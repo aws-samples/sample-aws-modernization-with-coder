@@ -10,7 +10,7 @@ weight: 34
 
 The Coder Control Plane requires additional permissions to create stand-alone AWS EC2 VM-Based Coder Workspaces from supporting Coder Templates.  AWS EC2 VM-based Workspaces will still be orchestrated by the core Coder Control Plane on EKS, and will use EKS pod-identity to associate the necessary IAM role.
 
-From the AWS Cloudshell and in the AWS account/region being used for the workshop, perform the following steps:
+From AWS CloudShell and in the AWS account/region being used for the workshop, perform the following steps:
 
 #### Step 1: Create IAM Role and Trust Relationship for EC2 Workspace Support
 ```bash

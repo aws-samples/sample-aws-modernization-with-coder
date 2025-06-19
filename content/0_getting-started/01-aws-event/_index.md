@@ -31,8 +31,8 @@ You will be taken to the workshop instructions. You can access the console of yo
 
 ![Console access](/static/images/console_access.png)
 
-::alert[We will not be using CLI credentials in today's workshop as thi his workshop uses AWS Cloudshell.]{header=Note}
+::alert[We will not be using CLI credentials in today's workshop as this workshop uses AWS CloudShell.]{header=Note}
 
 ## Proceed to the workshop
 
-You are now ready for the workshop. Execute the AWS Cloudshell workshop setup as specified [here](../02-own-account/)
+You are now ready for the workshop. Execute the AWS CloudShell workshop setup as specified [here](../02-own-account/)

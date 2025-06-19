@@ -10,7 +10,7 @@ weight: 32
 
 The Coder Control Plane uses a PostgreSQL compatible database to store backend state.  As part of this workshop, we will be using a simplified deployment suitable for POC's and testing, and deploy PostgreSQL into our EKS Cluster using Helm.
 
-From the AWS Cloudshell and in the AWS account/region being used for the workshop, perform the following steps:
+From AWS CloudShell and in the AWS account/region being used for the workshop, perform the following steps:
 
 #### Step 1: Create a Kubernetes Namespace for the Coder Control Plane
 ```bash

@@ -12,7 +12,7 @@ If you are running this workshop on your own AWS account, remember to delete all
 The following resources will be deployed to run the workshop:
 <!-- CHANGE THIS TO LIST ALL THE RESOURCES AND INITIAL SETUP NEEDED FOR THE WORKSHOP -->
 
-- AWS Cloudshell environment.
+- AWS CloudShell environment.
 - AWS EKS Cluster with supporting VPC, Subnets, Elastic Load-Balancer, EC2 Node Group with EBS Storage and supporting IAM Roles.
 
 :::alert{header=Note}
