@@ -146,25 +146,56 @@ By following these steps, you can resolve most common submodule issues and ensur
 
 ### Setup the Local Hugo Server  
 
-Launch a local development server to preview your workshop:
+5. **Install Hugo (if not already installed)**
 
-Hugo Server Install
+   Hugo is a static site generator that powers this workshop. Install it using your preferred method:
+   
+   **macOS (using Homebrew):**
+   ```bash
+   brew install hugo
+   ```
+   
+   **Windows (using Chocolatey):**
+   ```bash
+   choco install hugo-extended
+   ```
+   
+   **Windows (using Scoop):**
+   ```bash
+   scoop install hugo-extended
+   ```
+   
+   **Linux (Ubuntu/Debian):**
+   ```bash
+   sudo apt install hugo
+   ```
+   
+   **Linux (using Snap):**
+   ```bash
+   sudo snap install hugo
+   ```
+   
+   **Using Go (cross-platform):**
+   ```bash
+   go install github.com/gohugoio/hugo@latest
+   ```
+   
+   For other installation methods or the latest version, visit: https://gohugo.io/installation/
+   
+   **Verify Installation:**
+   ```bash
+   hugo version
+   ```
 
-Please navigate to:
+6. **Launch the Local Development Server**
 
-```bash
-https://gohugo.io/installation/
-```
+   Navigate to the root directory of your cloned repository and start the Hugo development server:
 
-to install the latest version of Hugo
+   ```bash
+   hugo server -D
+   ```
 
-Once Installed, ensure you are at the root directory of the repo, you have cloned and run this command:
-
-```bash
-hugo server -D
-```
-
-This will start a local server at `http://localhost:1313/`, where you can view your workshop in real time. The `-D` flag ensures draft content is also displayed.
+   This will start a local server at `http://localhost:1313/`, where you can view your workshop in real time. The `-D` flag ensures draft content is also displayed.
 
 ### Working with Workshop Content
 
