@@ -1,0 +1,96 @@
+# Coder Helm Chart Values for AWS Workshop
+# This configuration sets up Coder with AWS Load Balancer integration
+
+coder:
+  # Database configuration - connects to PostgreSQL deployed in previous step
+  env:
+    - name: CODER_PG_CONNECTION_URL
+      valueFrom:
+        secretKeyRef:
+          name: coder-db-url
+          key: url
+    
+    # Access URL will be updated after load balancer is provisioned
+    - name: CODER_ACCESS_URL
+      value: "https://coder.example.com"  # Will be updated with actual LB URL
+    
+    # Wildcard access for workspace URLs
+    - name: CODER_WILDCARD_ACCESS_URL
+      value: "*.coder.example.com"  # Will be updated with actual wildcard URL
+    
+    # Enable workspace proxy for better performance
+    - name: CODER_PROXY_TRUSTED_HEADERS
+      value: "X-Forwarded-For,X-Forwarded-Proto"
+    
+    # Security settings
+    - name: CODER_TLS_ENABLE
+      value: "false"  # TLS terminated at load balancer
+    
+    # Workspace settings
+    - name: CODER_PROVISIONER_DAEMONS
+      value: "1"
+
+  # Service configuration for AWS Load Balancer
+  service:
+    enable: true
+    type: LoadBalancer
+    annotations:
+      # AWS Load Balancer Controller annotations
+      service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+      # Enable proxy protocol for real client IPs
+      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+    
+    # Port configuration
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 8080
+
+  # Resource limits for production readiness
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+
+  # Health checks
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 30
+    periodSeconds: 10
+
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 5
+
+  # Security context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+
+# Service account configuration for AWS integration
+serviceAccount:
+  create: true
+  name: coder
+  annotations:
+    # Will be updated with IAM role ARN in later steps
+    eks.amazonaws.com/role-arn: ""
+
+# Ingress disabled since we're using LoadBalancer service
+ingress:
+  enable: false
+
+# Persistence for workspace data (if needed)
+persistence:
+  enabled: false  # Using external PostgreSQL

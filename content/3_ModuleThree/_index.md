@@ -1,7 +1,7 @@
 ---
 title: "Partner Setup" # MODIFY THIS TITLE IF APPLICABLE
 chapter: true
-weight: 3
+weight: 5
 ---
 
 # Partner Setup <!-- MODIFY THIS HEADING -->
