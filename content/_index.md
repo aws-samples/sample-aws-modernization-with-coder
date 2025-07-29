@@ -6,7 +6,7 @@ weight: 01
 
 # AWS and Coder AI-Powered Development Workshop
 
-![Partner Logo](/static/images/coder_logo.png)
+![Partner Logo][coder-log-def]
 
 ## Welcome to the Future of Development
 
@@ -55,8 +55,6 @@ Our solution combines the best of AWS cloud services with Coder's development pl
 - **AWS Bedrock** integration for AI-powered development assistance  
 - **Amazon CloudFront** for global content delivery and performance
 - **AWS IAM** for fine-grained security and access control
-- **Amazon RDS PostgreSQL** for reliable data persistence
-- **AWS KMS** for encryption and secrets management
 
 ## Who Should Attend
 
@@ -82,3 +80,5 @@ The examples and sample code provided in this workshop are intended to be consum
 
 ### Let's Begin Your Journey
 Start by setting up your workshop environment and preparing to deploy your AI-powered development platform.
+
+[coder-log-def]: /images/coder-logo-black.png
