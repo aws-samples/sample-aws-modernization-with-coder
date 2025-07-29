@@ -7,34 +7,33 @@ weight: 3
 
 The following architecture diagram illustrates the comprehensive AWS and Coder integration we'll be deploying:
 
-![architecture diagram](/static/images/AWSCoderSingleRegionv1-0.png)
+![architecture diagram](/images/AWSCoderSingleRegionv1-0.png)
 
 This architecture demonstrates a production-ready, scalable development platform that combines:
 
 - **Amazon EKS** with Auto Mode for intelligent container orchestration
 - **AWS Application Load Balancer** and **CloudFront** for global content delivery
-- **Amazon RDS PostgreSQL** for reliable data persistence
-- **AWS IAM** and **KMS** for enterprise-grade security
+- **PostgreSQL** for reliable data persistence
+- **AWS IAM** for enterprise-grade security
 - **Coder Control Plane** for development environment management
 - **AI Integration** with Amazon Q Developer and AWS Bedrock
 
 ## Preparing for the Workshop
 
-The workshop infrastructure will be automatically deployed using AWS CloudFormation. This includes the EKS cluster, networking, security components, and all foundational services needed for the Coder platform.
+The workshop infrastructure will be can automatically deployed using AWS CloudFormation or via manually the AWS CLI. This includes the EKS cluster, networking, security components, and all foundational services needed for the Coder platform.
 
 **Choose your setup path:**
 
-- **AWS Guided Event**: If you're attending an AWS-hosted workshop, follow the setup instructions [here](../0_getting-started/01-aws-event/).
-- **Self-Paced Learning**: If you're running this workshop independently, follow the setup instructions [here](../0_getting-started/02-own-account/).
+- **AWS Guided Event**: If you're attending an AWS-hosted workshop, follow the setup instructions [here](/0_getting-started/01-aws-event.html).
+- **Self-Paced Learning**: If you're running this workshop independently, follow the setup instructions [here](/0_getting-started/02-own-account.html).
 
-## What Gets Deployed Automatically
+## What Gets Deployed during the Workshop
 
-The CloudFormation template (`eks-cluster.yaml`) provisions:
+During the workshop participants will provision:
 
-✅ **Amazon EKS Cluster** (`coder-aws-cluster`) with Auto Mode enabled  
+✅ **Amazon EKS Cluster** with Auto Mode enabled  
 ✅ **VPC and Networking** with public/private subnets across multiple AZs  
 ✅ **Security Groups and IAM Roles** with least-privilege access  
-✅ **KMS Encryption Keys** for secrets and data protection  
 ✅ **EBS CSI Driver** for persistent storage  
 ✅ **AWS Load Balancer Controller** for ingress management  
 
