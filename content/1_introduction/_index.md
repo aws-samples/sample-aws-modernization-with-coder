@@ -12,7 +12,7 @@ Transform your development workflow by combining the power of AWS cloud infrastr
 
 ### Key Learning Objectives
 
-By the end of this workshop, you will be able to:
+By the end of this workshop, you will be able to demonstrate new skills in the following areas:
 
 **Infrastructure & Platform Management:**
 - Deploy and configure a production-ready Coder platform on Amazon EKS
