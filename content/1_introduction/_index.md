@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 chapter: true
-weight: 2
+weight: 03
 ---
 
 # Introduction
@@ -21,7 +21,7 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 
 **Template Creation & Management:**
 - Create persona-based Coder templates for different developer roles (Frontend, Backend, DevOps, Data Science)
-- Configure templates with pre-installed tools, dependencies, and development environments
+- Configure templates with pre-installed tools and dependencies
 - Implement Infrastructure as Code (IaC) patterns for consistent workspace provisioning
 
 **AI-Powered Development Workflows:**
@@ -49,12 +49,12 @@ This workshop addresses common developer experience challenges:
 
 **Our Solution:**
 - **Instant Environment Provisioning**: Spin up fully configured development environments in under 2 minutes
-- **AI-Enhanced Productivity**: Leverage Amazon Q Developer and Anthropic Claude for intelligent code assistance
+- **AI-Enhanced Productivity**: Leverage Amazon Q Developer and Anthropic Claude Code for intelligent code assistance
 - **Enterprise Security**: Centralized, secure development with built-in compliance and audit trails
 - **Cost Optimization**: Pay only for active development time with automatic resource scaling
 - **Team Collaboration**: Shared templates and environments that ensure consistency
 
-## Workshop Agenda (2 Hours)
+## Workshop Agenda (90 Min)
 
 **Prerequisites & Setup** *(15 minutes)*
 - AWS account configuration and infrastructure deployment
@@ -72,15 +72,9 @@ This workshop addresses common developer experience challenges:
 - Implement security and compliance policies
 - Test template deployment and workspace creation
 
-**Module 3: Advanced Workspace Management** *(30 minutes)*
-- Explore workspace lifecycle management
-- Implement resource optimization strategies
-- Configure team collaboration features
-- Monitor and troubleshoot workspace issues
-
-**Module 4: AI-Powered Development Showcase** *(30 minutes)*
+**Module 3: AI-Powered Development Showcase** *(30 minutes)*
 - Demonstrate Amazon Q Developer integration
-- Showcase Anthropic Claude-powered code review workflows
+- Showcase Anthropic Claude Code-powered code review workflows
 - Explore advanced agentic development patterns
 
 ## Target Audience

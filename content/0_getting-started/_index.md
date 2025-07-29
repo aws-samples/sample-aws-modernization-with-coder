@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-weight: 3
+weight: 20
 ---
 
 ## Workshop Architecture
@@ -15,7 +15,7 @@ This architecture demonstrates a production-ready, scalable development platform
 - **AWS Application Load Balancer** and **CloudFront** for global content delivery
 - **PostgreSQL** for reliable data persistence
 - **AWS IAM** for enterprise-grade security
-- **Coder Control Plane** for development environment management
+- **Coder Control Plane** for cloud development environment management
 - **AI Integration** with Amazon Q Developer and Anthropic Claude Code + AWS Bedrock
 
 ## Preparing for the Workshop

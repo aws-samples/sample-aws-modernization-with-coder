@@ -1,7 +1,7 @@
 ---
 title: "Hugo Framework and Markdown"
 chapter: true
-weight: 6
+weight: 99
 ---
 
 # Hugo Framework and Markdown

@@ -1,6 +1,6 @@
 ---
 title: Using Your Own AWS Account
-weight: 12
+weight: 22
 ---
 
 {{% notice warning %}}

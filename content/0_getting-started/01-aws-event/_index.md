@@ -1,6 +1,6 @@
 ---
 title: At an AWS Guided Event
-weight: 11
+weight: 21
 ---
 
 {{% notice info %}}

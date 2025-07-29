@@ -1,7 +1,7 @@
 ---
 title: "AWS and Coder AI-Powered Development Workshop"
 chapter: true
-weight: 01
+weight: 10
 ---
 
 # AWS and Coder AI-Powered Development Workshop

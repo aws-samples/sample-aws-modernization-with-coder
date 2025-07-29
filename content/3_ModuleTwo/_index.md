@@ -1,20 +1,20 @@
 ---
-title: "Partner Setup" # MODIFY THIS TITLE IF APPLICABLE
+title: "Template Engineering" # MODIFY THIS TITLE IF APPLICABLE
 chapter: true
-weight: 5
+weight: 40
 ---
 
-# Partner Setup <!-- MODIFY THIS HEADING -->
+# Template Engineering <!-- MODIFY THIS HEADING -->
 
-## Module Three Heading <!-- MODIFY THIS SUBHEADING -->
+## Module Two Heading <!-- MODIFY THIS SUBHEADING -->
 
 This paragraph block should be an introduction to the module about requirements the partner may need for their audience members. Examples include signing up for the partner platform or installing an agent.
 
-### Module Three Subheading <!-- MODIFY THIS SUBHEADING -->
+### Module Two Subheading <!-- MODIFY THIS SUBHEADING -->
 This paragraph block should be utilized to briefly explain the submodules. <br>
 
 #### Partner Setup Instructions <!-- MODIFY THIS SUBHEADING IF APPLICABLE -->
-A brief overview of submodule one.
+A brief overview of submodule two.
 
 {{% notice info %}}
 <p style='text-align: left;'>
