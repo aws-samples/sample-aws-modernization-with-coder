@@ -16,10 +16,10 @@ Welcome to the AWS and Coder AI-Powered Development Workshop – your gateway to
 
 Imagine a world where:
 - **New developers are productive in minutes, not days** – No more "it works on my machine" or lengthy environment setup
-- **AI becomes your coding partner** – Amazon Q Developer and Claude provide intelligent code suggestions, reviews, and documentation
-- **Security is built-in, not bolted-on** – Centralized, compliant development environments with audit trails
+- **AI becomes your coding partner** – Amazon Q Developer and Anthropic Claude Code provide intelligent code suggestions, reviews, and documentation
+- **Security is built-in, not bolted-on** – Centralized, compliant cloud development environments with audit trails
 - **Resources scale automatically** – Pay only for what you use with intelligent capacity management
-- **Teams collaborate seamlessly** – Shared templates and environments ensure consistency across projects
+- **Teams collaborate seamlessly** – Shared cloud development environment templates ensure consistency across projects
 
 This isn't a vision of the future – it's what you'll build today.
 
@@ -41,15 +41,15 @@ By completing this workshop, you'll have:
 
 ✅ **Created AI-enhanced development templates** for different personas (Frontend, Backend, DevOps, Data Science)
 
-✅ **Implemented intelligent development workflows** using Amazon Q Developer and Claude for code assistance
+✅ **Implemented intelligent development workflows** using Amazon Q Developer and Anthropic Claude Code for code assistance
 
-✅ **Established security and compliance patterns** for enterprise development environments
+✅ **Established security and compliance patterns** for enterprise cloud development environments
 
 ✅ **Gained hands-on experience** with modern cloud-native development practices
 
 ## Architecture at a Glance
 
-Our solution combines the best of AWS cloud services with Coder's development platform:
+Our solution combines the best of AWS cloud services with Coder's cloud development environments:
 
 - **Amazon EKS** with Auto Mode for intelligent Kubernetes management
 - **AWS Bedrock** integration for AI-powered development assistance  
@@ -58,11 +58,11 @@ Our solution combines the best of AWS cloud services with Coder's development pl
 
 ## Who Should Attend
 
-**Platform Engineers** building developer experience platforms
-**DevOps Engineers** implementing cloud-native workflows
-**Engineering Managers** seeking to boost team productivity  
-**Developers** interested in AI-enhanced development
-**Solutions Architects** designing scalable development infrastructure
+- **Platform Engineers** building developer experience platforms
+- **DevOps Engineers** implementing cloud-native workflows
+- **Engineering Managers** seeking to boost team productivity  
+- **Developers** interested in AI-enhanced development
+- **Solutions Architects** designing scalable development infrastructure
 
 **Prerequisites**: 200-level AWS knowledge, basic Kubernetes familiarity
 

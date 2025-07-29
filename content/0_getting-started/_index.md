@@ -16,11 +16,11 @@ This architecture demonstrates a production-ready, scalable development platform
 - **PostgreSQL** for reliable data persistence
 - **AWS IAM** for enterprise-grade security
 - **Coder Control Plane** for development environment management
-- **AI Integration** with Amazon Q Developer and AWS Bedrock
+- **AI Integration** with Amazon Q Developer and Anthropic Claude Code + AWS Bedrock
 
 ## Preparing for the Workshop
 
-The workshop infrastructure will be can automatically deployed using AWS CloudFormation or via manually the AWS CLI. This includes the EKS cluster, networking, security components, and all foundational services needed for the Coder platform.
+The workshop infrastructure will be can automatically deployed using AWS CloudFormation or manually via the AWS CLI. This includes the EKS cluster, networking, security components, and all foundational services needed for the Coder platform.
 
 **Choose your setup path:**
 

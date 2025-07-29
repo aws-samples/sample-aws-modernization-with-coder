@@ -26,7 +26,7 @@ By the end of this workshop, you will be able to:
 
 **AI-Powered Development Workflows:**
 - Integrate Amazon Q Developer for intelligent code assistance and generation
-- Leverage AWS Bedrock with Claude for advanced code review and documentation
+- Leverage AWS Bedrock with Anthropic Claude Code for advanced code review and documentation
 - Create agentic development workflows that automate repetitive tasks
 - Implement AI-powered code quality checks and security scanning
 
@@ -49,7 +49,7 @@ This workshop addresses common developer experience challenges:
 
 **Our Solution:**
 - **Instant Environment Provisioning**: Spin up fully configured development environments in under 2 minutes
-- **AI-Enhanced Productivity**: Leverage Amazon Q Developer and Claude for intelligent code assistance
+- **AI-Enhanced Productivity**: Leverage Amazon Q Developer and Anthropic Claude for intelligent code assistance
 - **Enterprise Security**: Centralized, secure development with built-in compliance and audit trails
 - **Cost Optimization**: Pay only for active development time with automatic resource scaling
 - **Team Collaboration**: Shared templates and environments that ensure consistency
@@ -57,11 +57,11 @@ This workshop addresses common developer experience challenges:
 ## Workshop Agenda (2 Hours)
 
 **Prerequisites & Setup** *(15 minutes)*
-- AWS account configuration and CloudFormation deployment
+- AWS account configuration and infrastructure deployment
 - Understanding the reference architecture
 
 **Module 1: Coder Infrastructure Deployment** *(20 minutes)*
-- Connect to pre-deployed Amazon EKS cluster
+- Connect to provisioned Amazon EKS cluster
 - Deploy PostgreSQL database for Coder persistence
 - Install and configure Coder control plane
 - Set up networking and security components
@@ -80,8 +80,7 @@ This workshop addresses common developer experience challenges:
 
 **Module 4: AI-Powered Development Showcase** *(30 minutes)*
 - Demonstrate Amazon Q Developer integration
-- Showcase Claude-powered code review workflows
-- Implement automated testing and deployment pipelines
+- Showcase Anthropic Claude-powered code review workflows
 - Explore advanced agentic development patterns
 
 ## Target Audience
@@ -95,7 +94,7 @@ This workshop is designed for:
 
 **Prerequisites:** 200-level AWS knowledge, basic Kubernetes understanding, familiarity with development workflows
 
-{{% notice warning %}}
+{{% notice info %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
 {{% /notice %}}
 
