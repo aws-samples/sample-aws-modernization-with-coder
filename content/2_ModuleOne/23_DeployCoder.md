@@ -109,9 +109,6 @@ If you see `HTTP/1.1 200 OK`, Coder is successfully deployed and accessible!
 #### Step 7: Access Coder Web Interface
 
 You can now access Coder in your browser:
-
-{{% button href="#" icon="fas fa-external-link-alt" %}}Open Coder Dashboard{{% /button %}}
-
 ```bash
 # Print the URL for easy copying
 echo "Access Coder at: $CODER_ACCESS_URL"
