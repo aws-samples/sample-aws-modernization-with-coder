@@ -5,7 +5,7 @@ weight: 20
 
 ## Workshop Architecture
 
-The following architecture diagram illustrates the comprehensive AWS and Coder integration we'll be deploying:
+The following architecture diagram illustrates the comprehensive AWS and Coder integration we'll be deploying: (Diagram needs updated logo + Amazon Q/Bedrock Services added)
 
 ![architecture diagram](/images/AWSCoderSingleRegionv1-0.png)
 

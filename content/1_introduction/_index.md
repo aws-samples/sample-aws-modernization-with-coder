@@ -36,7 +36,7 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Implement secure development practices with built-in compliance
 - Scale development capacity dynamically based on project needs
 
-## Workshop Architecture & Value Proposition
+## Workshop Value Proposition
 
 This workshop addresses common developer experience challenges:
 
@@ -88,7 +88,7 @@ This workshop is designed for:
 
 **Prerequisites:** 200-level AWS knowledge, basic Kubernetes understanding, familiarity with development workflows
 
-{{% notice info %}}
+{{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
 {{% /notice %}}
 

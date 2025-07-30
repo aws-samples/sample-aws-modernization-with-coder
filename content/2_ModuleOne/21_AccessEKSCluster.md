@@ -1,13 +1,13 @@
 ---
-title: "Access Your Pre-Deployed EKS Cluster" 
+title: "Access Provisioned EKS Cluster" 
 chapter: true
 weight: 31 
 ---
 
-# Access Your Pre-Deployed EKS Cluster
+# Access Provisioned EKS Cluster
 
 ## Connect to the Coder Control Plane Infrastructure
-![AWS RefArch](/static/images/AWSCoderSingleRegionv1-0.png)
+![AWS RefArch](/images/AWSCoderSingleRegionv1-0.png)
 
 The core Coder Control Plane infrastructure has been automatically deployed using AWS EKS as depicted in the reference architecture above. The CloudFormation template has created all necessary foundational AWS services including VPC, subnets, compute resources, and storage, along with an EKS cluster named `coder-aws-cluster`.
 
@@ -37,9 +37,6 @@ kubectl get nodes
 
 # Get cluster information
 kubectl cluster-info
-
-# Verify the cluster name
-aws eks describe-cluster --name coder-aws-cluster --region us-east-1 --query 'cluster.name'
 ```
 
 You should see output showing your cluster nodes in a "Ready" state, confirming successful connection to the EKS cluster.

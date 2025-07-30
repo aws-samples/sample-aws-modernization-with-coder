@@ -1,5 +1,5 @@
 ---
-title: "Deploy PostgreSQL to store Backend State" 
+title: "Deploy PostgreSQL Backend" 
 chapter: true
 weight: 32 
 ---
@@ -39,5 +39,5 @@ kubectl create secret generic coder-db-url -n coder \
 
 Tip:  Check the state of the coder-db-postgresql-(instance) pod created in the coder namespace to ensure it's running, and pod logs to ensure it deployed successfully.  Common trouble-shooting issues arise around Kubernetes/EKS PVC and PV creation and allocation.  Start by validating that the required storage (PV/PVC) is being created successfully. 
 
-### Next Section Heading <!-- MODIFY THIS HEADING -->
-This paragraph block can optionally be utilized to lead into the next section of the workshop.
+### Next Steps <!-- MODIFY THIS HEADING -->
+With PostgreSQL successfully deployed, you're ready to move on and deploy the Coder Control Plane.

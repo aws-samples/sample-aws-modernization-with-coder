@@ -52,7 +52,7 @@ Here's what has been automatically deployed and what we'll configure:
 💡 **Pro Tip**: The EKS cluster uses Auto Mode, which automatically provisions and manages compute capacity, networking, and storage based on your workload requirements. This reduces operational overhead while optimizing costs.
 {{% /notice %}}
 
-{{% notice info %}}
+{{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
 {{% /notice %}}
 

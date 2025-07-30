@@ -37,11 +37,11 @@ helm repo update
 helm install coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.15.1
+    --version 2.24.2
 ```
 
 {{% notice tip %}}
-You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.15.1 is known to work well with this workshop configuration.
+You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.2 is known to work well with this workshop configuration.
 {{% /notice %}}
 
 #### Step 3: Monitor Deployment Progress
@@ -88,7 +88,7 @@ sed -i "s|\*.coder.example.com|$CODER_WILDCARD_URL|g" coder-core-values-v2.yaml
 helm upgrade coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.15.1
+    --version 2.24.2
 ```
 
 #### Step 6: Verify Coder Accessibility
@@ -97,7 +97,7 @@ Test that Coder is accessible via the load balancer:
 
 ```bash
 # Test HTTP connectivity
-curl -I $CODER_ACCESS_URL/healthz
+curl -I $CODER_ACCESS_URL
 
 # If successful, you should see HTTP 200 response
 ```
@@ -138,11 +138,6 @@ Common issues:
 {{% /expand %}}
 
 {{% expand "Load balancer not getting external IP" %}}
-Verify AWS Load Balancer Controller is installed:
-```bash
-kubectl get pods -n kube-system | grep aws-load-balancer-controller
-```
-
 Check service events:
 ```bash
 kubectl describe service coder -n coder
@@ -156,12 +151,6 @@ Verify the service and endpoints:
 ```bash
 kubectl get service coder -n coder
 kubectl get endpoints coder -n coder
-```
-
-Check security groups allow traffic on port 80:
-```bash
-# The load balancer security group should allow inbound HTTP traffic
-aws ec2 describe-security-groups --filters "Name=group-name,Values=*coder*"
 ```
 {{% /expand %}}
 
