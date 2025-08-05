@@ -82,9 +82,5 @@ Select code-server to create a Code Server browser session, and explore the feat
 💡 **Pro Tip**: Start with a simple template and iterate. Add complexity gradually based on user feedback and requirements.
 {{% /notice %}}
 
-{{% notice info %}}
-🔒 **Security Note**: Always follow the principle of least privilege when configuring security groups and IAM roles.
-{{% /notice %}}
-
 ### Next Steps
 Now that you understand template fundamentals, let's create persona-specific templates that cater to different developer roles and workflows.
