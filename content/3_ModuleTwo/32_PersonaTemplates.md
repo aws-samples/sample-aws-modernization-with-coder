@@ -10,33 +10,88 @@ weight: 42
 
 Different developers have different needs. A frontend developer working on React applications requires different tools than a DevOps engineer managing Kubernetes clusters. Persona-based templates solve this by creating specialized environments optimized for specific roles and workflows.
 
-### Template Design Philosophy
+This workshop leverages pre-built templates from the [AWS Coder Workshop GitOps repository](https://github.com/coder/aws-coder-workshop-gitops) that demonstrate production-ready persona-based development environments.
 
-Effective persona templates follow these principles:
+## Available Workshop Templates
 
-- **Role-Specific Tooling**: Include only the tools and dependencies relevant to the persona
-- **Optimized Performance**: Right-size resources for typical workloads
-- **Workflow Integration**: Pre-configure common development workflows
-- **Security by Default**: Implement role-appropriate security policies
-- **Extensibility**: Allow customization without breaking core functionality
+The workshop repository contains several specialized templates designed for different development personas and use cases:
 
-## Frontend Developer Template
+### 1. AWS Linux Base with Amazon Q (`awshp-linux-q-base`)
 
-### Overview
-Optimized for modern web development with React, Vue, Angular, and other frontend frameworks.
+**Purpose**: General-purpose Linux development environment with Amazon Q Developer integration
 
-### Key Features
-- **Runtime**: Node.js 20+ with npm, yarn, and pnpm
-- **Development Server**: Hot reload with port forwarding
-- **Browser Tools**: Integrated browser testing and debugging
-- **Build Tools**: Webpack, Vite, Parcel pre-configured
-- **Testing**: Jest, Cypress, Playwright ready to use
+**Key Features**:
+- AWS EC2 Linux instances with persistent storage
+- Pre-installed Amazon Q Developer for AI-powered coding assistance
+- VS Code Server with development extensions
+- Git, Docker, and common development tools
+- Optimized for cloud-native development workflows
 
-### Template Implementation
+**Use Cases**:
+- General software development
+- Cloud application development
+- Learning and experimentation with Amazon Q
+- Multi-language development projects
 
-Create `frontend-developer-template/main.tf`:
+### 2. Kubernetes Development (`awshp-k8s-with-amazon-q`)
+
+**Purpose**: Container-based development environment running on Kubernetes with Amazon Q integration
+
+**Key Features**:
+- Kubernetes pod-based workspaces for scalability
+- Amazon Q Developer integration for container development
+- Persistent home directory storage
+- Pre-configured kubectl and container tools
+- Ephemeral compute with persistent data
+
+**Use Cases**:
+- Microservices development
+- Kubernetes application development
+- Container orchestration learning
+- Cloud-native architecture development
+
+### 3. AWS SAM Development (`awshp-linux-sam`)
+
+**Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
+
+**Key Features**:
+- AWS EC2 Linux instances optimized for serverless development
+- AWS SAM CLI pre-installed and configured
+- Lambda development tools and runtime environments
+- AWS CLI with proper IAM integration
+- Code deployment and testing capabilities
+
+**Use Cases**:
+- AWS Lambda function development
+- Serverless application architecture
+- Event-driven application development
+- AWS service integration projects
+
+### 4. Windows Development with DCV (`awshp-windows-dcv`)
+
+**Purpose**: Windows-based development environment with NICE DCV remote desktop
+
+**Key Features**:
+- Windows Server 2022 EC2 instances
+- NICE DCV for high-performance remote desktop access
+- VS Code on Windows with full GUI support
+- PowerShell and Windows development tools
+- Configurable instance types and storage
+
+**Use Cases**:
+- .NET application development
+- Windows-specific software development
+- Legacy application modernization
+- Cross-platform development testing
+
+## Template Architecture Patterns
+
+### Infrastructure as Code Approach
+
+All templates follow Terraform-based Infrastructure as Code principles:
 
 ```hcl
+# Example template structure from the repository
 terraform {
   required_providers {
     coder = {
@@ -48,558 +103,176 @@ terraform {
   }
 }
 
-provider "coder" {}
-provider "aws" {
-  region = var.aws_region
-}
-
+# Workspace and owner data sources
 data "coder_workspace" "me" {}
 data "coder_workspace_owner" "me" {}
 
-# Optimized instance for frontend development
-resource "aws_instance" "frontend_workspace" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-  
-  vpc_security_group_ids = [aws_security_group.frontend_workspace.id]
-  subnet_id              = var.subnet_id
-  
-  # Enhanced storage for node_modules and build artifacts
-  root_block_device {
-    volume_type = "gp3"
-    volume_size = 50
-    encrypted   = true
-  }
-  
-  user_data = templatefile("${path.module}/frontend_startup.sh", {
-    username = data.coder_workspace_owner.me.name
-    node_version = var.node_version
-  })
-  
+# AWS resources with proper tagging
+resource "aws_instance" "workspace" {
+  # Instance configuration
   tags = {
-    Name     = "coder-frontend-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    Owner    = data.coder_workspace_owner.me.name
-    Persona  = "frontend-developer"
-    Coder    = "true"
+    Name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    Owner = data.coder_workspace_owner.me.name
+    Coder_Provisioned = "true"
   }
-}
-
-# Security group optimized for frontend development
-resource "aws_security_group" "frontend_workspace" {
-  name_prefix = "coder-frontend-"
-  description = "Security group for frontend development workspace"
-  
-  # SSH access
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  # Development servers (React, Vue, Angular default ports)
-  ingress {
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  ingress {
-    from_port   = 4200
-    to_port     = 4200
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  ingress {
-    from_port   = 5173
-    to_port     = 5173
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  # Storybook default port
-  ingress {
-    from_port   = 6006
-    to_port     = 6006
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  # VS Code Server
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "coder_agent" "frontend" {
-  arch           = "amd64"
-  os             = "linux"
-  startup_script = file("${path.module}/frontend_startup.sh")
-  
-  metadata {
-    display_name = "Node.js Version"
-    key          = "node_version"
-    script       = "node --version"
-    interval     = 60
-    timeout      = 5
-  }
-  
-  metadata {
-    display_name = "NPM Packages"
-    key          = "npm_packages"
-    script       = "find ~/projects -name package.json | wc -l"
-    interval     = 300
-    timeout      = 10
-  }
-}
-
-# VS Code with frontend extensions
-resource "coder_app" "vscode_frontend" {
-  agent_id     = coder_agent.frontend.id
-  slug         = "vscode"
-  display_name = "VS Code (Frontend)"
-  icon         = "/icon/code.svg"
-  url          = "http://localhost:8080"
-  subdomain    = false
-  share        = "owner"
-}
-
-# React Dev Server
-resource "coder_app" "react_dev" {
-  agent_id     = coder_agent.frontend.id
-  slug         = "react-dev"
-  display_name = "React Dev Server"
-  icon         = "/icon/react.svg"
-  url          = "http://localhost:3000"
-  subdomain    = true
-  share        = "authenticated"
-  
-  healthcheck {
-    url       = "http://localhost:3000"
-    interval  = 10
-    threshold = 3
-  }
-}
-
-# Storybook
-resource "coder_app" "storybook" {
-  agent_id     = coder_agent.frontend.id
-  slug         = "storybook"
-  display_name = "Storybook"
-  icon         = "/icon/storybook.svg"
-  url          = "http://localhost:6006"
-  subdomain    = true
-  share        = "authenticated"
 }
 ```
 
-Create `frontend-developer-template/frontend_startup.sh`:
+### Security Best Practices
+
+The templates implement several security best practices:
+
+- **IAM Integration**: Proper AWS IAM roles and policies
+- **Resource Tagging**: Consistent tagging for resource management
+- **Network Security**: Appropriate security group configurations
+- **Encryption**: EBS volume encryption by default
+- **Access Control**: Workspace-level access controls
+
+### Scalability Features
+
+- **Auto-scaling**: Kubernetes-based templates support horizontal scaling
+- **Resource Optimization**: Right-sized instances for different workloads
+- **Persistent Storage**: Separation of compute and storage for cost efficiency
+- **Multi-region Support**: Templates work across AWS regions
+
+## GitOps Workflow Integration
+
+The workshop templates demonstrate a complete GitOps workflow for template management:
+
+### Template Versioning
+
+Templates are managed through `template_versions.tf`:
+
+```hcl
+resource "coder_template" "awshp-linux-q-base" {
+  name         = "awshp-linux-q-base"
+  description  = "AWS EC2 Linux with Amazon Q Developer"
+  organization_id = data.coder_organization.default.id
+  
+  versions = [{
+    name      = "1.0.0"
+    directory = "./awshp-linux-q-base"
+    active    = true
+  }]
+}
+```
+
+### Deployment Automation
+
+The repository includes `templates_gitops.sh` script for automated template deployment:
 
 ```bash
-#!/bin/bash
-set -euo pipefail
+# Initialize Terraform
+terraform init
 
-echo "Setting up Frontend Development Environment 🎨"
+# Login to Coder
+coder login $CODER_AGENT_URL
 
-# Update system
-sudo apt-get update && sudo apt-get upgrade -y
-
-# Install essential tools
-sudo apt-get install -y curl wget git vim htop tree jq unzip build-essential
-
-# Install Node.js using NodeSource
-curl -fsSL https://deb.nodesource.com/setup_${node_version}.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Install global npm packages for frontend development
-npm install -g \
-  yarn \
-  pnpm \
-  @vue/cli \
-  @angular/cli \
-  create-react-app \
-  vite \
-  @storybook/cli \
-  eslint \
-  prettier \
-  typescript \
-  ts-node
-
-# Install VS Code Server
-curl -fsSL https://code-server.dev/install.sh | sh
-
-# Configure VS Code Server
-mkdir -p ~/.config/code-server
-cat > ~/.config/code-server/config.yaml << EOF
-bind-addr: 0.0.0.0:8080
-auth: none
-password: ""
-cert: false
-EOF
-
-# Install frontend-specific VS Code extensions
-code-server --install-extension bradlc.vscode-tailwindcss
-code-server --install-extension esbenp.prettier-vscode
-code-server --install-extension dbaeumer.vscode-eslint
-code-server --install-extension ms-vscode.vscode-typescript-next
-code-server --install-extension ms-vscode.vscode-json
-code-server --install-extension formulahendry.auto-rename-tag
-code-server --install-extension christian-kohler.path-intellisense
-code-server --install-extension ms-vscode.vscode-css-peek
-code-server --install-extension bradlc.vscode-tailwindcss
-code-server --install-extension steoates.autoimport-es6-ts
-
-# Start VS Code Server
-sudo systemctl enable --now code-server@${username}
-
-# Create project structure
-mkdir -p ~/projects/{react,vue,angular,vanilla}
-mkdir -p ~/templates
-mkdir -p ~/.npm-global
-
-# Configure npm global directory
-npm config set prefix '~/.npm-global'
-echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
-
-# Create useful aliases
-cat >> ~/.bashrc << 'EOF'
-
-# Frontend Development Aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias ..='cd ..'
-alias ...='cd ../..'
-
-# Node.js aliases
-alias ni='npm install'
-alias nid='npm install --save-dev'
-alias nig='npm install --global'
-alias nt='npm test'
-alias nr='npm run'
-alias ns='npm start'
-alias nb='npm run build'
-
-# Yarn aliases
-alias yi='yarn install'
-alias ya='yarn add'
-alias yad='yarn add --dev'
-alias yt='yarn test'
-alias yr='yarn run'
-alias ys='yarn start'
-alias yb='yarn build'
-
-# Git aliases
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
-alias gl='git log --oneline'
-alias gd='git diff'
-EOF
-
-# Install browser for testing (headless)
-sudo apt-get install -y chromium-browser
-
-# Create sample projects
-cd ~/projects/react
-npx create-react-app sample-app --template typescript
-
-cd ~/projects/vue
-npm create vue@latest sample-app -- --typescript --router --pinia --vitest --cypress
-
-echo "Frontend Development Environment Ready! 🚀"
-echo "Available tools:"
-echo "  - Node.js $(node --version)"
-echo "  - npm $(npm --version)"
-echo "  - yarn $(yarn --version)"
-echo "  - pnpm $(pnpm --version)"
-echo "  - VS Code Server at http://localhost:8080"
-echo "  - Sample React app in ~/projects/react/sample-app"
-echo "  - Sample Vue app in ~/projects/vue/sample-app"
+# Deploy templates
+./templates_gitops.sh <session-token>
 ```
 
-## Backend Developer Template
+## Implementing Templates in Your Workshop
 
-### Overview
-Optimized for API development, microservices, and backend system development.
+### Step 1: Clone the Template Repository
 
-### Key Features
-- **Multi-Language Support**: Go, Python, Java, Node.js, .NET
-- **Database Tools**: PostgreSQL, MySQL, Redis clients
-- **API Testing**: Postman CLI, curl, HTTPie
-- **Monitoring**: Basic observability tools
-- **Container Support**: Docker and Docker Compose
+```bash
+# Clone the workshop templates
+git clone https://github.com/coder/aws-coder-workshop-gitops.git
+cd aws-coder-workshop-gitops/templates
+```
 
-### Template Implementation
+### Step 2: Configure AWS Authentication
 
-Create `backend-developer-template/main.tf`:
+Ensure your Coder deployment has proper AWS credentials:
+
+```bash
+# Verify AWS access
+aws sts get-caller-identity
+
+# Check required permissions
+aws iam simulate-principal-policy \
+  --policy-source-arn $(aws sts get-caller-identity --query Arn --output text) \
+  --action-names ec2:RunInstances ec2:DescribeInstances
+```
+
+### Step 3: Deploy Templates
+
+```bash
+# Initialize Terraform
+terraform init
+
+# Login to Coder
+coder login https://your-coder-instance.com
+
+# Deploy all templates
+./templates_gitops.sh $(coder tokens create --lifetime 24h)
+```
+
+### Step 4: Verify Template Deployment
+
+```bash
+# List available templates
+coder templates list
+
+# Test template creation
+coder create --template awshp-linux-q-base test-workspace
+```
+
+## Customizing Templates for Your Organization
+
+### Adding Organization-Specific Tools
+
+Extend the base templates with your organization's tools:
 
 ```hcl
-# Backend-optimized instance with more CPU and memory
-resource "aws_instance" "backend_workspace" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type # Default: t3.large
+# Add to startup_script in coder_agent resource
+startup_script = <<-EOT
+  #!/bin/bash
   
-  vpc_security_group_ids = [aws_security_group.backend_workspace.id]
-  subnet_id              = var.subnet_id
+  # Base template setup
+  ${file("${path.module}/base_setup.sh")}
   
-  # Enhanced storage for databases and build artifacts
-  root_block_device {
-    volume_type = "gp3"
-    volume_size = 100
-    encrypted   = true
-    iops        = 3000
-  }
+  # Organization-specific tools
+  curl -fsSL https://your-org.com/tools/install.sh | bash
   
-  user_data = templatefile("${path.module}/backend_startup.sh", {
-    username = data.coder_workspace_owner.me.name
-  })
-  
-  tags = {
-    Name     = "coder-backend-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    Owner    = data.coder_workspace_owner.me.name
-    Persona  = "backend-developer"
-    Coder    = "true"
-  }
-}
+  # Custom configurations
+  cp /opt/your-org/configs/* ~/.config/
+EOT
+```
 
-# Security group for backend development
-resource "aws_security_group" "backend_workspace" {
-  name_prefix = "coder-backend-"
-  description = "Security group for backend development workspace"
+### Implementing Compliance Requirements
+
+Add compliance and security configurations:
+
+```hcl
+# Enhanced security group
+resource "aws_security_group" "workspace" {
+  name_prefix = "coder-secure-"
   
-  # SSH access
+  # Restrict SSH access to corporate network
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.corporate_cidr]
   }
   
-  # API development ports
-  ingress {
-    from_port   = 8000
-    to_port     = 8999
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  # Log all network traffic
+  tags = {
+    Compliance = "SOC2"
+    Monitoring = "enabled"
   }
-  
-  # Database ports (PostgreSQL, MySQL, Redis)
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/8"]
-  }
-  
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/8"]
-  }
-  
-  ingress {
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/8"]
-  }
-  
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-# API Documentation Server
-resource "coder_app" "swagger_ui" {
-  agent_id     = coder_agent.backend.id
-  slug         = "swagger"
-  display_name = "API Documentation"
-  icon         = "/icon/swagger.svg"
-  url          = "http://localhost:8080/docs"
-  subdomain    = true
-  share        = "authenticated"
-}
-
-# Database Admin Interface
-resource "coder_app" "pgadmin" {
-  agent_id     = coder_agent.backend.id
-  slug         = "pgadmin"
-  display_name = "Database Admin"
-  icon         = "/icon/database.svg"
-  url          = "http://localhost:5050"
-  subdomain    = true
-  share        = "owner"
 }
 ```
 
-## DevOps Engineer Template
+## Next Steps
 
-### Overview
-Optimized for infrastructure management, CI/CD, and platform engineering.
+With persona-based templates deployed, you can:
 
-### Key Features
-- **Infrastructure Tools**: Terraform, Ansible, Pulumi
-- **Container Orchestration**: kubectl, helm, docker
-- **Cloud CLIs**: AWS, Azure, GCP command-line tools
-- **Monitoring**: Prometheus, Grafana, monitoring scripts
-- **Security**: Security scanning and compliance tools
+1. **Create Workspaces**: Users can create workspaces from available templates
+2. **Monitor Usage**: Track template usage and performance metrics
+3. **Iterate Templates**: Update templates based on user feedback
+4. **Scale Deployment**: Add more specialized templates as needed
 
-### Template Highlights
-
-```hcl
-# DevOps-optimized instance with enhanced networking
-resource "aws_instance" "devops_workspace" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.xlarge" # More resources for infrastructure tasks
-  
-  # Enhanced IAM role for AWS operations
-  iam_instance_profile = aws_iam_instance_profile.devops_profile.name
-  
-  vpc_security_group_ids = [aws_security_group.devops_workspace.id]
-  subnet_id              = var.subnet_id
-  
-  user_data = templatefile("${path.module}/devops_startup.sh", {
-    username = data.coder_workspace_owner.me.name
-  })
-}
-
-# IAM role with necessary permissions for DevOps tasks
-resource "aws_iam_role" "devops_role" {
-  name = "coder-devops-role-${random_id.workspace.hex}"
-  
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      }
-    ]
-  })
-}
-
-# Kubernetes Dashboard
-resource "coder_app" "k8s_dashboard" {
-  agent_id     = coder_agent.devops.id
-  slug         = "k8s-dashboard"
-  display_name = "Kubernetes Dashboard"
-  icon         = "/icon/kubernetes.svg"
-  url          = "http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/"
-  subdomain    = false
-  share        = "owner"
-}
-```
-
-## Data Science Template
-
-### Overview
-Optimized for machine learning, data analysis, and research workflows.
-
-### Key Features
-- **Python Ecosystem**: Jupyter, pandas, scikit-learn, TensorFlow, PyTorch
-- **R Environment**: RStudio Server, tidyverse, data.table
-- **GPU Support**: CUDA drivers for ML workloads
-- **Data Storage**: Integration with S3, data lake access
-- **Visualization**: Plotly, matplotlib, ggplot2
-
-### Template Highlights
-
-```hcl
-# GPU-enabled instance for ML workloads
-resource "aws_instance" "datascience_workspace" {
-  ami           = data.aws_ami.deep_learning.id # Deep Learning AMI
-  instance_type = var.gpu_instance_type # Default: g4dn.xlarge
-  
-  vpc_security_group_ids = [aws_security_group.datascience_workspace.id]
-  subnet_id              = var.subnet_id
-}
-
-# Jupyter Lab
-resource "coder_app" "jupyter" {
-  agent_id     = coder_agent.datascience.id
-  slug         = "jupyter"
-  display_name = "Jupyter Lab"
-  icon         = "/icon/jupyter.svg"
-  url          = "http://localhost:8888"
-  subdomain    = true
-  share        = "owner"
-}
-
-# RStudio Server
-resource "coder_app" "rstudio" {
-  agent_id     = coder_agent.datascience.id
-  slug         = "rstudio"
-  display_name = "RStudio Server"
-  icon         = "/icon/rstudio.svg"
-  url          = "http://localhost:8787"
-  subdomain    = true
-  share        = "owner"
-}
-```
-
-## Template Selection Strategy
-
-### Automatic Template Recommendation
-
-Implement logic to recommend templates based on:
-
-1. **Project Repository Analysis**: Scan for package.json, requirements.txt, Dockerfile
-2. **User Role**: Integration with identity providers and team assignments
-3. **Resource Requirements**: CPU, memory, and storage needs
-4. **Compliance Requirements**: Security and regulatory constraints
-
-### Template Inheritance
-
-Create a base template with common functionality:
-
-```hcl
-# base-template/main.tf
-module "base_workspace" {
-  source = "./modules/base-workspace"
-  
-  workspace_name = var.workspace_name
-  owner_name     = data.coder_workspace_owner.me.name
-  instance_type  = var.instance_type
-  subnet_id      = var.subnet_id
-}
-
-# Extend with persona-specific features
-module "frontend_extensions" {
-  count  = var.persona == "frontend" ? 1 : 0
-  source = "./modules/frontend-extensions"
-  
-  workspace_instance = module.base_workspace.instance
-}
-```
-
-{{% notice tip %}}
-💡 **Pro Tip**: Use template inheritance to maintain consistency while allowing specialization. This reduces duplication and makes updates easier.
-{{% /notice %}}
-
-{{% notice info %}}
-🔄 **Continuous Improvement**: Regularly review template usage metrics and user feedback to optimize resource allocation and tool selection.
-{{% /notice %}}
-
-### Next Steps
-Now let's integrate AI-powered development tools to supercharge these persona-based environments with intelligent assistance.
+The templates from the workshop repository provide a solid foundation for building a comprehensive development platform that serves multiple developer personas while maintaining consistency and security standards.
