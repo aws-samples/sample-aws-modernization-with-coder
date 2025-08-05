@@ -1,42 +1,91 @@
 ---
-title: "AI-Powered Development Showcase"
+title: "AI-Driven Development Workflows"
 chapter: true
 weight: 50
 ---
 
-# AI-Powered Development Showcase
-<br>
+# AI-Driven Development Workflows
 
-### Setting Up The Workshop: AWS Hosted Or Self-paced
-By utilizing the Hugo language localization settings, directing the workshop towards a specific setup can be simplified. The `Language` setting in the `config.toml` file will allow you to distinguish between having one option or both. Commenting out one of the languages will hide all files that are related to that setup. By default, only the self-guided setup will be enabled. To enable switching, set `disableLanguageSwitchingButton` to `false` in the `config.toml`. If you want to have only the Event Engine setup, set the `defaultContentLanguage` at the top of the `config.toml` file to `ee`.
+## Transforming Development with Intelligent Automation
 
-### The Entry Point Of The Workshop And Naming Conventions
-All modifications should be done to files in the `content` folder. `_index.md` serves as the main entry point to your workshop. Adding modules can be done utilizing the format of `#_title` as a folder within `content`. By adding a number value to the title, this helps to keep the files structured in parity with the content of the workshop. A good practice for file naming is to have the folder be the module number and the submodule numbers add to that number reflecting their order. For example, the first module is `1_ModuleOne` and the submodules would be `11_SubmoduleOne`, `12_SubmoduleTwo`, and so forth. <br> <!-- <br> applies a line break to paragraphs -->
-To ensure the modules and submodules follow the correct structure order, adjust the "weight" value in the heading of the file to reflect the order you wish to use. Three module examples are included in this template with the second being split based upon the method of setup. The same rules apply for submodules. `_index.md` will be the entry point of that module. Submodules should be named with the format of `{module number}{weight}_{title}.{language}.md`. For example, `11_Foreword.md` would be the first submodule of module one in the default language/setup. `31_PartnerSetup.ee.md` would be the first submodule of module 3 in the EventEngine language/setup.
+Welcome to the AI-Driven Development Workflows module! Now that you have deployed Coder and created intelligent templates, it's time to experience the future of software development. This module demonstrates how AI transforms every aspect of the development lifecycle—from initial code generation to deployment and monitoring.
 
-### Working With Hugo Markdown and Shortcode
-The following links will supply you with all the reference documentation about Hugo markdown. For more experienced developers, inline HTML is also an option to add more customization. For example `<p style='text-align: left;'>` inline will allow you to adjust your text placement.
+### What We'll Accomplish
 
-### Markdown and Shortcode Resources
+In this module, you will:
+
+1. *Master AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Q Developer and AWS Bedrock
+2. *Implement Automated Testing Strategies* - Build AI-driven test generation, execution, and quality assurance pipelines
+3. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
+4. *Establish AI-Enhanced Monitoring* - Set up intelligent observability with automated anomaly detection and performance insights
+5. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
+## The AI-First Development Philosophy
+
+AI-driven development isn't just about code completion—it's a fundamental shift in how we approach software engineering:
+
+### Traditional Development vs. AI-Driven Development
+
+| Traditional Approach | AI-Driven Approach |
+|---------------------|--------------------|
+| Manual code writing | AI-assisted generation with human guidance |
+| Reactive debugging | Proactive issue detection and resolution |
+| Manual testing | Intelligent test generation and execution |
+| Static documentation | Dynamic, context-aware documentation |
+| Manual code reviews | AI-enhanced reviews with security scanning |
+| Reactive monitoring | Predictive analytics and automated remediation |
+
+### Key Principles
+
+- *Human-AI Collaboration*: AI amplifies human creativity rather than replacing it
+- *Context-Aware Assistance*: AI understands your codebase, patterns, and objectives
+- *Continuous Learning*: Systems improve based on team patterns and feedback
+- *Proactive Intelligence*: AI anticipates needs and suggests optimizations
+- *End-to-End Automation*: AI workflows span the entire development lifecycle
+## Architecture Overview
+
+Our AI-driven development platform integrates multiple AWS AI services with Coder:
+
+[ASCII architecture diagram showing AI services integration]
+
+## Real-World AI Development Scenarios
+
+### Scenario 1: New Feature Development
+*Traditional Time*: 2-3 weeks  
+*AI-Driven Time*: 3-5 days
+
+1. *AI Requirements Analysis*: Natural language feature description → detailed technical requirements
+2. *Intelligent Code Generation*: AI generates boilerplate, API endpoints, and database schemas
+3. *Automated Testing*: AI creates comprehensive test suites based on requirements
+4. *Smart Code Review*: AI identifies potential issues, security vulnerabilities, and optimization opportunities
+5. *Intelligent Deployment*: AI optimizes infrastructure configuration and deployment strategy
+
+### Module Learning Objectives
+
+By the end of this module, you will be able to:
+
+*AI-Powered Development Skills:*
+- Leverage Amazon Q Developer for intelligent code completion and generation
+- Use AWS Bedrock Claude for advanced code review and architectural guidance
+- Implement AI-driven refactoring and optimization workflows
+- Create context-aware development assistants
+
+### Success Metrics
+
+We'll measure the impact of AI-driven development:
+
+- *Development Velocity*: 3-5x faster feature delivery
+- *Code Quality*: 80% reduction in bugs and security vulnerabilities
+- *Test Coverage*: 95%+ automated test coverage with AI-generated tests
+- *Deployment Reliability*: 99.9% successful deployments with zero-downtime
+- *Developer Satisfaction*: Reduced cognitive load and increased focus on creative work
+
 {{% notice tip %}}
-The following links are your go-to resource for markdown and shortcode reference in building your workshop: <br>
-* Markdown cheat sheet https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet <br>
-* Learn theme markdown https://learn.netlify.app/en/cont/markdown/ <br>
-* Menu extras and shortcuts https://learn.netlify.app/en/cont/menushortcuts/ <br>
-* Using Font Awesome Emoji's <i class="fas fa-heart"></i> https://learn.netlify.app/en/cont/icons/ to help your page pop <i class="fas fa-glass-cheers"></i>
+🤖 *AI Development Mindset*: Think of AI as your intelligent pair programming partner. The goal is human-AI collaboration that amplifies creativity and productivity.
 {{% /notice %}}
 
-### Adding Images and Static Media 
-Any images and static media to be included in the workshop need to be placed in the `static/images` folder. The format to display an image is as follows: `![Alternate Text](/images/imagename.jpg)` <br>
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These examples are not intended for use in production environments.
+{{% /notice %}}
 
-For example, the markdown for this dog is `![An adorable puppy](/images/dog.jpg)` and the image is in the `static/images` folder. <br>
-![An adorable puppy](/images/dog.jpg)
-
-### Creating Links
-The format for creating links is `[Link Display Text](http://example.com)`. For example, this link [Hugo Framework](https://gohugo.io/about/what-is-hugo/) was created using `[Hugo Framework](https://gohugo.io/about/what-is-hugo/)`.
-
-### The "More" Menu Section
-This section of the menu on the left is designed to add additional resources that are related to the workshop but not necessarily part of the workshop itself. To modify these links, edit the sections marked `[[menu.shortcuts]]` in the `config.toml` located in the root folder. The "name" portion will be what is displayed in the menu. The "url" should be the address of the link. The "weight" setting will adjust the display order, similar to the other "weight" settings utilized in indexes and modules mentioned previously.
-
-### Ensuring Pages Appear In Both Setup Versions
-A shortcut to creating the workshop with different setup versions is utilizing the localization functionality of Hugo. By adding a secondary extension to the filename, this file will be included in the specific version of the workshop. Currently, the base utilizes the format `*.ee.md` to signify that the page is to be used in the AWS EventEngine setup. Much of the time, the files will be the same as the content only differs at specific points. It is necessary to add them, however, to make sure that the common content is duplicated across both versions. If you wish to change the secondary extension or default version, this can be done in the `config.toml` file in the heading and `[Languages]` sections.
+### Ready to Experience the Future?
+Let's dive into AI-powered development workflows and transform how you build software. The future of development is intelligent, automated, and incredibly productive!
