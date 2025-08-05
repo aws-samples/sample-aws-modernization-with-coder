@@ -67,7 +67,25 @@ The workshop repository contains several specialized templates designed for diff
 - Event-driven application development
 - AWS service integration projects
 
-### 4. Windows Development with DCV (`awshp-windows-dcv`)
+### 4. Kubernetes with Claude Code (`awshp-k8s-with-claude-code`)
+
+**Purpose**: Container-based development environment with Claude Code AI assistant integration
+
+**Key Features**:
+- Kubernetes pod-based workspaces with AI assistance
+- Claude Code AI assistant for automated development tasks
+- Integration with AWS Bedrock for Claude models
+- VS Code Web and Cursor AI-powered editor
+- Configurable CPU, memory, and storage resources
+- Built-in preview server for web applications
+
+**Use Cases**:
+- AI-assisted software development
+- Rapid prototyping with AI code generation
+- Learning and experimentation with AI coding tools
+- Container-based development with intelligent assistance
+
+### 5. Windows Development with DCV (`awshp-windows-dcv`)
 
 **Purpose**: Windows-based development environment with NICE DCV remote desktop
 
