@@ -80,7 +80,7 @@ coder whoami
 
 # Create a session token for template deployment
 CODER_SESSION_TOKEN=$(coder tokens create --lifetime 24h)
-echo "Session token created successfully"
+echo "Session token created successfully "+$CODER_SESSION_TOKEN
 ```
 
 ### Step 5: Deploy Workshop Templates
@@ -106,13 +106,6 @@ Confirm that all templates were deployed successfully:
 ```bash
 # List all available templates
 coder templates list
-
-# Check template details
-coder templates show awshp-linux-q-base
-coder templates show awshp-k8s-with-amazon-q
-coder templates show awshp-linux-sam
-coder templates show awshp-k8s-with-claude-code
-coder templates show awshp-windows-dcv
 ```
 
 You should see all 5 workshop templates listed and available for workspace creation.
@@ -122,7 +115,7 @@ You should see all 5 workshop templates listed and available for workspace creat
 Create a test workspace to verify template functionality:
 
 ```bash
-# Create a test workspace using the Linux Q base template
+# Create a test workspace using the Kubernetes Q base template
 coder create test-linux-q --template awshp-linux-q-base
 
 # Check workspace status
@@ -142,11 +135,11 @@ The workshop repository contains several specialized templates designed for diff
 
 ### 1. AWS Linux Base with Amazon Q (`awshp-linux-q-base`)
 
-**Purpose**: General-purpose Linux development environment with Amazon Q Developer integration
+**Purpose**: General-purpose Linux development environment with Amazon Q Developer CLI integration
 
 **Key Features**:
 - AWS EC2 Linux instances with persistent storage
-- Pre-installed Amazon Q Developer for AI-powered coding assistance
+- Pre-installed Amazon Q Developer CLI for AI-powered coding assistance
 - VS Code Server with development extensions
 - Git, Docker, and common development tools
 - Optimized for cloud-native development workflows
@@ -159,14 +152,15 @@ The workshop repository contains several specialized templates designed for diff
 
 ### 2. Kubernetes Development (`awshp-k8s-with-amazon-q`)
 
-**Purpose**: Container-based development environment running on Kubernetes with Amazon Q integration
+**Purpose**: Container-based development environment running on Kubernetes with Amazon Q CLI integration
 
 **Key Features**:
 - Kubernetes pod-based workspaces for scalability
-- Amazon Q Developer integration for container development
+- Amazon Q Developer CLI integration for automated development tasks
 - Persistent home directory storage
 - Pre-configured kubectl and container tools
 - Ephemeral compute with persistent data
+- Coder Tasks integration, Run Async Agentic AI Tasks in Coder Workspaces
 
 **Use Cases**:
 - Microservices development
@@ -201,7 +195,7 @@ The workshop repository contains several specialized templates designed for diff
 - Integration with AWS Bedrock for Claude models
 - VS Code Web and Cursor AI-powered editor
 - Configurable CPU, memory, and storage resources
-- Built-in preview server for web applications
+- Coder Tasks integration, Run Async Agentic AI Tasks in Coder Workspaces
 
 **Use Cases**:
 - AI-assisted software development
@@ -254,7 +248,6 @@ resource "aws_instance" "workspace" {
   # Instance configuration
   tags = {
     Name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    Owner = data.coder_workspace_owner.me.name
     Coder_Provisioned = "true"
   }
 }
@@ -271,7 +264,7 @@ The templates implement several security best practices:
 
 ### Scalability Features
 
-- **Auto-scaling**: Kubernetes-based templates support horizontal scaling
+- **Auto-scaling**: Kubernetes-based templates support horizontal scaling of EKS Cluster Node Pools
 - **Resource Optimization**: Right-sized instances for different workloads
 - **Persistent Storage**: Separation of compute and storage for cost efficiency
 - **Multi-region Support**: Templates work across AWS regions
@@ -333,31 +326,6 @@ startup_script = <<-EOT
   # Custom configurations
   cp /opt/your-org/configs/* ~/.config/
 EOT
-```
-
-### Implementing Compliance Requirements
-
-Add compliance and security configurations:
-
-```hcl
-# Enhanced security group
-resource "aws_security_group" "workspace" {
-  name_prefix = "coder-secure-"
-  
-  # Restrict SSH access to corporate network
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.corporate_cidr]
-  }
-  
-  # Log all network traffic
-  tags = {
-    Compliance = "SOC2"
-    Monitoring = "enabled"
-  }
-}
 ```
 
 ## Next Steps
