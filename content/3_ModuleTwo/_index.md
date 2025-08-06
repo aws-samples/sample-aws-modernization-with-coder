@@ -15,10 +15,9 @@ Welcome to the Template Engineering module! Now that you have a fully deployed C
 In this module, you will:
 
 1. **Master Template Fundamentals** - Understand Coder template architecture, Terraform integration, and workspace lifecycle management
-2. **Create Persona-Based Templates** - Build specialized environments for Frontend, Backend, DevOps, and Data Science teams
-3. **Integrate AI Development Tools** - Configure Amazon Q Developer and AWS Bedrock for intelligent code assistance
-4. **Implement Advanced Features** - Add networking, persistent storage, security policies, and custom resource provisioning
-5. **Optimize for Scale** - Design templates for multi-tenant environments with cost optimization and resource governance
+2. **Create Persona-Based Templates** - Build specialized environments for general, serverless, Windows, and Agentic AI AWS development 
+3. **Integrate AI Development Tools** - Configure Amazon Q Developer and Claude Code/AWS Bedrock for intelligent code assistance
+4. **Optimize for Scale** - Design templates for multi-tenant environments with cost optimization and resource governance
 
 ## Template Engineering Philosophy
 
@@ -59,29 +58,50 @@ Coder templates leverage several key AWS services and patterns:
 
 ## Template Types We'll Build
 
-### 1. Frontend Developer Template
-- **Runtime**: Node.js 20+ with npm/yarn/pnpm
-- **Tools**: VS Code Server, React DevTools, Webpack Dev Server
-- **AI Integration**: Amazon Q for React/TypeScript assistance
-- **Features**: Hot reload, browser sync, automated testing
+### 1. AWS Linux Base with Amazon Q 
+**Purpose**: EC2-based Linux development environment with Amazon Q Developer integration
 
-### 2. Backend Developer Template
-- **Runtime**: Multi-language support (Go, Python, Java, .NET)
-- **Tools**: Database clients, API testing tools, monitoring dashboards
-- **AI Integration**: Bedrock Claude for API design and optimization
-- **Features**: Local database instances, service mesh integration
+**Use Cases**:
+- General software development
+- Cloud application development
+- Learning and experimentation with Amazon Q
+- Multi-language development projects
 
-### 3. DevOps Engineer Template
-- **Runtime**: Terraform, Kubernetes CLI, AWS CLI
-- **Tools**: Helm, ArgoCD, Prometheus, Grafana
-- **AI Integration**: Infrastructure code generation and review
-- **Features**: Multi-cloud access, security scanning, compliance checks
+### 2. Kubernetes Development 
+**Purpose**: Container-based development environment running on Kubernetes with Amazon Q integration
 
-### 4. Data Science Template
-- **Runtime**: Python 3.11+, R, Jupyter Lab
-- **Tools**: pandas, scikit-learn, TensorFlow, PyTorch
-- **AI Integration**: Amazon SageMaker integration, model deployment
-- **Features**: GPU acceleration, large dataset access, experiment tracking
+**Use Cases**:
+- Microservices development
+- Kubernetes application development
+- Container orchestration learning
+- Cloud-native architecture development
+
+### 3. AWS SAM Development 
+**Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
+
+**Use Cases**:
+- AWS Lambda function development
+- Serverless application architecture
+- Event-driven application development
+- AWS service integration projects
+
+### 4. Kubernetes with Claude Code 
+**Purpose**: Container-based development environment with Claude Code AI assistant integration
+
+**Use Cases**:
+- AI-assisted software development
+- Rapid prototyping with AI code generation
+- Learning and experimentation with AI coding tools
+- Container-based development with intelligent assistance
+
+### 5. Windows Development with DCV 
+**Purpose**: Windows-based development environment with NICE DCV remote desktop
+
+**Use Cases**:
+- .NET application development
+- Windows-specific software development
+- Legacy application modernization
+- Cross-platform development testing
 
 ## Key Benefits of This Approach
 
