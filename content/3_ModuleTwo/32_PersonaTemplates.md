@@ -12,6 +12,130 @@ Different developers have different needs. A frontend developer working on React
 
 This workshop leverages pre-built templates from the [AWS Coder Workshop GitOps repository](https://github.com/coder/aws-coder-workshop-gitops) that demonstrate production-ready persona-based development environments.
 
+## Hands-On: Deploy Workshop Templates
+
+In this section, you'll create a Kubernetes devcontainer workspace and use it to deploy the workshop templates to your Coder instance.
+
+### Step 1: Create a Kubernetes Devcontainer Template
+
+First, create a Kubernetes devcontainer template:
+
+1. **Access your Coder dashboard, Templates** and click "New template"
+2. **Select Kubernetes from the FILTER** and click "Use template" for the Kubernetes (Devcontainer)
+3. **Review Template configuration** and click "Save"
+
+### Step 2: Create a Kubernetes Devcontainer Workspace
+
+Next, create a workspace using the Kubernetes Devcontainer template for template administration:
+1. **Access your Coder dashboard** and click "Create Workspace"
+2. **Select the Kubernetes (Devcontainer) template** (created in the previous step)
+3. **Configure the workspace parameters**:
+   - **Name**: `template-admin-workspace`
+   - **Repository**: `https://github.com/coder/aws-coder-workshop-gitops`
+   - **CPU**: 2 cores
+   - **Memory**: 4 GB
+   - **Disk Size**: 20 GB
+
+4. **Click "Create Workspace"** and wait for it to start
+
+{{% notice info %}}
+The devcontainer specification in the repository will automatically provision terraform, helm, kubectl, and other tools needed for template administration.
+{{% /notice %}}
+
+### Step 3: Access Your Template Administration Workspace
+
+Once your workspace is running:
+
+1. **Open the workspace** from your Coder dashboard
+2. **Launch VS Code** or your preferred editor
+3. **Open a terminal** within the workspace
+
+### Step 4: Initialize Template Deployment Environment
+
+In your workspace terminal, set up the template deployment environment:
+
+```bash
+# Navigate to the templates directory
+cd /workspaces/aws-coder-workshop-gitops/templates
+
+# Verify required tools are available
+terraform version
+kubectl version --client
+coder version
+
+# Initialize Terraform
+terraform init
+```
+
+### Step 4: Authenticate with Your Coder Instance
+
+Authenticate the Coder CLI with your workshop instance:
+
+```bash
+# Login to your Coder instance (replace with your actual URL)
+coder login $CODER_AGENT_URL
+
+# Verify authentication
+coder whoami
+
+# Create a session token for template deployment
+CODER_SESSION_TOKEN=$(coder tokens create --lifetime 24h)
+echo "Session token created successfully"
+```
+
+### Step 5: Deploy Workshop Templates
+
+Use the provided GitOps script to deploy all workshop templates:
+
+```bash
+# Make the deployment script executable
+chmod +x templates_gitops.sh
+
+# Deploy all templates to your Coder instance
+./templates_gitops.sh $CODER_SESSION_TOKEN
+```
+
+{{% notice tip %}}
+The deployment script will create all 5 workshop templates in your Coder instance. This process typically takes 2-3 minutes.
+{{% /notice %}}
+
+### Step 6: Verify Template Deployment
+
+Confirm that all templates were deployed successfully:
+
+```bash
+# List all available templates
+coder templates list
+
+# Check template details
+coder templates show awshp-linux-q-base
+coder templates show awshp-k8s-with-amazon-q
+coder templates show awshp-linux-sam
+coder templates show awshp-k8s-with-claude-code
+coder templates show awshp-windows-dcv
+```
+
+You should see all 5 workshop templates listed and available for workspace creation.
+
+### Step 7: Test Template Functionality
+
+Create a test workspace to verify template functionality:
+
+```bash
+# Create a test workspace using the Linux Q base template
+coder create test-linux-q --template awshp-linux-q-base
+
+# Check workspace status
+coder list
+
+# Clean up the test workspace
+coder delete test-linux-q
+```
+
+{{% notice success %}}
+Congratulations! You've successfully deployed all workshop templates using a GitOps workflow. Your Coder instance now has 5 persona-based templates ready for use.
+{{% /notice %}}
+
 ## Available Workshop Templates
 
 The workshop repository contains several specialized templates designed for different development personas and use cases:
@@ -190,51 +314,41 @@ coder login $CODER_AGENT_URL
 ./templates_gitops.sh <session-token>
 ```
 
-## Implementing Templates in Your Workshop
+## Template Management and Updates
 
-### Step 1: Clone the Template Repository
+Now that you've deployed the workshop templates, you can manage and update them using the same GitOps workflow:
+
+### Updating Templates
+
+To update templates with new features or configurations:
 
 ```bash
-# Clone the workshop templates
-git clone https://github.com/coder/aws-coder-workshop-gitops.git
-cd aws-coder-workshop-gitops/templates
+# In your template-admin-workspace
+cd /workspaces/aws-coder-workshop-gitops/templates
+
+# Make changes to template files
+# Edit main.tf files in template directories
+
+# Deploy updates
+./templates_gitops.sh $CODER_SESSION_TOKEN
 ```
 
-### Step 2: Configure AWS Authentication
+### Adding New Templates
 
-Ensure your Coder deployment has proper AWS credentials:
-
-```bash
-# Verify AWS access
-aws sts get-caller-identity
-
-# Check required permissions
-aws iam simulate-principal-policy \
-  --policy-source-arn $(aws sts get-caller-identity --query Arn --output text) \
-  --action-names ec2:RunInstances ec2:DescribeInstances
-```
-
-### Step 3: Deploy Templates
+To add organization-specific templates:
 
 ```bash
-# Initialize Terraform
-terraform init
+# Create new template directory
+mkdir awshp-custom-template
+cd awshp-custom-template
 
-# Login to Coder
-coder login https://your-coder-instance.com
+# Create template files
+# Add main.tf, README.md, and other required files
 
-# Deploy all templates
-./templates_gitops.sh $(coder tokens create --lifetime 24h)
-```
-
-### Step 4: Verify Template Deployment
-
-```bash
-# List available templates
-coder templates list
-
-# Test template creation
-coder create --template awshp-linux-q-base test-workspace
+# Update template_versions.tf to include new template
+# Deploy changes
+cd ..
+./templates_gitops.sh $CODER_SESSION_TOKEN
 ```
 
 ## Customizing Templates for Your Organization
