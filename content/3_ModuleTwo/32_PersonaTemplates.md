@@ -26,7 +26,7 @@ First, create a Kubernetes devcontainer template:
 
 ### Step 2: Create a Kubernetes Devcontainer Workspace
 
-Next, create a workspace using the Kubernetes Devcontainer template for template administration:
+Next, create a workspace using the Kubernetes Devcontainer template for Coder administration:
 1. **Access your Coder dashboard** and click "Create Workspace"
 2. **Select the Kubernetes (Devcontainer) template** (created in the previous step)
 3. **Configure the workspace parameters**:
