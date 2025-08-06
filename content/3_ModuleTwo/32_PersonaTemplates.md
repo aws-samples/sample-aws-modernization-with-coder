@@ -266,7 +266,6 @@ The templates implement several security best practices:
 
 - **IAM Integration**: Proper AWS IAM roles and policies
 - **Resource Tagging**: Consistent tagging for resource management
-- **Network Security**: Appropriate security group configurations
 - **Encryption**: EBS volume encryption by default
 - **Access Control**: Workspace-level access controls
 
@@ -276,43 +275,6 @@ The templates implement several security best practices:
 - **Resource Optimization**: Right-sized instances for different workloads
 - **Persistent Storage**: Separation of compute and storage for cost efficiency
 - **Multi-region Support**: Templates work across AWS regions
-
-## GitOps Workflow Integration
-
-The workshop templates demonstrate a complete GitOps workflow for template management:
-
-### Template Versioning
-
-Templates are managed through `template_versions.tf`:
-
-```hcl
-resource "coder_template" "awshp-linux-q-base" {
-  name         = "awshp-linux-q-base"
-  description  = "AWS EC2 Linux with Amazon Q Developer"
-  organization_id = data.coder_organization.default.id
-  
-  versions = [{
-    name      = "1.0.0"
-    directory = "./awshp-linux-q-base"
-    active    = true
-  }]
-}
-```
-
-### Deployment Automation
-
-The repository includes `templates_gitops.sh` script for automated template deployment:
-
-```bash
-# Initialize Terraform
-terraform init
-
-# Login to Coder
-coder login $CODER_AGENT_URL
-
-# Deploy templates
-./templates_gitops.sh <session-token>
-```
 
 ## Template Management and Updates
 
