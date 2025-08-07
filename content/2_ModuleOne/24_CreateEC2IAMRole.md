@@ -17,27 +17,23 @@ From AWS CloudShell and in the AWS account/region being used for the workshop, p
 
 #### Step 1: Create IAM Role and Trust Relationship for EC2 Workspace Support
 ```bash
-# Make sure you have the ekspodid-trust-policy.json file in your current directory (update role name)
-aws iam create-role --role-name your-coder-ec2-workspace-role --assume-role-policy-document file://ekspodid-trust-policy.json
+# Make sure you have the ekspodid-trust-policy.json file in your current directory 
+aws iam create-role --role-name coder-workshop-ec2-workspace-role --assume-role-policy-document file://ekspodid-trust-policy.json
 
-# Attach necessary policies to the role 
+# Attach necessary policies to the role (Scope to only necessary outside of workshop in your own AWS Account)
 aws iam attach-role-policy \
-    --role-name your-coder-ec2-workspace-role \
-    --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess
-
-aws iam attach-role-policy \
-    --role-name your-coder-ec2-workspace-role \
-    --policy-arn arn:aws:iam::aws:policy/IAMReadOnlyAccess
+    --role-name coder-workshop-ec2-workspace-role \
+    --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
 #### Step 2: Associate IAM Role with EKS/Coder Control Plane
 ```bash
 # Add IAM Pod Identity association for EC2 Workspace support
 aws eks create-pod-identity-association \
-    --cluster-name your-cluster-name \
+    --cluster-name coder-aws-cluster \
     --namespace coder \
     --service-account coder \
-    --role-arn arn:aws:iam::your-aws-account-id:role/your-coder-ec2-workspace-role
+    --role-arn arn:aws:iam::<your-aws-account-id>:role/coder-workshop-ec2-workspace-role
 ```
 {{% notice info %}}
 The updated IAM Role association may not take affect until the Coder Control Plane is restarted.  Delete the coder-(instance) pods in the coder namespace that are currently running, and validate that new ones are automatically started and running. 

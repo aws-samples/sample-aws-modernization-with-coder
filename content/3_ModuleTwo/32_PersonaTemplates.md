@@ -155,7 +155,7 @@ The workshop repository contains several specialized templates designed for diff
 **Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
 
 **Key Features**:
-- AWS EC2 Linux instances optimized for serverless development
+- AWS EC2 ARM64/Graviton Linux instances optimized for serverless development
 - AWS SAM CLI pre-installed and configured
 - Lambda development tools and runtime environments
 - AWS CLI with proper IAM integration
