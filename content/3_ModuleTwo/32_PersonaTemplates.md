@@ -306,28 +306,6 @@ cd ..
 ./templates_gitops.sh $CODER_SESSION_TOKEN
 ```
 
-## Customizing Templates for Your Organization
-
-### Adding Organization-Specific Tools
-
-Extend the base templates with your organization's tools:
-
-```hcl
-# Add to startup_script in coder_agent resource
-startup_script = <<-EOT
-  #!/bin/bash
-  
-  # Base template setup
-  ${file("${path.module}/base_setup.sh")}
-  
-  # Organization-specific tools
-  curl -fsSL https://your-org.com/tools/install.sh | bash
-  
-  # Custom configurations
-  cp /opt/your-org/configs/* ~/.config/
-EOT
-```
-
 ## Next Steps
 
 With persona-based templates deployed, you can:
