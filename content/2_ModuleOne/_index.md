@@ -24,7 +24,7 @@ In this module, you will:
 
 Here's what has been automatically deployed and what we'll configure:
 
-![AWS RefArch](/images/AWSCoderSingleRegionv1-0.png)
+![AWS RefArch](/images/AWSCoderSingleRegionv1-1.png)
 
 **Pre-Deployed Infrastructure (via CloudFormation):**
 - Amazon EKS cluster (`coder-aws-cluster`) with Auto Mode
