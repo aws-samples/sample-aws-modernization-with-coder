@@ -150,25 +150,7 @@ The workshop repository contains several specialized templates designed for diff
 - Learning and experimentation with Amazon Q
 - Multi-language development projects
 
-### 2. Kubernetes Development with Amazon Q (`awshp-k8s-with-amazon-q`)
-
-**Purpose**: Container-based development environment running on Kubernetes with Amazon Q Agentic Task integration
-
-**Key Features**:
-- Kubernetes pod-based workspaces for scalability
-- Amazon Q Developer CLI integration for automated development tasks
-- Persistent home directory storage
-- Pre-configured kubectl and container tools
-- Ephemeral compute with persistent data
-- Coder Tasks integration, Run Async Agentic AI Tasks in Coder Workspaces
-
-**Use Cases**:
-- Microservices development
-- Kubernetes application development
-- Container orchestration learning
-- Cloud-native architecture development
-
-### 3. AWS SAM Development (`awshp-linux-sam`)
+### 2. AWS SAM Development (`awshp-linux-sam`)
 
 **Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
 
@@ -185,7 +167,7 @@ The workshop repository contains several specialized templates designed for diff
 - Event-driven application development
 - AWS service integration projects
 
-### 4. Kubernetes Development with Claude Code (`awshp-k8s-with-claude-code`)
+### 3. Kubernetes Development with Claude Code (`awshp-k8s-with-claude-code`)
 
 **Purpose**: Container-based development environment running on Kubernetes with Claude Code Agentic Task integration
 
@@ -203,7 +185,7 @@ The workshop repository contains several specialized templates designed for diff
 - Learning and experimentation with AI coding tools
 - Container-based development with intelligent assistance
 
-### 5. Windows Development with DCV (`awshp-windows-dcv`)
+### 4. Windows Development with DCV (`awshp-windows-dcv`)
 
 **Purpose**: Windows-based development environment with NICE DCV remote desktop
 

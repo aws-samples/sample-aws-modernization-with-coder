@@ -67,17 +67,7 @@ Coder templates leverage several key AWS services and patterns:
 - Learning and experimentation with Amazon Q
 - Multi-language development projects
 
-### 2. Kubernetes Development with Amazon Q 
-**Purpose**: Container-based development environment running on Kubernetes with Amazon Q Agentic Task integration
-
-**Use Cases**:
-- AI-assisted software development
-- Microservices development
-- Kubernetes application development
-- Container orchestration learning
-- Cloud-native architecture development
-
-### 3. AWS SAM Development 
+### 2. AWS SAM Development 
 **Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
 
 **Use Cases**:
@@ -86,7 +76,7 @@ Coder templates leverage several key AWS services and patterns:
 - Event-driven application development
 - AWS service integration projects
 
-### 4. Kubernetes Development with Claude Code 
+### 3. Kubernetes Development with Claude Code 
 **Purpose**: Container-based development environment running on Kubernetes with Claude Code Agentic Task integration
 
 **Use Cases**:
@@ -95,7 +85,7 @@ Coder templates leverage several key AWS services and patterns:
 - Learning and experimentation with AI coding tools
 - Container-based development with intelligent assistance
 
-### 5. Windows Development with DCV 
+### 4. Windows Development with DCV 
 **Purpose**: Windows-based development environment with NICE DCV remote desktop
 
 **Use Cases**:
