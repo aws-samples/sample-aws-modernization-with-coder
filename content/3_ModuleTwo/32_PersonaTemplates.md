@@ -21,7 +21,7 @@ In this section, you'll create a Kubernetes devcontainer workspace and use it to
 First, create a Kubernetes devcontainer template:
 
 1. **Access your Coder dashboard, Templates** and click "New template"
-2. **Select Kubernetes from the FILTER** and click "Use template" for the Kubernetes (Devcontainer)
+2. **Select Kubernetes from the FILTER** and click "Use template" for the Kubernetes (Devcontainer) template
 3. **Review Template configuration** and click "Save"
 
 ### Step 2: Create a Kubernetes Devcontainer Workspace
