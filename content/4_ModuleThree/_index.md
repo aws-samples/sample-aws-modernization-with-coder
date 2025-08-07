@@ -45,7 +45,7 @@ AI-driven development isn't just about code completion—it's a fundamental shif
 
 Our AI-driven development platform integrates multiple AWS AI services with Coder:
 
-[ASCII architecture diagram showing AI services integration]
+![Codeer AI Architecture diagram](/images/AWSCoderAgenticAI.png)
 
 ## Real-World AI Development Scenarios
 
