@@ -150,9 +150,9 @@ The workshop repository contains several specialized templates designed for diff
 - Learning and experimentation with Amazon Q
 - Multi-language development projects
 
-### 2. Kubernetes Development (`awshp-k8s-with-amazon-q`)
+### 2. Kubernetes Development with Amazon Q (`awshp-k8s-with-amazon-q`)
 
-**Purpose**: Container-based development environment running on Kubernetes with Amazon Q CLI integration
+**Purpose**: Container-based development environment running on Kubernetes with Amazon Q Agentic Task integration
 
 **Key Features**:
 - Kubernetes pod-based workspaces for scalability
@@ -185,9 +185,9 @@ The workshop repository contains several specialized templates designed for diff
 - Event-driven application development
 - AWS service integration projects
 
-### 4. Kubernetes with Claude Code (`awshp-k8s-with-claude-code`)
+### 4. Kubernetes Development with Claude Code (`awshp-k8s-with-claude-code`)
 
-**Purpose**: Container-based development environment with Claude Code AI assistant integration
+**Purpose**: Container-based development environment running on Kubernetes with Claude Code Agentic Task integration
 
 **Key Features**:
 - Kubernetes pod-based workspaces with AI assistance

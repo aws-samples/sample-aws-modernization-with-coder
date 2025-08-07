@@ -7,6 +7,9 @@ weight: 34
 # Create IAM/EC2 Control Plane Role 
 
 ## Create IAM Role for EC2 VM Coder Workspaces  
+{{% notice info %}}
+**Workshop Author Note**:  Need to update this section to create a role that can also be used later for an IAM Instance Profile in the EC2-Based Workspace Templates 
+{{% /notice %}}
 
 The Coder Control Plane requires additional permissions to create stand-alone AWS EC2 VM-Based Coder Workspaces from supporting Coder Templates.  AWS EC2 VM-based Workspaces will still be orchestrated by the core Coder Control Plane on EKS, and will use EKS pod-identity to associate the necessary IAM role.
 
@@ -36,7 +39,9 @@ aws eks create-pod-identity-association \
     --service-account coder \
     --role-arn arn:aws:iam::your-aws-account-id:role/your-coder-ec2-workspace-role
 ```
-Tip:  The updated IAM Role association may not take affect until the Coder Control Plane is restarted.  Delete the coder-(instance) pods in the coder namespace that are currently running, and validate that new ones are automatically started and running. 
+{{% notice info %}}
+The updated IAM Role association may not take affect until the Coder Control Plane is restarted.  Delete the coder-(instance) pods in the coder namespace that are currently running, and validate that new ones are automatically started and running. 
+{{% /notice %}}
 
-### Next Section Heading <!-- MODIFY THIS HEADING -->
-This paragraph block can optionally be utilized to lead into the next section of the workshop.
+### Next Steps <!-- MODIFY THIS HEADING -->
+With the required IAM Role successfully created and associated with the Coder EKS Service Account, you're ready to create a CloudFront distribution for the Coder Control Plane.

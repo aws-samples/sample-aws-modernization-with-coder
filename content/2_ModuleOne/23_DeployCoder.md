@@ -102,7 +102,7 @@ curl -I $CODER_ACCESS_URL
 # If successful, you should see HTTP 200 response
 ```
 
-{{% notice success %}}
+{{% notice info %}}
 If you see `HTTP/1.1 200 OK`, Coder is successfully deployed and accessible!
 {{% /notice %}}
 
@@ -114,10 +114,7 @@ You can now access Coder in your browser:
 echo "Access Coder at: $CODER_ACCESS_URL"
 ```
 
-When you first access Coder, you'll be prompted to:
-1. Create an admin account
-2. Set up your organization
-3. Configure authentication (if desired)
+When you first access Coder, you'll be prompted to create your Admin account.  This will be the account you use to access Coder for the remainder of the Workshop, so be sure to save your credentials for future reference.
 
 ## Troubleshooting
 

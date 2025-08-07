@@ -8,7 +8,7 @@ weight: 35
 
 ## Configure CloudFront for Global Access and TLS Termination
 
-CloudFront provides global content delivery, TLS termination, and improved performance for your Coder deployment. This module will create a CloudFront distribution that sits in front of your AWS Load Balancer and update the Coder configuration to use HTTPS.
+CloudFront provides global content delivery, TLS termination, and improved performance for your Coder deployment. This module will create a CloudFront distribution that sits in front of your AWS Load Balancer and updates the Coder configuration to use HTTPS.
 
 {{% notice info %}}
 CloudFront distributions can take 10-15 minutes to deploy globally. The process involves creating the distribution, waiting for deployment, and then updating the Coder configuration.

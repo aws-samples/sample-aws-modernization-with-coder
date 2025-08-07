@@ -46,20 +46,20 @@ Coder templates leverage several key AWS services and patterns:
 ┌─────────────────────────────────────────────────────────────┐
 │                    AWS Infrastructure                      │
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
-│  │      EKS        │  │      EC2        │  │     EFS     │ │
+│  │      EKS        │  │      EC2        │  │     EBS     │ │
 │  │   Workspaces    │  │   Workspaces    │  │   Storage   │ │
 │  └─────────────────┘  └─────────────────┘  └─────────────┘ │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
-│  │   Amazon Q      │  │   AWS Bedrock   │  │   CodeGuru  │ │
-│  │   Developer     │  │   Claude Code   │  │   Reviewer  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────┘ │
+│  ┌─────────────────┐  ┌─────────────────┐                  │
+│  │   Amazon Q      │  │   AWS Bedrock   │                  │
+│  │   Developer     │  │   Claude Code   │                  │
+│  └─────────────────┘  └─────────────────┘                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ## Template Types We'll Build
 
 ### 1. AWS Linux Base with Amazon Q 
-**Purpose**: EC2-based Linux development environment with Amazon Q Developer integration
+**Purpose**: General-purpose Linux development environment with Amazon Q Developer CLI integration
 
 **Use Cases**:
 - General software development
@@ -67,10 +67,11 @@ Coder templates leverage several key AWS services and patterns:
 - Learning and experimentation with Amazon Q
 - Multi-language development projects
 
-### 2. Kubernetes Development 
-**Purpose**: Container-based development environment running on Kubernetes with Amazon Q integration
+### 2. Kubernetes Development with Amazon Q 
+**Purpose**: Container-based development environment running on Kubernetes with Amazon Q Agentic Task integration
 
 **Use Cases**:
+- AI-assisted software development
 - Microservices development
 - Kubernetes application development
 - Container orchestration learning
@@ -85,8 +86,8 @@ Coder templates leverage several key AWS services and patterns:
 - Event-driven application development
 - AWS service integration projects
 
-### 4. Kubernetes with Claude Code 
-**Purpose**: Container-based development environment with Claude Code AI assistant integration
+### 4. Kubernetes Development with Claude Code 
+**Purpose**: Container-based development environment running on Kubernetes with Claude Code Agentic Task integration
 
 **Use Cases**:
 - AI-assisted software development
