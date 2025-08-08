@@ -54,7 +54,7 @@ This workshop addresses common developer experience challenges:
 - **Compute Optimization**: Optimize spend by shutting down idle resources
 - **VDI Alternative**: Replace slow and expensive legacy VDI with cloud workspaces 
 
-## Workshop Agenda (Duration: 90 Min)
+## Workshop Modules (Duration: 90 Min)
 
 **Prerequisites & Setup** *(15 minutes)*
 - AWS account configuration and infrastructure deployment
