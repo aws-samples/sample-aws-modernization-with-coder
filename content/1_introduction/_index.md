@@ -10,7 +10,7 @@ weight: 03
 
 In this workshop, you will learn how to standardize and scale development environments that eliminates "works on my machine" problems while supercharging productivity with AI-powered development tools on your existing AWS infrastructure.
 
-### Key Learning Objectives
+### Key Learning Objectives (Duration 90 minutes)
 
 By the end of this workshop, you will be able to demonstrate new skills in the following areas:
 
@@ -47,27 +47,6 @@ Coder delivers self-hosted cloud development environments (CDE) that are provisi
 - **Compute Optimization**: Optimize spend by shutting down idle resources
 - **VDI Alternative**: Replace slow and expensive legacy VDI with cloud workspaces 
 
-## Workshop Modules (Duration: 90 Min)
-
-**Prerequisites & Setup** *(15 minutes)*
-- AWS account configuration and infrastructure deployment
-- Understanding the reference architecture
-
-**Module 1: Coder Infrastructure Deployment** *(20 minutes)*
-- Connect to provisioned Amazon EKS cluster
-- Deploy PostgreSQL database for Coder persistence
-- Install and configure Coder control plane
-- Set up networking and security components
-
-**Module 2: Template Engineering** *(25 minutes)*
-- Create persona-based development templates
-- Showcase AI development tools integration
-- Test template deployment and workspace creation
-
-**Module 3: AI-Powered Development Showcase** *(30 minutes)*
-- Demonstrate Amazon Q Developer integration
-- Showcase Anthropic Claude Code-powered code review workflows
-- Explore advanced agentic development patterns
 
 ## Target Audience
 
