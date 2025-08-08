@@ -6,7 +6,7 @@ weight: 03
 
 # Introduction
 
-## Supercharge Developer Experience with Coder on AWS
+## Supercharge Developer Experience and Productivity with Coder on AWS
 
 Transform your development workflow by combining the power of AWS cloud infrastructure with Coder's Cloud Development Environments (CDEs) and cutting-edge AI capabilities. This workshop demonstrates how to create a modern, scalable development platform that eliminates "works on my machine" problems while supercharging productivity with AI-powered development tools.
 
@@ -31,8 +31,8 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Implement AI-powered code quality checks and security scanning
 
 **Real-World Use Cases:**
-- Onboard new developers in minutes instead of days
-- Enable consistent development environments across teams
+- Onboard and shift developers in minutes instead of days
+- Standardize development environments across teams
 - Implement secure development practices with built-in compliance
 - Scale development capacity dynamically based on project needs
 
@@ -43,18 +43,18 @@ This workshop addresses common developer experience challenges:
 **Traditional Problems:**
 - Hours spent on environment setup and configuration
 - "Works on my machine" inconsistencies across team members
-- Security vulnerabilities from local development practices
-- Difficulty scaling development resources for growing teams
-- Manual, repetitive development tasks consuming valuable time
+- Security risks originated from local development practices
+- Difficulty scaling and troubleshooting development resources for growing teams
+- Tool sprawl and scattered source code
 
-**Our Solution:**
-- **Instant Environment Provisioning**: Spin up fully configured development environments in under 2 minutes
-- **AI-Enhanced Productivity**: Leverage Amazon Q Developer and Anthropic Claude Code for intelligent code assistance
-- **Enterprise Security**: Centralized, secure development with built-in compliance and audit trails
-- **Cost Optimization**: Pay only for active development time with automatic resource scaling
-- **Team Collaboration**: Shared templates and environments that ensure consistency
+**Coder delivers:**
+- **Improved Develeper Experience & Productivity**: Spin up fully configured environments in minutes without complex local setups
+- **Secure & Reliable Environments**: Transition source code from laptops to your cloud for centralized control and governance
+- **Agentics with trust at scale**: Leverage Amazon Q Developer and Anthropic Claude Code for intelligent code assistance
+- **Compute Optimization**: Optimize spend by shutting down idle resources
+- **VDI Alternative**: Replace slow and expensive legacy VDI with cloud workspaces 
 
-## Workshop Agenda (90 Min)
+## Workshop Agenda (Duration: 90 Min)
 
 **Prerequisites & Setup** *(15 minutes)*
 - AWS account configuration and infrastructure deployment
@@ -81,7 +81,7 @@ This workshop addresses common developer experience challenges:
 
 This workshop is designed for:
 - **Platform Engineers** building developer experience platforms
-- **DevOps Engineers** implementing cloud-native development workflows  
+- **DevOps / MLOps Engineers** implementing cloud-native development workflows  
 - **Engineering Managers** seeking to improve team productivity
 - **Developers** interested in AI-powered development environments
 - **Solutions Architects** designing scalable development infrastructure
