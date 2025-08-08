@@ -39,12 +39,6 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 
 Coder delivers self-hosted cloud development environments (CDE) that are provisioned as code and pre-deployed for developer activity on day one. Coder runs in your own cloud or even in air-gapped on-premises environments, giving developers access to powerful infrastructure without compromising governance. 
 
-**Traditional Problems:**
-- Hours spent on environment setup and configuration
-- "Works on my machine" inconsistencies across team members
-- Security risks originated from local development practices
-- Difficulty scaling and troubleshooting development resources for growing teams
-- Tool sprawl and scattered source code
 
 **Coder delivers:**
 - **Improved Develeper Experience & Productivity**: Spin up fully configured environments in minutes without complex local setups
