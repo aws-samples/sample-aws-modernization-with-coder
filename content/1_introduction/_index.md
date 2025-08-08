@@ -42,7 +42,7 @@ Coder delivers self-hosted cloud development environments (CDE) that are provisi
 
 **Coder delivers:**
 - **Improved Develeper Experience & Productivity**: Spin up fully configured environments in minutes without complex local setups
-- **Secure & Reliable Environments**: Transition source code from laptops to your cloud for centralized control and governance
+- **Secure & Compliant Environments**: Transition source code from laptops to your cloud for centralized control and governance
 - **Agentics with trust at scale**: Leverage Amazon Q Developer and Anthropic Claude Code for intelligent code assistance
 - **Compute Optimization**: Optimize spend by shutting down idle resources
 - **VDI Alternative**: Replace slow and expensive legacy VDI with cloud workspaces 
