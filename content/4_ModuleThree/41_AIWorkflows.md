@@ -1,48 +1,50 @@
 ---
-title: "AI-Powered Development Workflows"
-chapter: true
+title: "AI-Driven Workflows"
+chapter: false
 weight: 51
 ---
 
-# AI-Powered Development Workflows
+# AI-Driven Development Workflows
 
 ## Transforming Development with Intelligent Automation
 
-AI-powered development workflows represent a fundamental shift from reactive to proactive development. Instead of waiting for issues to arise, AI anticipates needs, suggests optimizations, and automates routine tasks, allowing developers to focus on creative problem-solving and innovation.
+AI-driven development workflows represent a fundamental shift from reactive to proactive development. Instead of waiting for issues to arise, AI anticipates needs, suggests optimizations, and automates routine tasks, allowing developers to focus on creative problem-solving and innovation.
 
 ### Setting Up Your AI Development Environment
 
-Let's configure your Coder workspace with comprehensive AI development tools.
+Let's create your Coder workspace with comprehensive AI development tools.
 
 #### Step 1: Access Your AI-Enhanced Workspace
 
-First, create a new workspace using the AI-enhanced template we built in ModuleTwo:
+Create a workspace using the AWS Workshop - EC2 (Linux) Q Developer template:
+1. **Access your Coder dashboard** and click "Create Workspace"
+2. **Select the AWS Workshop - EC2 (Linux) Q Developer template** (created in the previous module)
+3. **Configure the workspace parameters**:
+   - **Name**: `linux-qdev-workspace`
+   - **Instance type**: 2 vCPU, 4 GiB RAM
+   - **Region**: us-east-1 (Default)
+   - **Disk Size**: 30 GB (Default)
 
+4. **Click "Create Workspace"** and wait for it to start
+
+{{% notice info %}}
+The devcontainer specification in the repository will automatically provision terraform, helm, kubectl, and other tools needed for template administration.
+{{% /notice %}}
+
+#### Step 2: Access Your Linux Q Developer Workspace
+
+Once your workspace is running:
+
+1. **Open the workspace** from your Coder dashboard
+2. **Launch VS Code** or your preferred editor
+3. **Open a terminal** within the workspace
+
+#### Step 3: Initialize AI Development Tools
+Once in your workspace, let's set up the AI development environment:
 ```bash
-# Connect to your Coder instance
-coder login https://your-coder-instance.com
-
-# Create an AI-enhanced workspace
-coder create ai-dev-workspace --template="ai-enhanced-developer"
-
-# Connect to your workspace
-coder ssh ai-dev-workspace
-```
-#### Step 2: Initialize AI Development Tools
-Once in your workspace, let's set up the AI development toolkit:
-```bash
-# Initialize the AI development environment
-cd ~/projects
-git clone https://github.com/your-org/sample-ecommerce-app.git
-cd sample-ecommerce-app
-
-# Install AI development dependencies
-npm install -g @aws/amazon-q-developer-cli
-pip3 install boto3 anthropic openai
-
-# Configure AI tools
-aws configure  # Set up AWS credentials
-q configure    # Configure Amazon Q Developer
+# Initialize the Q Developer CLI
+q login    # Use for Free with Builder ID option, and follow prompts
+q chat     # Initialize chat session
 ```
 ### Workflow 1: AI-Assisted Feature Development
 #### Scenario: Adding a Product Recommendation Engine
@@ -51,7 +53,7 @@ Step 1: Requirements Analysis with AI
 Start by describing your feature in natural language:
 ```bash
 # Use Amazon Q Developer to analyze requirements
-q analyze-requirements "Add a product recommendation engine that suggests related products based on user browsing history and purchase patterns. Should integrate with existing user authentication and product catalog."
+analyze the following requirements: "Add a product recommendation engine that suggests related products based on user browsing history and purchase patterns. Should integrate with existing user authentication and product catalog."
 ```
 Amazon Q will provide:
 - Technical requirements breakdown

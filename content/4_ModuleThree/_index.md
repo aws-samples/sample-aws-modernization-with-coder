@@ -1,5 +1,5 @@
 ---
-title: "AI-Driven Development Workflows"
+title: "AI-Driven Development"
 chapter: true
 weight: 50
 ---
@@ -17,8 +17,7 @@ In this module, you will:
 1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Q Developer and AWS Bedrock
 2. *Implement Automated Testing Strategies* - Build AI-driven test generation, execution, and quality assurance pipelines
 3. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
-4. *Establish AI-Enhanced Monitoring* - Set up intelligent observability with automated anomaly detection and performance insights
-5. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
+4. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
 ## The AI-First Development Philosophy
 
 AI-driven development isn't just about code completion—it's a fundamental shift in how we approach software engineering:
@@ -50,8 +49,8 @@ Our AI-driven development platform integrates multiple AWS AI services with Code
 ## Real-World AI Development Scenarios
 
 ### Scenario 1: New Feature Development
-*Traditional Time*: 2-3 weeks  
-*AI-Driven Time*: 3-5 days
+*Traditional Time*: Weeks  
+*AI-Driven Time*: Days
 
 1. *AI Requirements Analysis*: Natural language feature description → detailed technical requirements
 2. *Intelligent Code Generation*: AI generates boilerplate, API endpoints, and database schemas
@@ -68,16 +67,6 @@ By the end of this module, you will be able to:
 - Use AWS Bedrock Claude for advanced code review and architectural guidance
 - Implement AI-driven refactoring and optimization workflows
 - Create context-aware development assistants
-
-### Success Metrics
-
-We'll measure the impact of AI-driven development:
-
-- *Development Velocity*: 3-5x faster feature delivery
-- *Code Quality*: 80% reduction in bugs and security vulnerabilities
-- *Test Coverage*: 95%+ automated test coverage with AI-generated tests
-- *Deployment Reliability*: 99.9% successful deployments with zero-downtime
-- *Developer Satisfaction*: Reduced cognitive load and increased focus on creative work
 
 {{% notice tip %}}
 🤖 *AI Development Mindset*: Think of AI as your intelligent pair programming partner. The goal is human-AI collaboration that amplifies creativity and productivity.
