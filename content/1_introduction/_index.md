@@ -6,9 +6,9 @@ weight: 03
 
 # Introduction
 
-## Supercharge Developer Experience and Productivity with Coder on AWS
+## Supercharge Developer Onboarding and Experience with Coder on AWS
 
-Transform your development workflow by combining the power of AWS cloud infrastructure with Coder's Cloud Development Environments (CDEs) and cutting-edge AI capabilities. This workshop demonstrates how to create a modern, scalable development platform that eliminates "works on my machine" problems while supercharging productivity with AI-powered development tools.
+In this workshop, you will learn how to standardize and scale development environments that eliminates "works on my machine" problems while supercharging productivity with AI-powered development tools on your existing AWS infrastructure.
 
 ### Key Learning Objectives
 
@@ -36,9 +36,9 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Implement secure development practices with built-in compliance
 - Scale development capacity dynamically based on project needs
 
-## Workshop Value Proposition
+## About Coder
 
-This workshop addresses common developer experience challenges:
+Coder delivers self-hosted cloud development environments (CDE) that are provisioned as code and pre-deployed for developer activity on day one. Coder runs in your own cloud or even in air-gapped on-premises environments, giving developers access to powerful infrastructure without compromising governance. 
 
 **Traditional Problems:**
 - Hours spent on environment setup and configuration
