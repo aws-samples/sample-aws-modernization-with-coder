@@ -96,11 +96,11 @@ Coder templates leverage several key AWS services and patterns:
 
 ## Key Benefits of This Approach
 
-- **Consistency**: Every developer gets the same, optimized environment
+- **Consistency**: Every developer gets the same, optimized environment 
 - **Security**: Built-in compliance and security policies
 - **Productivity**: AI-powered assistance reduces cognitive load
 - **Scalability**: Templates scale from individual developers to enterprise teams
-- **Cost Optimization**: Right-sized resources with automatic scaling
+- **Cost Optimization**: Right-sized resources with automatic scaling up and down
 
 {{% notice tip %}} 
 💡 **Pro Tip**: Templates are living infrastructure. Start simple and iterate based on team feedback. The best templates evolve with your development practices.
