@@ -83,7 +83,7 @@ This workshop is designed for:
 - **Platform Engineers** building developer experience platforms
 - **DevOps Engineers** implementing cloud-native development workflows  
 - **Engineering Managers** seeking to improve team productivity
-- **Developers** interested in AI-enhanced development environments
+- **Developers** interested in AI-powered development environments
 - **Solutions Architects** designing scalable development infrastructure
 
 **Prerequisites:** 200-level AWS knowledge, basic Kubernetes understanding, familiarity with development workflows
