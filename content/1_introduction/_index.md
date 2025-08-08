@@ -20,7 +20,7 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Implement secure, multi-tenant development infrastructure using AWS best practices
 
 **Template Creation & Management:**
-- Create persona-based Coder templates for different developer roles (Frontend, Backend, DevOps, Data Science)
+- Create persona-based Coder templates for different development environments (General/Linux, Serverless, AI-Assisted, Windows)
 - Configure templates with pre-installed tools and dependencies
 - Implement Infrastructure as Code (IaC) patterns for consistent workspace provisioning
 
@@ -28,7 +28,6 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Integrate Amazon Q Developer for intelligent code assistance and generation
 - Leverage AWS Bedrock with Anthropic Claude Code for advanced code review and documentation
 - Create agentic development workflows that automate repetitive tasks
-- Implement AI-powered code quality checks and security scanning
 
 **Real-World Use Cases:**
 - Onboard and shift developers in minutes instead of days
@@ -68,8 +67,7 @@ Coder delivers self-hosted cloud development environments (CDE) that are provisi
 
 **Module 2: Template Engineering** *(25 minutes)*
 - Create persona-based development templates
-- Configure AI development tools integration
-- Implement security and compliance policies
+- Showcase AI development tools integration
 - Test template deployment and workspace creation
 
 **Module 3: AI-Powered Development Showcase** *(30 minutes)*

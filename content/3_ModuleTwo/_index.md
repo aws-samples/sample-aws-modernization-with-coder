@@ -15,7 +15,7 @@ Welcome to the Template Engineering module! Now that you have a fully deployed C
 In this module, you will:
 
 1. **Master Template Fundamentals** - Understand Coder template architecture, Terraform integration, and workspace lifecycle management
-2. **Create Persona-Based Templates** - Build specialized environments for general, serverless, Windows, and Agentic AI AWS development 
+2. **Create Persona-Based Templates** - Build specialized environments for General, Serverless, Windows, and Agentic AI AWS development 
 3. **Integrate AI Development Tools** - Configure Amazon Q Developer and Claude Code/AWS Bedrock for intelligent code assistance
 4. **Optimize for Scale** - Design templates for multi-tenant environments with cost optimization and resource governance
 

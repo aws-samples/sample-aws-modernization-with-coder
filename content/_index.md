@@ -52,9 +52,10 @@ By completing this workshop, you'll have:
 Our solution combines the best of AWS cloud services with Coder's cloud development environments:
 
 - **Amazon EKS** with Auto Mode for intelligent Kubernetes management
-- **AWS Bedrock** integration for AI-powered development assistance  
 - **Amazon CloudFront** for global content delivery and performance
 - **AWS IAM** for fine-grained security and access control
+- **AWS Bedrock** and **Amazon Q Developer** integration for AI-powered development assistance  
+
 
 ## Who Should Attend
 
