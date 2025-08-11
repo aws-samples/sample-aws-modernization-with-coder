@@ -1,31 +1,28 @@
 ---
-title: "AI-Driven Development"
+title: "AI-Driven Automation"
 chapter: false
-weight: 51
+weight: 52
 ---
 
-# AI-Driven Development Workflows
+# AI-Driven Task Automation Workflows
 
-## Transforming Development with Intelligent Automation
+## Transforming Development Tasks with Intelligent Automation
 
-AI-driven development workflows represent a fundamental shift from reactive to proactive development. Instead of waiting for issues to arise, AI anticipates needs, suggests optimizations, and automates routine tasks, allowing developers to focus on creative problem-solving and innovation.
+AI-driven automation workflows represent a potentially exponential boost to developer productivity by enabling Agentic AI to autonomously perform routine development tasks with minimul input and supervision. Instead of using precious Developer cycles, AI can automate standard SDLC tasks, allowing developers to focus on creative problem-solving and innovation.
 
-### Setting Up Your AI Development Environment
+### Setting Up Your AI Task Automation Environment
 
-Let's create your Coder workspace with comprehensive AI development tools.
+Let's create a Coder Task that will perform a Well-Architected review of the Web App we previously created.
 
-#### Step 1: Access Your AI-Enhanced Workspace
+#### Step 1: Create Your Task-Automation Workspace
 
-Create a workspace using the AWS Workshop - EC2 (Linux) Q Developer template:
-1. **Access your Coder dashboard** and click "Create Workspace"
-2. **Select the AWS Workshop - EC2 (Linux) Q Developer template** (created in the previous module)
-3. **Configure the workspace parameters**:
-   - **Name**: `linux-qdev-workspace`
-   - **Instance type**: 2 vCPU, 4 GiB RAM
-   - **Region**: us-east-1 (Default)
-   - **Disk Size**: 30 GB (Default)
+Create a Task using the AWS Workshop - Kubernetes with Claude Code template:
+1. **Access your Coder dashboard** and click "Tasks"
+2. **Within the Task UI, Select the AWS Workshop - Kubernetes with Claude Code template from the drop-down** (created in the previous module)
+3. **Configure the task prompt**:
+   - "Analyze the Task Management Web App found at <your github repo>, perform a Well Architected Review of the application with a focus on the Security pillar.  Create up to two additional Coder workspaces using the AWS Workshop - EC2 (Linux) Q Developer template to work on any suggested updates to resolve issues identifed"
 
-4. **Click "Create Workspace"** and wait for it to start
+4. **Click "Run task"** and wait for it to start
 
 {{% notice info %}}
 The selected Coder workspace template will automatically provision the AWS CLI, CDK, Amazon Q Developer CLI and other tools needed for AI-Driven AWS Development.

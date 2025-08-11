@@ -1,5 +1,5 @@
 ---
-title: "AI-Driven Development"
+title: "AI-Driven Workflows"
 chapter: true
 weight: 50
 ---
