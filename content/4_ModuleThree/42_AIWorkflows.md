@@ -29,7 +29,7 @@ Create a Task using the AWS Workshop - Kubernetes with Claude Code template:
 The Coder Task UI will automatically provision a task-based workspace and Claude Caude will begin analyzing the provided Task prompt.
 {{% /notice %}}
 
-The Claude Cod Web UI in the left pane will be begin by creating and updating a "To Do List" of activities to be peformed.  As is progresses, you can monitor the Agents actions.  It will most likely prompt for your approval and direction on how to move ahead to create new workspaces to resolve the identified issues. Depending on how you respond, the Agent will spawn up to two additional Tasks to remediate the findings.
+The Claude Cod Web UI in the left pane will be begin by creating and updating a "To Do List" of activities to be peformed.  As it progresses, you can monitor the Agents actions.  It will most likely prompt for your approval and direction on how to move ahead to create new workspaces to resolve the identified issues. Depending on how you respond, the Agent will spawn up to two additional Tasks to remediate the findings.
 
 ![Codeer AI Driven Review](/images/ai-driven-app-review.png)
 

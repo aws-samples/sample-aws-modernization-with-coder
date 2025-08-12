@@ -96,7 +96,7 @@ chmod +x templates_gitops.sh
 ```
 
 {{% notice tip %}}
-The deployment script will create all 5 workshop templates in your Coder instance. When prompted by Terraform, respond "yes" to create the defined resources. This process typically takes 2-3 minutes.
+The deployment script will create all 4 workshop templates in your Coder instance. When prompted by Terraform, respond "yes" to create the defined resources. This process typically takes 2-3 minutes.
 {{% /notice %}}
 
 ### Step 6: Verify Template Deployment
@@ -108,7 +108,7 @@ Confirm that all templates were deployed successfully:
 coder templates list
 ```
 
-You should see all 5 workshop templates listed and available for workspace creation.
+You should see all 4 workshop templates listed and available for workspace creation.
 
 ### Step 7: Test Template Functionality
 
@@ -126,7 +126,7 @@ coder delete test-linux-q
 ```
 
 {{% notice success %}}
-Congratulations! You've successfully deployed all workshop templates using a GitOps workflow. Your Coder instance now has 5 persona-based templates ready for use.
+Congratulations! You've successfully deployed all workshop templates using a GitOps workflow. Your Coder instance now has 4 persona-based templates ready for use.
 {{% /notice %}}
 
 ## Next Steps

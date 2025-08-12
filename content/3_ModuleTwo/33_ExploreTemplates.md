@@ -17,8 +17,8 @@ The workshop repository contains several specialized templates designed for diff
 **Key Features**:
 - AWS EC2 Linux instances with persistent storage
 - Pre-installed Amazon Q Developer CLI for AI-powered coding assistance
-- VS Code Server with development extensions
-- Git, Docker, and common development tools
+- Code Server with development extensions
+- Git, AWS CLI/CDK, and common development tools
 - Optimized for cloud-native development workflows
 
 **Use Cases**:
@@ -37,7 +37,6 @@ The workshop repository contains several specialized templates designed for diff
 - AWS CLI with proper IAM integration
 - Amazon Q IDE Extension pre-installed
 - Lambda development tools and runtime environments
-- Code deployment and testing capabilities
 
 **Use Cases**:
 - AWS Lambda function development
