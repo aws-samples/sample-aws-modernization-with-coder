@@ -14,7 +14,26 @@ From AWS CloudShell and in the AWS account/region being used for the workshop, p
 
 #### Step 1: Create IAM Role and Trust Relationship for EC2 Workspace Support
 ```bash
-# Make sure you have the ekspodid-trust-policy.json file in your current directory 
+# Create eks iam role trust association
+cat > ekspodid-trust-policy.json << EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowEksAuthToAssumeRoleForPodIdentity",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "pods.eks.amazonaws.com"
+            },
+            "Action": [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ]
+        }
+    ]
+}
+EOF
+
 aws iam create-role --role-name coder-workshop-ec2-workspace-role --assume-role-policy-document file://ekspodid-trust-policy.json
 
 # Attach necessary policies to the role (Scope to only necessary outside of workshop in your own AWS Account)

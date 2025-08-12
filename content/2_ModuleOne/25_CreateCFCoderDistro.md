@@ -150,7 +150,7 @@ sed -i "s|\*\.$CODER_LB_HOSTNAME|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values
 helm upgrade coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.24.2
+    --version 2.24.3
 ```
 
 #### Step 6: Verify Coder HTTPS Access
@@ -166,7 +166,7 @@ echo "Access Coder securely at: $CODER_CLOUDFRONT_URL"
 ```
 
 {{% notice success %}}
-If you see `HTTP/2 200` or `HTTP/1.1 200 OK`, Coder is successfully accessible via HTTPS through CloudFront!
+If you see **HTTP/2 200** or **HTTP/1.1 200 OK**, Coder is successfully accessible via HTTPS through CloudFront!
 {{% /notice %}}
 
 ## Troubleshooting

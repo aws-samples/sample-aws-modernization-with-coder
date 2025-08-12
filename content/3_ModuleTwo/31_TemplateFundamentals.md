@@ -66,7 +66,7 @@ Review the template main.tf (select Edit), then Create Workspace to provision yo
 Create your own unique Workspace name or use a suggestion, and then select Create Workspace
 ![Coder K8S Workspace Create](/images/K8s-workspace-create.png)
 
-Your first Workspace is now successfully provisioned into your EKS Cluster as a Kubernetes Deployment:
+Your first Workspace is now successfully provisioned into your EKS Cluster as a Kubernetes Deployment (pod):
 ![Coder K8S Workspace Provisioned](/images/K8s-workspace-provisioned.png)
 
 ### Step 3: Validate Workspace connectivity via Terminal and code-server

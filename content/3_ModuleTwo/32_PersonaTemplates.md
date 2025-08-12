@@ -47,7 +47,7 @@ The devcontainer specification in the repository will automatically provision te
 Once your workspace is running:
 
 1. **Open the workspace** from your Coder dashboard
-2. **Launch VS Code** or your preferred editor
+2. **Launch code-server** or your preferred editor
 3. **Open a terminal** within the workspace
 
 ### Step 4: Initialize Template Deployment Environment
