@@ -126,7 +126,7 @@ This should remove any deployed components and ensure Amazon Q double-checks and
 ```
 
 {{% notice tip %}}
-🚀 *Workflow Optimization*: These AI workflows can reduce development time by 60-80% while improving code quality. Start with one workflow and gradually add more as your team becomes comfortable.
+🚀 *Workflow Optimization*: These AI development workflows can reduce development time by 60-80% while improving code quality. Start with one workflow and gradually add more as your team becomes comfortable.
 {{% /notice %}}
 
 ## Next Steps
