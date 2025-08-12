@@ -12,7 +12,7 @@ The following architecture diagram illustrates the comprehensive AWS and Coder i
 This architecture demonstrates a production-ready, scalable development platform that combines:
 
 - **Amazon EKS** with Auto Mode for intelligent container orchestration
-- **AWS Application Load Balancer** and **CloudFront** for global content delivery
+- **AWS Network Load Balancer** and **CloudFront** for global content delivery
 - **PostgreSQL** for reliable data persistence
 - **AWS IAM** for enterprise-grade security
 - **Coder Control Plane** for cloud development environment management

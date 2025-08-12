@@ -8,7 +8,7 @@ weight: 03
 
 ## Supercharge Developer Onboarding and Experience with Coder on AWS
 
-In this workshop, you will learn how to standardize and scale development environments that eliminates "works on my machine" problems while supercharging productivity with AI-powered development tools on your existing AWS infrastructure.
+In this workshop, you will learn how to standardize and scale development environments that eliminate "works on my machine" problems while supercharging productivity with AI-powered development tools on your existing AWS infrastructure.
 
 ### Key Learning Objectives (Duration 90 minutes)
 
@@ -30,14 +30,14 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Create agentic development workflows that automate repetitive tasks
 
 **Real-World Use Cases:**
-- Onboard and shift developers in minutes instead of days
+- Onboard developers in minutes instead of days
 - Standardize development environments across teams
 - Implement secure development practices with built-in compliance
 - Scale development capacity dynamically based on project needs
 
 ## About Coder
 
-Coder delivers self-hosted cloud development environments (CDE) that are provisioned as code and pre-deployed for developer activity on day one. Coder runs in your own cloud or even in air-gapped on-premises environments, giving developers access to powerful infrastructure without compromising governance. 
+Coder delivers self-hosted cloud development environments (CDE) that are provisioned as code and pre-deployed for developer activity on day one. Coder runs in your own cloud or even in air-gapped hybrid environments, giving developers access to powerful infrastructure without compromising governance. 
 
 
 **Coder delivers:**

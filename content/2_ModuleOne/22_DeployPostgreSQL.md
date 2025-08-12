@@ -37,7 +37,9 @@ kubectl create secret generic coder-db-url -n coder \
   --from-literal=url="postgres://coder:coder@coder-db-postgresql.coder.svc.cluster.local:5432/coder?sslmode=disable"
 ```
 
-Tip:  Check the state of the coder-db-postgresql-(instance) pod created in the coder namespace to ensure it's running, and pod logs to ensure it deployed successfully.  Common trouble-shooting issues arise around Kubernetes/EKS PVC and PV creation and allocation.  Start by validating that the required storage (PV/PVC) is being created successfully. 
+{{% notice tip %}}
+Troubleshooting Tip:  Check the state of the coder-db-postgresql-(instance) pod created in the coder namespace to ensure it's running, and pod logs to ensure it deployed successfully.  Common trouble-shooting issues arise around Kubernetes/EKS PVC and PV creation and allocation.  Start by validating that the required storage (PV/PVC) is being created successfully. 
+{{% /notice %}}
 
 ### Next Steps <!-- MODIFY THIS HEADING -->
 With PostgreSQL successfully deployed, you're ready to move on and deploy the Coder Control Plane.

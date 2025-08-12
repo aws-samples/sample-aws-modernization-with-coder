@@ -37,11 +37,11 @@ helm repo update
 helm install coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.24.2
+    --version 2.24.3
 ```
 
 {{% notice tip %}}
-You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.2 is known to work well with this workshop configuration.
+You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.3 is known to work well with this workshop configuration.
 {{% /notice %}}
 
 #### Step 3: Monitor Deployment Progress
@@ -56,7 +56,7 @@ kubectl get pods -n coder -w
 kubectl get service coder -n coder -w
 ```
 
-This process typically takes 3-5 minutes. You'll see the EXTERNAL-IP change from `<pending>` to an AWS load balancer hostname.
+This process typically takes 3-5 minutes. You'll see the EXTERNAL-IP change from **pending** to an AWS load balancer hostname.
 
 #### Step 4: Retrieve Load Balancer Information
 
@@ -88,7 +88,7 @@ sed -i "s|\*.coder.example.com|$CODER_WILDCARD_URL|g" coder-core-values-v2.yaml
 helm upgrade coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.24.2
+    --version 2.24.3
 ```
 
 #### Step 6: Verify Coder Accessibility
@@ -103,7 +103,7 @@ curl -I $CODER_ACCESS_URL
 ```
 
 {{% notice info %}}
-If you see `HTTP/1.1 200 OK`, Coder is successfully deployed and accessible!
+If you see **HTTP/1.1 200 OK**, Coder is successfully deployed and accessible!
 {{% /notice %}}
 
 #### Step 7: Access Coder Web Interface
@@ -114,7 +114,7 @@ You can now access Coder in your browser:
 echo "Access Coder at: $CODER_ACCESS_URL"
 ```
 
-When you first access Coder, you'll be prompted to create your Admin account.  This will be the account you use to access Coder for the remainder of the Workshop, so be sure to save your credentials for future reference.
+Depending on your browser, when you access Coder you may get some security warnings, which for the purposes of the workshop you can ignore, and continue to the Coder Control Plane web console.  Additionally, when you first access Coder, you'll be prompted to create your Admin account.  This will be the account you use to access Coder for the remainder of the Workshop, so be sure to save your credentials for future reference.
 
 ## Troubleshooting
 

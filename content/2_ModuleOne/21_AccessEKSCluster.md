@@ -52,9 +52,5 @@ kubectl get storageclass
 kubectl get storageclass -o jsonpath='{.items[?(@.metadata.annotations.storageclass\.kubernetes\.io/is-default-class=="true")].metadata.name}'
 ```
 
-{{% notice tip %}}
-The cluster is configured with Auto Mode, which automatically manages compute capacity, networking, and storage based on your workload requirements. This simplifies cluster operations and optimizes costs.
-{{% /notice %}}
-
 ### Next Steps
 With your EKS cluster access configured, you're ready to deploy PostgreSQL and the Coder control plane in the following sections.

@@ -14,7 +14,7 @@ The CloudFormation template has already provisioned the foundational AWS infrast
 
 In this module, you will:
 
-1. **Connect to Pre-Deployed Amazon EKS Cluster** - Access your automatically provisioned Kubernetes cluster with Auto Mode enabled
+1. **Connect to Pre-Deployed Amazon EKS Cluster** - Access your provisioned EKS Kubernetes cluster with Auto Mode enabled
 2. **Deploy PostgreSQL Database Service** - Set up persistent storage for Coder's configuration and workspace metadata
 3. **Install Coder Control Plane** - Deploy the core Coder services with Network Load Balancer and ingress configuration
 4. **Configure IAM Roles and Service Accounts** - Set up secure AWS integration for dynamic workspace provisioning

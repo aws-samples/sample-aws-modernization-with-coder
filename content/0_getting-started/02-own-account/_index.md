@@ -33,7 +33,7 @@ git clone <workshop repo name>
 ```
 ```bash
 # Change directories to the workshop repo
-cd <workshop repo>
+cd <workshop repo name>
 ```
 ```bash
 # Execture the bootstrap script
