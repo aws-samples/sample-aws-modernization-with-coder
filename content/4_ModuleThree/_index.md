@@ -15,9 +15,8 @@ Welcome to the AI-Driven Development Workflows module! Now that you have deploye
 In this module, you will:
 
 1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Q Developer and AWS Bedrock
-2. *Implement Automated Testing Strategies* - Build AI-driven test generation, execution, and quality assurance pipelines
-3. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
-4. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
+2. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
+3. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
 ## The AI-First Development Philosophy
 
 AI-driven development isn't just about code completion—it's a fundamental shift in how we approach software engineering:

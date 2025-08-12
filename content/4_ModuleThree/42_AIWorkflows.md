@@ -10,7 +10,8 @@ weight: 52
 
 AI-driven automation workflows represent a potentially exponential boost to developer productivity by enabling Agentic AI to autonomously perform routine development tasks with minimul input and supervision. Instead of using precious Developer cycles, AI can automate standard SDLC tasks, allowing developers to focus on creative problem-solving and innovation.
 
-### Setting Up Your AI Task Automation Environment
+### Workflow 2: AI-Driven Task Automation with Claude Code
+#### Scenario: Perform an automated Well-Architected Review, and act on any findings
 
 Let's create a Coder Task that will perform a Well-Architected review of the Web App we previously created.
 
