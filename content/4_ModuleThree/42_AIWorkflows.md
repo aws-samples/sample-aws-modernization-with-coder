@@ -46,6 +46,6 @@ Once your initial Task completes:
 Take some time on your own and explore each of the created Tasks and evaluate the results of the remediation activities performed by Claude Code.  Experiment by instructing Claude Code to unit test the changes and/or smoke-test a deployment to your AWS account.
 
 {{% notice tip %}}
-🚀 *Workflow Automation*: These AI automation workflows can reduce time spent on routine activities, while dramaticaly boosting developer productivity. Start by automating one workflow and experimenting until you get consistent results. Gradually add more AI automation workflows as your team becomes comfortable.
+🚀 *Workflow Automation*: These AI automation workflows can reduce time spent on routine activities, while dramaticaly boosting developer productivity. Start by automating one workflow and experimenting until you get consistent results. Gradually add more AI automation workflows as your team becomes comfortable with specific Agent capabilities and required prompts to get the desired results.
 {{% /notice %}}
 
