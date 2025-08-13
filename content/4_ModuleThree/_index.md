@@ -6,7 +6,7 @@ weight: 50
 
 # AI-Driven Development Workflows
 
-## Transforming Development with Intelligent Automation
+## Speed Up Development with Intelligent Automation
 
 Welcome to the AI-Driven Development Workflows module! Now that you have deployed Coder and created intelligent templates, it's time to experience the future of software development. This module demonstrates how AI transforms every aspect of the development lifecycle—from initial code generation to deployment and monitoring.
 
