@@ -1,68 +1,226 @@
 ---
-title: "Configure workshop specific requirements" # MODIFY THIS TITLE
+title: "Create CloudFront Distribution"
 chapter: true
-weight: 5 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+weight: 35
 ---
 
-<!-- MORE SUBMODULES CAN BE ADDED TO DIVIDE UP THE SETUP INTO SMALLER SECTIONS -->
-<!-- COPY AND PASTE THIS SUBMODULE FILE, RENAME, AND CHANGE THE CONTENTS AS NECESSARY -->
+# Create Coder CloudFront Distribution
 
-# Configuring Workshop Specific Requirements <!-- MODIFY THIS HEADING IF NECESSARY -->
+## Configure CloudFront for Global Access and TLS Termination
 
-## Submodule Five Heading <!-- MODIFY THIS SUBHEADING -->
-
-This paragraph block can be used to explain how to configure any specific workshop requirements if necessary. Example content guidance can be found at the bottom of the page.
+CloudFront provides global content delivery, TLS termination, and improved performance for your Coder deployment. This module will create a CloudFront distribution that sits in front of your AWS Load Balancer and updates the Coder configuration to use HTTPS.
 
 {{% notice info %}}
-<p style='text-align: left;'>
-**REMOVE:** With the exception of _index.md, the module folders and filenames should be changed to better reflect their content, i.e. 1_Planning as the folder and 11_HowToBegin as the first submodule. Changing the "weight" value of the header is ultimately what reflects the order the modules are presented.
-</p>
+CloudFront distributions can take 10-15 minutes to deploy globally. The process involves creating the distribution, waiting for deployment, and then updating the Coder configuration.
 {{% /notice %}}
 
-### Next Section Heading <!-- MODIFY THIS HEADING -->
-This paragraph block can optionally be utilized to lead into the next section of the workshop.
+#### Step 1: Retrieve Current Load Balancer Information
 
+First, get the current load balancer hostname from your Coder service:
 
-#### Example Content Guidance
-# Configure Workspace <!-- MODIFY THIS SUBHEADING -->
+```bash
+# Get the current load balancer hostname
+CODER_LB_HOSTNAME=$(kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+echo "Current Coder Load Balancer: $CODER_LB_HOSTNAME"
 
-    Return to your workspace and click the gear icon (in top right corner), or click to open a new tab and choose “Open Preferences”
+# Verify the load balancer is accessible
+curl -I http://$CODER_LB_HOSTNAME
+```
 
-    Select AWS SETTINGS and turn off AWS managed temporary credentials
+#### Step 2: Create CloudFront Distribution
 
-    Close the Preferences tab
+Create a CloudFront distribution using the AWS CLI:
 
-Turn off temp credentials
+```bash
+# Create distribution configuration
+cat > cloudfront-config.json << EOF
+{
+  "CallerReference": "coder-workshop-$(date +%s)",
+  "Comment": "Coder Workshop CloudFront Distribution",
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "coder-alb-origin",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 7,
+      "Items": ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": ["GET", "HEAD"]
+      }
+    },
+    "ForwardedValues": {
+      "QueryString": true,
+      "Cookies": {"Forward": "all"},
+      "Headers": {
+        "Quantity": 1,
+        "Items": ["*"]
+      }
+    },
+    "MinTTL": 0,
+    "DefaultTTL": 0,
+    "MaxTTL": 0
+  },
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "coder-alb-origin",
+        "DomainName": "$CODER_LB_HOSTNAME",
+        "CustomOriginConfig": {
+          "HTTPPort": 80,
+          "HTTPSPort": 443,
+          "OriginProtocolPolicy": "http-only"
+        }
+      }
+    ]
+  },
+  "Enabled": true,
+  "PriceClass": "PriceClass_100"
+}
+EOF
 
-    Copy and run (paste with Ctrl+P or CMD+P) the commands below.
+# Create the CloudFront distribution
+CLOUDFRONT_RESULT=$(aws cloudfront create-distribution --distribution-config file://cloudfront-config.json)
+echo "$CLOUDFRONT_RESULT" > cloudfront-result.json
 
-Before running it, review what it does by reading through the comments.
+# Extract distribution information
+DISTRIBUTION_ID=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.Id')
+CLOUDFRONT_DOMAIN=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.DomainName')
 
-# Update awscli
-sudo pip install --upgrade awscli && hash -r
+echo "CloudFront Distribution ID: $DISTRIBUTION_ID"
+echo "CloudFront Domain: $CLOUDFRONT_DOMAIN"
+```
 
-# Install jq command-line tool for parsing JSON, and bash-completion
-sudo yum -y install jq gettext bash-completion moreutils
+#### Step 3: Wait for CloudFront Deployment
 
-# Install yq for yaml processing
-echo 'yq() {
-docker run --rm -i -v "${PWD}":/workdir mikefarah/yq yq "$@"
-}' | tee -a ~/.bashrc && source ~/.bashrc
+Monitor the CloudFront distribution deployment status:
 
-# Verify the binaries are in the path and executable
-for command in jq aws
-do
-  which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
+```bash
+# Check deployment status
+echo "Waiting for CloudFront distribution to deploy..."
+while true; do
+  STATUS=$(aws cloudfront get-distribution --id $DISTRIBUTION_ID --query 'Distribution.Status' --output text)
+  echo "Distribution Status: $STATUS"
+  if [ "$STATUS" = "Deployed" ]; then
+    echo "CloudFront distribution is ready!"
+    break
+  fi
+  echo "Waiting 60 seconds before checking again..."
+  sleep 60
 done
-   
-# Remove existing credentials file.
-rm -vf ${HOME}/.aws/credentials
-   
-# Set the ACCOUNT_ID and the region to work with our desired region
-export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
-   test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || echo AWS_REGION is not set
+```
 
-# Validate that our IAM role is valid.
-aws sts get-caller-identity --query Arn | grep CircleCI-Workshop-Admin -q && echo "IAM role valid" || echo "IAM role NOT valid"
+{{% notice tip %}}
+CloudFront deployment typically takes 10-15 minutes. You can continue with other tasks and return to check the status periodically.
+{{% /notice %}}
 
-## Warning If the IAM role is not valid, DO NOT PROCEED. Go back and confirm the steps on this page.
+#### Step 4: Test CloudFront Distribution
+
+Verify the CloudFront distribution is working:
+
+```bash
+# Test HTTPS access through CloudFront
+curl -I https://$CLOUDFRONT_DOMAIN
+
+# Test HTTP redirect to HTTPS
+curl -I http://$CLOUDFRONT_DOMAIN
+```
+
+{{% notice success %}}
+You should see HTTP 301/302 redirects for HTTP requests and successful responses for HTTPS requests.
+{{% /notice %}}
+
+#### Step 5: Update Coder Configuration with CloudFront URLs
+
+Update the Coder Helm values to use the CloudFront distribution:
+
+```bash
+# Construct the new URLs
+CODER_CLOUDFRONT_URL="https://$CLOUDFRONT_DOMAIN"
+CODER_CLOUDFRONT_WILDCARD="*.$CLOUDFRONT_DOMAIN"
+
+echo "New Coder Access URL: $CODER_CLOUDFRONT_URL"
+echo "New Coder Wildcard URL: $CODER_CLOUDFRONT_WILDCARD"
+
+# Update the values file with CloudFront URLs
+sed -i "s|http://$CODER_LB_HOSTNAME|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
+sed -i "s|\*\.$CODER_LB_HOSTNAME|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
+
+# Apply the updated configuration
+helm upgrade coder coder-v2/coder \
+    --namespace coder \
+    --values coder-core-values-v2.yaml \
+    --version 2.24.3
+```
+
+#### Step 6: Verify Coder HTTPS Access
+
+Test that Coder is accessible via HTTPS through CloudFront:
+
+```bash
+# Test HTTPS connectivity
+curl -I $CODER_CLOUDFRONT_URL
+
+# Print the final URL for browser access
+echo "Access Coder securely at: $CODER_CLOUDFRONT_URL"
+```
+
+{{% notice success %}}
+If you see **HTTP/2 200** or **HTTP/1.1 200 OK**, Coder is successfully accessible via HTTPS through CloudFront!
+{{% /notice %}}
+
+## Troubleshooting
+
+{{% expand "CloudFront distribution creation fails" %}}
+Check your AWS permissions and region:
+```bash
+# Verify CloudFront permissions
+aws cloudfront list-distributions
+
+# Check if the load balancer hostname is valid
+nslookup $CODER_LB_HOSTNAME
+```
+
+Ensure your IAM role has CloudFront permissions:
+- `cloudfront:CreateDistribution`
+- `cloudfront:GetDistribution`
+- `cloudfront:UpdateDistribution`
+{{% /expand %}}
+
+{{% expand "CloudFront returns 502/504 errors" %}}
+Verify the origin configuration:
+```bash
+# Check if the load balancer is responding
+curl -v http://$CODER_LB_HOSTNAME
+
+# Verify CloudFront origin settings
+aws cloudfront get-distribution-config --id $DISTRIBUTION_ID
+```
+
+Common issues:
+- Origin protocol policy mismatch
+- Load balancer security group blocking CloudFront IPs
+- Origin domain name incorrect
+{{% /expand %}}
+
+{{% expand "Coder interface not loading after CloudFront update" %}}
+Check the Coder pod logs and configuration:
+```bash
+# Check Coder pod status
+kubectl get pods -n coder
+kubectl logs -n coder -l app.kubernetes.io/name=coder
+
+# Verify the updated configuration
+helm get values coder -n coder
+```
+
+Ensure the access URL in the Helm values matches the CloudFront domain.
+{{% /expand %}}
+
+### Next Steps
+With CloudFront successfully configured, your Coder deployment now has:
+- Global content delivery and improved performance
+- Automatic HTTPS/TLS termination
+- Enhanced security through AWS's edge locations
+
+You're ready to configure development templates and user workspaces.

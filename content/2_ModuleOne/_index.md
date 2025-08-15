@@ -1,20 +1,20 @@
 ---
-title: "Coder Infrastructure and Deployment"
+title: "Coder Platform Deployment"
 chapter: true
-weight: 4
+weight: 30
 ---
 
-# Coder Infrastructure and Deployment
+# Coder Platform Deployment
 
-Welcome to the Coder Infrastructure and Deployment section! In this module, you'll connect to your pre-deployed AWS infrastructure and configure the Coder Cloud Development Environment (CDE) control plane. 
+Welcome to the Coder Platform Deployment section! In this module, you'll connect to your pre-deployed AWS infrastructure and configure the Coder Cloud Development Environment (CDE) control plane. 
 
-The CloudFormation template has already provisioned the foundational AWS infrastructure. Now we'll configure and deploy the Coder platform components to create a production-ready development environment platform.
+The CloudFormation template has already provisioned the foundational AWS infrastructure. Now we'll deploy and configure the Coder components to create a production-ready cloud development environment platform.
 
 ## What We'll Accomplish
 
 In this module, you will:
 
-1. **Connect to Pre-Deployed Amazon EKS Cluster** - Access your automatically provisioned Kubernetes cluster with Auto Mode enabled
+1. **Connect to Pre-Deployed Amazon EKS Cluster** - Access your provisioned EKS Kubernetes cluster with Auto Mode enabled
 2. **Deploy PostgreSQL Database Service** - Set up persistent storage for Coder's configuration and workspace metadata
 3. **Install Coder Control Plane** - Deploy the core Coder services with Network Load Balancer and ingress configuration
 4. **Configure IAM Roles and Service Accounts** - Set up secure AWS integration for dynamic workspace provisioning
@@ -24,14 +24,13 @@ In this module, you will:
 
 Here's what has been automatically deployed and what we'll configure:
 
-![AWS RefArch](/static/images/AWSCoderSingleRegionv1-0.png)
+![AWS RefArch](/images/AWSCoderSingleRegionv1-1.png)
 
 **Pre-Deployed Infrastructure (via CloudFormation):**
 - Amazon EKS cluster (`coder-aws-cluster`) with Auto Mode
 - VPC with public/private subnets across multiple Availability Zones
 - EKS node groups with optimized instance types
 - AWS Load Balancer Controller and EBS CSI driver
-- KMS encryption keys for secrets management
 - IAM roles and policies for secure AWS service integration
 
 **Components We'll Deploy:**
@@ -39,7 +38,7 @@ Here's what has been automatically deployed and what we'll configure:
 - Coder control plane services and web interface
 - Network Load Balancer for external access
 - CloudFront distribution for global content delivery
-- Service accounts for workspace provisioning
+- Kubernetes Service accounts and additional IAM roles for workspace provisioning
 
 ## Key Benefits of This Architecture
 
@@ -49,8 +48,8 @@ Here's what has been automatically deployed and what we'll configure:
 - **Performance**: CloudFront CDN for optimal user experience globally
 - **Cost Optimization**: Pay-per-use scaling and efficient resource utilization
 
-{{% notice info %}}
-The EKS cluster uses Auto Mode, which automatically provisions and manages compute capacity, networking, and storage based on your workload requirements. This reduces operational overhead while optimizing costs.
+{{% notice tip %}}
+💡 **Pro Tip**: The EKS cluster uses Auto Mode, which automatically provisions and manages compute capacity, networking, and storage based on your workload requirements. This reduces operational overhead while optimizing costs.
 {{% /notice %}}
 
 {{% notice warning %}}

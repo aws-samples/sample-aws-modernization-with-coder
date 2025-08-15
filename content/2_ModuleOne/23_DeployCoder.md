@@ -37,11 +37,11 @@ helm repo update
 helm install coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.15.1
+    --version 2.24.3
 ```
 
 {{% notice tip %}}
-You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.15.1 is known to work well with this workshop configuration.
+You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.3 is known to work well with this workshop configuration.
 {{% /notice %}}
 
 #### Step 3: Monitor Deployment Progress
@@ -56,7 +56,7 @@ kubectl get pods -n coder -w
 kubectl get service coder -n coder -w
 ```
 
-This process typically takes 3-5 minutes. You'll see the EXTERNAL-IP change from `<pending>` to an AWS load balancer hostname.
+This process typically takes 3-5 minutes. You'll see the EXTERNAL-IP change from **pending** to an AWS load balancer hostname.
 
 #### Step 4: Retrieve Load Balancer Information
 
@@ -88,7 +88,7 @@ sed -i "s|\*.coder.example.com|$CODER_WILDCARD_URL|g" coder-core-values-v2.yaml
 helm upgrade coder coder-v2/coder \
     --namespace coder \
     --values coder-core-values-v2.yaml \
-    --version 2.15.1
+    --version 2.24.3
 ```
 
 #### Step 6: Verify Coder Accessibility
@@ -97,30 +97,24 @@ Test that Coder is accessible via the load balancer:
 
 ```bash
 # Test HTTP connectivity
-curl -I $CODER_ACCESS_URL/healthz
+curl -I $CODER_ACCESS_URL
 
 # If successful, you should see HTTP 200 response
 ```
 
-{{% notice success %}}
-If you see `HTTP/1.1 200 OK`, Coder is successfully deployed and accessible!
+{{% notice info %}}
+If you see **HTTP/1.1 200 OK**, Coder is successfully deployed and accessible!
 {{% /notice %}}
 
 #### Step 7: Access Coder Web Interface
 
 You can now access Coder in your browser:
-
-{{% button href="#" icon="fas fa-external-link-alt" %}}Open Coder Dashboard{{% /button %}}
-
 ```bash
 # Print the URL for easy copying
 echo "Access Coder at: $CODER_ACCESS_URL"
 ```
 
-When you first access Coder, you'll be prompted to:
-1. Create an admin account
-2. Set up your organization
-3. Configure authentication (if desired)
+Depending on your browser, when you access Coder you may get some security warnings, which for the purposes of the workshop you can ignore, and continue to the Coder Control Plane web console.  Additionally, when you first access Coder, you'll be prompted to create your Admin account.  This will be the account you use to access Coder for the remainder of the Workshop, so be sure to save your credentials for future reference.
 
 ## Troubleshooting
 
@@ -138,11 +132,6 @@ Common issues:
 {{% /expand %}}
 
 {{% expand "Load balancer not getting external IP" %}}
-Verify AWS Load Balancer Controller is installed:
-```bash
-kubectl get pods -n kube-system | grep aws-load-balancer-controller
-```
-
 Check service events:
 ```bash
 kubectl describe service coder -n coder
@@ -157,13 +146,7 @@ Verify the service and endpoints:
 kubectl get service coder -n coder
 kubectl get endpoints coder -n coder
 ```
-
-Check security groups allow traffic on port 80:
-```bash
-# The load balancer security group should allow inbound HTTP traffic
-aws ec2 describe-security-groups --filters "Name=group-name,Values=*coder*"
-```
 {{% /expand %}}
 
 ### Next Steps
-With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning and set up development templates.
+With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning and create a CloudFront distribution to support HTTP(s)/TLS.
