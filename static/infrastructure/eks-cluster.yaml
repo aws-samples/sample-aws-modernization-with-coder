@@ -258,6 +258,7 @@ Resources:
                     SSM_PREFIX="/eks/${EKSClusterName}"
                     aws ssm put-parameter --name "$SSM_PREFIX/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
                     aws ssm put-parameter --name "$SSM_PREFIX/region" --value "${AWSRegion}" --type "String" --overwrite                  
+                  fi
                 
                 # Signal CloudFormation with success/failure status
                 - |
