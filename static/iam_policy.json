@@ -151,7 +151,7 @@
                 "eks:DeleteCluster"
             ],
             "Resource": [
-                "arn:aws:eks:*:*:cluster/akuity-aws-cluster"
+                "arn:aws:eks:*:*:cluster/coder-aws-cluster"
             ]
         },
         {
@@ -165,7 +165,7 @@
                 "eks:UpdateAddon",
                 "eks:DescribeAddonVersions"
             ],
-            "Resource": "arn:aws:eks:*:*:addon/akuity-aws-cluster/*"
+            "Resource": "arn:aws:eks:*:*:addon/coder-aws-cluster/*"
         },
         {
             "Sid": "MarketplacePermissions",
