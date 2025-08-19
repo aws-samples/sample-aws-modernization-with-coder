@@ -67,10 +67,6 @@ By the end of this workshop, you'll understand how Coder CDEs transform the deve
 - Centralized security and governance
 - Scalable cloud resources on-demand
 
-{{% notice info %}}
-**Why Cloud Development Environments Matter**: Leading technology companies like Anthropic, Netflix, Goldman Sachs, and Government/Intelligence Agencices have adopted CDEs to scale their development teams efficiently while maintaining security and consistency. This workshop shows you how to implement the same patterns in your organization.
-{{% /notice %}}
-
 ## Ready to Experience the Future of Development?
 
 Let's begin by setting up your Coder platform on AWS and experiencing firsthand how Cloud Development Environments can transform your development workflows.
