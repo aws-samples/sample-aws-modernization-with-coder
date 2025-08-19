@@ -20,7 +20,7 @@ First, download the pre-configured Helm values file for this workshop:
 
 ```bash
 # Download the Coder configuration file
-curl -o coder-core-values-v2.yaml https://raw.githubusercontent.com/your-workshop-repo/main/static/infrastructure/coder-core-values-v2.yaml
+curl -o coder-core-values-v2.yaml https://raw.githubusercontent.com/greg-the-coder/aws-workshop-samples/refs/heads/main/coder-admin/coder-core-values-v2.yaml
 
 # Verify the file was downloaded
 ls -la coder-core-values-v2.yaml

@@ -23,6 +23,31 @@ Imagine a world where:
 
 This isn't a vision of the future – it's what you'll build today.
 
+## Key Learning Objectives (Duration 90 minutes)
+
+By the end of this workshop, you will be able to demonstrate new skills in the following areas:
+
+**Infrastructure & Platform Management:**
+- Deploy and configure a production-ready Coder platform on Amazon EKS
+- Understand the architecture patterns for scalable cloud development environments
+- Implement secure, multi-tenant development infrastructure using AWS best practices
+
+**Template Creation & Management:**
+- Create persona-based Coder templates for different development environments (General/Linux, Serverless, AI-Assisted, Windows)
+- Configure templates with pre-installed tools and dependencies
+- Implement Infrastructure as Code (IaC) patterns for consistent workspace provisioning
+
+**AI-Powered Development Workflows:**
+- Integrate Amazon Q Developer for intelligent code assistance and generation
+- Leverage AWS Bedrock with Anthropic Claude Code for advanced code review and documentation
+- Create agentic development workflows that automate repetitive tasks
+
+**Real-World Use Cases:**
+- Onboard developers in minutes instead of days
+- Standardize development environments across teams
+- Implement secure development practices with built-in compliance
+- Scale development capacity dynamically based on project needs
+
 ## What Makes This Workshop Unique
 
 **Real-World Impact**: Based on production deployments serving thousands of developers at enterprise scale
@@ -33,35 +58,11 @@ This isn't a vision of the future – it's what you'll build today.
 
 **Hands-On Learning**: Deploy, configure, and use the platform – not just theory
 
-## Workshop Outcomes
-
-By completing this workshop, you'll have:
-
-✅ **Deployed a production-ready development platform** on Amazon EKS with auto-scaling and high availability
-
-✅ **Created AI-enhanced development templates** for different personas (Frontend, Backend, DevOps, Data Science)
-
-✅ **Implemented intelligent development workflows** using Amazon Q Developer and Anthropic Claude Code for code assistance
-
-✅ **Established security and compliance patterns** for enterprise cloud development environments
-
-✅ **Gained hands-on experience** with modern cloud-native development practices
-
-## Architecture at a Glance
-
-Our solution combines the best of AWS cloud services with Coder's cloud development environments:
-
-- **Amazon EKS** with Auto Mode for intelligent Kubernetes management
-- **Amazon CloudFront** for global content delivery and performance
-- **AWS IAM** for fine-grained security and access control
-- **AWS Bedrock** and **Amazon Q Developer** integration for AI-powered development assistance  
-
-
 ## Who Should Attend
 
 - **Platform Engineers** building developer experience platforms
 - **DevOps Engineers** implementing cloud-native workflows
-- **Engineering Managers** seeking to boost team productivity  
+- **Engineering Managers** seeking to boost team productivity
 - **Developers** interested in AI-enhanced development
 - **Solutions Architects** designing scalable development infrastructure
 
