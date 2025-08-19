@@ -6,10 +6,6 @@ weight: 05
 
 # About this Coder Workshop
 
-## Transforming Development with Cloud-Native Environments
-
-Coder delivers self-hosted Cloud Development Environments (CDEs) that revolutionize how development teams work. By moving development workloads from local machines to the cloud, Coder eliminates the friction of environment setup while providing enterprise-grade security, scalability, and cost optimization.
-
 ## What are Cloud Development Environments?
 
 Cloud Development Environments are fully-configured, cloud-hosted development workspaces that developers can access from anywhere. Unlike traditional local development setups, CDEs provide:
