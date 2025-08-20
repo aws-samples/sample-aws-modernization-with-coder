@@ -1,5 +1,5 @@
 ---
-title: "Coder Platform Deployment"
+title: "Coder Deployment"
 chapter: true
 weight: 30
 ---
@@ -20,11 +20,9 @@ In this module, you will:
 4. **Configure IAM Roles and Service Accounts** - Set up secure AWS integration for dynamic workspace provisioning
 5. **Deploy AWS CloudFront Distribution** - Enable secure TLS termination for Coder workspace access
 
-## Architecture Overview
+## Platform Deployment Overview
 
 Here's what has been automatically deployed and what we'll configure:
-
-![AWS RefArch](/images/AWSCoderSingleRegionv1-1.png)
 
 **Pre-Deployed Infrastructure (via CloudFormation):**
 - Amazon EKS cluster (`coder-aws-cluster`) with Auto Mode

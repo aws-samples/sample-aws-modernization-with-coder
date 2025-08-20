@@ -4,13 +4,23 @@ chapter: true
 weight: 03
 ---
 
-# Introduction
+# Coder Cloud Development Environments
 
-## Supercharge Developer Onboarding and Experience with Coder on AWS
+## Transforming Development with Cloud-Native Environments
 
-In this workshop, you will learn how to standardize and scale development environments that eliminate "works on my machine" problems while supercharging productivity with AI-powered development tools on your existing AWS infrastructure.
+Coder delivers self-hosted Cloud Development Environments (CDEs) that revolutionize how development teams work. By moving development workloads from local machines to the cloud, Coder eliminates the friction of environment setup while providing enterprise-grade security, scalability, and cost optimization.
 
-### Key Learning Objectives (Duration 90 minutes)
+## What are Cloud Development Environments?
+
+Cloud Development Environments are fully-configured, cloud-hosted development workspaces that developers can access from anywhere. Unlike traditional local development setups, CDEs provide:
+
+- **Instant Environment Provisioning**: Spin up fully configured development environments in minutes, not hours or days
+- **Consistent Development Experience**: Every developer works in identical, reproducible environments
+- **Centralized Security & Governance**: Source code stays in your cloud infrastructure, not on individual laptops
+- **Scalable Compute Resources**: Access powerful cloud resources on-demand without expensive local hardware
+- **Seamless Collaboration**: Share environments, debug together, and maintain consistency across teams
+
+## Key Learning Objectives (Duration 90 minutes)
 
 By the end of this workshop, you will be able to demonstrate new skills in the following areas:
 
@@ -35,33 +45,16 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Implement secure development practices with built-in compliance
 - Scale development capacity dynamically based on project needs
 
-## About Coder
+## Who Should Attend
 
-Coder delivers self-hosted cloud development environments (CDE) that are provisioned as code and pre-deployed for developer activity on day one. Coder runs in your own cloud or even in air-gapped hybrid environments, giving developers access to powerful infrastructure without compromising governance. 
-
-
-**Coder delivers:**
-- **Improved Develeper Experience & Productivity**: Spin up fully configured environments in minutes without complex local setups
-- **Secure & Compliant Environments**: Transition source code from laptops to your cloud for centralized control and governance
-- **Agentics with trust at scale**: Leverage Amazon Q Developer and Anthropic Claude Code for intelligent code assistance
-- **Compute Optimization**: Optimize spend by shutting down idle resources
-- **VDI Alternative**: Replace slow and expensive legacy VDI with cloud workspaces 
-
-
-## Target Audience
-
-This workshop is designed for:
 - **Platform Engineers** building developer experience platforms
-- **DevOps / MLOps Engineers** implementing cloud-native development workflows  
-- **Engineering Managers** seeking to improve team productivity
-- **Developers** interested in AI-powered development environments
+- **DevOps Engineers** implementing cloud-native workflows
+- **Engineering Managers** seeking to boost team productivity
+- **Developers** interested in AI-enhanced development
 - **Solutions Architects** designing scalable development infrastructure
 
-**Prerequisites:** 200-level AWS knowledge, basic Kubernetes understanding, familiarity with development workflows
+**Prerequisites**: 200-level AWS knowledge, basic Kubernetes familiarity
 
 {{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
 {{% /notice %}}
-
-### Ready to Transform Your Development Experience?
-Let's begin by setting up your workshop environment and exploring the power of cloud-native development with AI assistance.

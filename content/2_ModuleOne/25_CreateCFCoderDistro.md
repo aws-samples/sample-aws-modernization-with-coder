@@ -38,7 +38,7 @@ cat > cloudfront-config.json << EOF
   "CallerReference": "coder-workshop-$(date +%s)",
   "Comment": "Coder Workshop CloudFront Distribution",
   "DefaultCacheBehavior": {
-    "TargetOriginId": "coder-alb-origin",
+    "TargetOriginId": "coder-nlb-origin",
     "ViewerProtocolPolicy": "redirect-to-https",
     "AllowedMethods": {
       "Quantity": 7,
@@ -64,7 +64,7 @@ cat > cloudfront-config.json << EOF
     "Quantity": 1,
     "Items": [
       {
-        "Id": "coder-alb-origin",
+        "Id": "coder-nlb-origin",
         "DomainName": "$CODER_LB_HOSTNAME",
         "CustomOriginConfig": {
           "HTTPPort": 80,
