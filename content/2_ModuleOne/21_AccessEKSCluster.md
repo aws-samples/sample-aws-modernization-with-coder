@@ -25,7 +25,7 @@ Once AWS CloudShell is ready, run the following command to configure kubectl to 
 
 ```bash
 # Connect to the pre-deployed EKS cluster
-aws eks update-kubeconfig --name coder-aws-cluster --region us-east-1
+aws eks update-kubeconfig --name coder-aws-cluster --region <workshop region>
 ```
 
 #### Step 3: Validate EKS Cluster Access
