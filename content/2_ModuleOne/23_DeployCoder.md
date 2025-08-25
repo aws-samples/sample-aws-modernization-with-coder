@@ -149,4 +149,4 @@ kubectl get endpoints coder -n coder
 {{% /expand %}}
 
 ### Next Steps
-With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning and create a CloudFront distribution to support HTTP(s)/TLS.
+With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  Remember to bookmark your **Coder Access URL** for easy reference for the remainder of the workshop.

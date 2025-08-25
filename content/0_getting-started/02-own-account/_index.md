@@ -29,12 +29,17 @@ We will be using the Kubernetes Helm utility from the AWS Clooudshell. If Helm i
 3. Run the following commands in CloudShell terminal.
 ```bash
 # Install Helm using the official script
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get-helm-3.sh
+chmod +x get-helm-3.sh && ./get-helm-3.sh
 ```
 ```bash
 # Verify the installation
 helm version --short
 ```
+
+{{% notice info %}}
+You may need to re-install **helm** if your AWS cloudshell session timesout and restarts.  Simply re-use the created `get-helm-3.sh` bash script.
+{{% /notice %}}
 
 {{% notice warning %}}
 If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/90-cleanup) to avoid unnecessary charges.

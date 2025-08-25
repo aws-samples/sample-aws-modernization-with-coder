@@ -56,4 +56,4 @@ The updated IAM Role association may not take affect until the Coder Control Pla
 {{% /notice %}}
 
 ### Next Steps <!-- MODIFY THIS HEADING -->
-With the required IAM Role successfully created and associated with the Coder EKS Service Account, you're ready to create a CloudFront distribution for the Coder Control Plane.
+With the required IAM Role successfully created and associated with the Coder EKS Service Account, you're ready to configure development templates and user workspaces!
