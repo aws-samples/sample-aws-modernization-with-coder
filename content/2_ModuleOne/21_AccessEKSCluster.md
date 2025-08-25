@@ -41,8 +41,27 @@ kubectl cluster-info
 
 You should see output showing your cluster nodes in a "Ready" state, confirming successful connection to the EKS cluster.
 
-#### Step 4: Verify Storage Configuration
-The EKS cluster has been configured with the AWS EBS CSI driver for persistent storage. You can verify the storage class configuration:
+#### Step 4: Update and Verify Storage Configuration
+The EKS cluster needs to be configured with a default AWS EBS CSI driver that supports dynamic provisioning of persistent storage. 
+
+```bash
+# Deploy a K8S StorageClass for dynamic EBS volume provisioning
+kubectl apply -f - <<EOF
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3-csi
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.eks.amazonaws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
+  encrypted: "true"
+allowVolumeExpansion: true
+EOF
+```
+You can verify the storage class configuration:
 
 ```bash
 # Check available storage classes
