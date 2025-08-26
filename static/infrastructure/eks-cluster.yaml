@@ -16,13 +16,26 @@ Parameters:
     Type: String
     Default: "t3.large"
 
-  VSCodeInstanceName:
-    Description: Name of the VSCode server instance
-    Type: String
-    Default: "VSCodeServer"
-
 Resources:
 ################## PERMISSIONS AND ROLES #################
+  WorkshopAdminRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: coder-and-aws-workshop-admin
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - codebuild.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      Path: "/"
+
   coderLambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -81,7 +94,7 @@ Resources:
           - Effect: Allow
             Action:
             - iam:PassRole
-            Resource: !Sub "arn:aws:iam::${AWS::AccountId}:role/coder-and-aws-workshop-admin"
+            Resource: !GetAtt WorkshopAdminRole.Arn
           - Effect: Allow
             Action:
             - ssm:DescribeInstanceInformation
@@ -126,11 +139,12 @@ Resources:
 
   WorkshopInstanceProfile:
     Type: AWS::IAM::InstanceProfile
+    DependsOn: WorkshopAdminRole
     Properties:
       Path: "/"
       InstanceProfileName: !Sub "coder-and-aws-workshop-admin-${AWS::StackName}"
       Roles:
-        - "coder-and-aws-workshop-admin"
+        - !Ref WorkshopAdminRole
 
 ################## EKS Bootstrap #####################
 
@@ -139,7 +153,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Sub CodeBuild-${AWS::StackName}
-      ServiceRole: !Sub "arn:aws:iam::${AWS::AccountId}:role/coder-and-aws-workshop-admin"
+      ServiceRole: !GetAtt WorkshopAdminRole.Arn
       Artifacts:
         Type: NO_ARTIFACTS
       LogsConfig:
@@ -167,8 +181,6 @@ Resources:
             Value: !Ref KubernetesVersion
           - Name: WorkerNodeInstanceType
             Value: !Ref WorkerNodeInstanceType
-          - Name: VSCodeInstanceName
-            Value: !Ref VSCodeInstanceName
           
       Source:
         Type: NO_SOURCE
@@ -246,6 +258,7 @@ Resources:
                     SSM_PREFIX="/eks/${EKSClusterName}"
                     aws ssm put-parameter --name "$SSM_PREFIX/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
                     aws ssm put-parameter --name "$SSM_PREFIX/region" --value "${AWSRegion}" --type "String" --overwrite                  
+                  fi
                 
                 # Signal CloudFormation with success/failure status
                 - |
