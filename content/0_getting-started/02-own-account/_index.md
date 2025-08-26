@@ -4,7 +4,7 @@ weight: 22
 ---
 
 {{% notice warning %}}
-If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/90-cleanup) to avoid unnecessary charges.
+If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/5_conclusion/52_cleanup.html) to avoid unnecessary charges.
 {{% /notice %}}
 
 ## Workshop resources
@@ -42,5 +42,5 @@ You may need to re-install **helm** if your AWS cloudshell session timesout and 
 {{% /notice %}}
 
 {{% notice warning %}}
-If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/90-cleanup) to avoid unnecessary charges.
+If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/5_conclusion/52_cleanup.html) to avoid unnecessary charges.
 {{% /notice %}}

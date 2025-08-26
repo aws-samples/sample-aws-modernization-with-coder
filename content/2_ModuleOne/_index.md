@@ -18,7 +18,6 @@ In this module, you will:
 2. **Deploy PostgreSQL Database Service** - Set up persistent storage for Coder's configuration and workspace metadata
 3. **Install Coder Control Plane** - Deploy the core Coder services with Network Load Balancer and ingress configuration
 4. **Configure IAM Roles and Service Accounts** - Set up secure AWS integration for dynamic workspace provisioning
-5. **Deploy AWS CloudFront Distribution** - Enable secure TLS termination for Coder workspace access
 
 ## Platform Deployment Overview
 
@@ -35,7 +34,6 @@ Here's what has been automatically deployed and what we'll configure:
 - PostgreSQL database for Coder persistence
 - Coder control plane services and web interface
 - Network Load Balancer for external access
-- CloudFront distribution for global content delivery
 - Kubernetes Service accounts and additional IAM roles for workspace provisioning
 
 ## Key Benefits of This Architecture
@@ -43,7 +41,6 @@ Here's what has been automatically deployed and what we'll configure:
 - **High Availability**: Multi-AZ deployment ensures resilience
 - **Auto Scaling**: EKS Auto Mode automatically manages capacity
 - **Security**: Encrypted storage, private networking, and least-privilege IAM
-- **Performance**: CloudFront CDN for optimal user experience globally
 - **Cost Optimization**: Pay-per-use scaling and efficient resource utilization
 
 {{% notice tip %}}
