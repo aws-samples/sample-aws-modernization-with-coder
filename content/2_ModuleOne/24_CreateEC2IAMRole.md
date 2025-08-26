@@ -23,7 +23,10 @@ cat > ekspodid-trust-policy.json << EOF
             "Sid": "AllowEksAuthToAssumeRoleForPodIdentity",
             "Effect": "Allow",
             "Principal": {
-                "Service": "pods.eks.amazonaws.com"
+                "Service": [
+                    "pods.eks.amazonaws.com",
+                    "ec2.amazonaws.com"
+                ]
             },
             "Action": [
                 "sts:AssumeRole",
@@ -51,6 +54,18 @@ aws eks create-pod-identity-association \
     --service-account coder \
     --role-arn arn:aws:iam::<your-aws-account-id>:role/coder-workshop-ec2-workspace-role
 ```
+
+#### Step 3: Create IAM EC2 Instance Profile and associate IAM Role
+```bash
+# Create IAM Instance Profile and associate IAM Role
+aws iam create-instance-profile \
+--instance-profile-name coder-workshop-ec2-workspace-profile
+
+aws iam add-role-to-instance-profile \
+--instance-profile-name coder-workshop-ec2-workspace-profile \
+--role-name coder-workshop-ec2-workspace-role
+```
+
 {{% notice info %}}
 The updated IAM Role association may not take affect until the Coder Control Plane is restarted.  Delete the coder-(instance) pods in the coder namespace that are currently running, and validate that new ones are automatically started and running. 
 {{% /notice %}}
