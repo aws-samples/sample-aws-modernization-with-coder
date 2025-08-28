@@ -6,7 +6,7 @@ weight: 03
 
 # Coder Cloud Development Environments
 
-## Transforming Development with Cloud-Native Environments
+## Secure environments for developers and their agents.
 
 Coder delivers self-hosted Cloud Development Environments (CDEs) that revolutionize how development teams work. By moving development workloads from local machines to the cloud, Coder eliminates the friction of environment setup while providing enterprise-grade security, scalability, and cost optimization.
 
