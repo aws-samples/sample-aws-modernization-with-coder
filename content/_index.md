@@ -22,7 +22,7 @@ Imagine a world where:
 - **Resources scale automatically** – Pay only for what you use with intelligent capacity management
 - **Teams collaborate seamlessly** – Shared cloud development environment templates ensure consistency across projects
 
-This is how the best teams are building today.
+This is how the most effective teams are building today.
 
 ## Cost of Workshop
 If you are running this as part of an AWS hosted event and, in the sandbox provided to you, then there is no cost for you.
