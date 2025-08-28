@@ -30,7 +30,7 @@ If you are running the workshop **in your own environment**, use the Region us-e
 
 ## Ready to Transform Development?
 
-The future of software development is cloud-native, AI-enhanced, and incredibly productive. Let's build it together.
+The future of software development is cloud-native, AI-enabled, and incredibly productive. Let's build it together.
 
 {{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
