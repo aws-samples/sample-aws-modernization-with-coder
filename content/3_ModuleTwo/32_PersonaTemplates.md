@@ -31,7 +31,7 @@ Next, create a workspace using the Kubernetes Devcontainer template for Coder ad
 2. **Select the Kubernetes (Devcontainer) template** (created in the previous step)
 3. **Configure the workspace parameters**:
    - **Name**: `template-admin-workspace`
-   - **Repository**: `https://github.com/coder/aws-coder-workshop-gitops`
+   - **Repository**: `https://github.com/coder/aws-coder-workshop-gitops.git`
    - **CPU**: 2 cores
    - **Memory**: 4 GB
    - **Disk Size**: 20 GB

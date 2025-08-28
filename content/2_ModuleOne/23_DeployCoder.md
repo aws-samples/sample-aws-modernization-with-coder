@@ -20,7 +20,7 @@ First, download the pre-configured Helm values file for this workshop:
 
 ```bash
 # Download the Coder configuration file
-curl -o coder-core-values-v2.yaml https://raw.githubusercontent.com/your-workshop-repo/main/static/infrastructure/coder-core-values-v2.yaml
+curl -o coder-core-values-v2.yaml https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/coder-core-values-v2.yaml
 
 # Verify the file was downloaded
 ls -la coder-core-values-v2.yaml
@@ -41,7 +41,7 @@ helm install coder coder-v2/coder \
 ```
 
 {{% notice tip %}}
-You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.3 is known to work well with this workshop configuration.
+You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.3 was known to work well with this workshop at the time of it's creation.
 {{% /notice %}}
 
 #### Step 3: Monitor Deployment Progress
@@ -56,7 +56,9 @@ kubectl get pods -n coder -w
 kubectl get service coder -n coder -w
 ```
 
-This process typically takes 3-5 minutes. You'll see the EXTERNAL-IP change from **pending** to an AWS load balancer hostname.
+This process typically takes 3-5 minutes. You'll see the EXTERNAL-IP change from **pending** to an AWS load balancer hostname.  Additionally, as this EKS Cluster is using Auto-Mode, you may see Karpenter dynamically scaling out/in Nodes during Helm deployments.  
+
+Occasionally, this causes the PostgreSQL pod to change Nodes, and cause the deployed Coder pod(s) to reconnect to the DB before they are fully operational again.
 
 #### Step 4: Retrieve Load Balancer Information
 
@@ -146,7 +148,8 @@ Verify the service and endpoints:
 kubectl get service coder -n coder
 kubectl get endpoints coder -n coder
 ```
+Enable your browser to accept insecure (http) connections when prompted or relax browser security settings as needed.
 {{% /expand %}}
 
 ### Next Steps
-With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning and create a CloudFront distribution to support HTTP(s)/TLS.
+With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  Remember to bookmark your **Coder Access URL** for easy reference for the remainder of the workshop.

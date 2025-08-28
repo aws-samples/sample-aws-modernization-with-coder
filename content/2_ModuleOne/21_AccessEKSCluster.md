@@ -1,5 +1,5 @@
 ---
-title: "Access Provisioned EKS Cluster" 
+title: "Access EKS Cluster" 
 chapter: true
 weight: 31 
 ---
@@ -7,7 +7,7 @@ weight: 31
 # Access Provisioned EKS Cluster
 
 ## Connect to the Coder Control Plane Infrastructure
-![AWS RefArch](/images/AWSCoderSingleRegionv1-1.png)
+![AWS RefArch](https://raw.githubusercontent.com/coder/coder/main/docs/images/architecture-diagram.png)
 
 The core Coder Control Plane infrastructure has been automatically deployed using AWS EKS as depicted in the reference architecture above. The CloudFormation template has created all necessary foundational AWS services including VPC, subnets, compute resources, and storage, along with an EKS cluster named `coder-aws-cluster`.
 
@@ -25,7 +25,7 @@ Once AWS CloudShell is ready, run the following command to configure kubectl to 
 
 ```bash
 # Connect to the pre-deployed EKS cluster
-aws eks update-kubeconfig --name coder-aws-cluster --region us-east-1
+aws eks update-kubeconfig --name coder-aws-cluster --region <workshop region>
 ```
 
 #### Step 3: Validate EKS Cluster Access
@@ -41,8 +41,27 @@ kubectl cluster-info
 
 You should see output showing your cluster nodes in a "Ready" state, confirming successful connection to the EKS cluster.
 
-#### Step 4: Verify Storage Configuration
-The EKS cluster has been configured with the AWS EBS CSI driver for persistent storage. You can verify the storage class configuration:
+#### Step 4: Update and Verify Storage Configuration
+The EKS cluster needs to be configured with a default AWS EBS CSI driver that supports dynamic provisioning of persistent storage. 
+
+```bash
+# Deploy a K8S StorageClass for dynamic EBS volume provisioning
+kubectl apply -f - <<EOF
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3-csi
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.eks.amazonaws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
+  encrypted: "true"
+allowVolumeExpansion: true
+EOF
+```
+You can verify the storage class configuration:
 
 ```bash
 # Check available storage classes

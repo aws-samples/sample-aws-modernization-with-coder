@@ -12,7 +12,7 @@ The following architecture diagram illustrates the comprehensive AWS and Coder i
 This architecture demonstrates a production-ready, scalable development platform that combines:
 
 - **Amazon EKS** with Auto Mode for intelligent container orchestration
-- **AWS Network Load Balancer** and **CloudFront** for global content delivery
+- **AWS Network Load Balancer** content delivery and Coder Workspace connectivity
 - **PostgreSQL** for reliable data persistence
 - **AWS IAM** for enterprise-grade security
 - **Coder Control Plane** for cloud development environment management
@@ -50,7 +50,7 @@ During the workshop participants will provision:
 {{% /notice %}}
 
 {{% notice warning %}}
-**Cost Management**: If you are running this workshop on your own AWS account, remember to delete all resources by following the [Clean Up Resources](/90-cleanup) section to avoid unnecessary charges. The workshop is designed to use cost-effective instance types and auto-scaling to minimize costs during the learning experience.
+**Cost Management**: If you are running this workshop on your own AWS account, remember to delete all resources by following the [Clean Up Resources](/5_conclusion/52_cleanup.html) section to avoid unnecessary charges. The workshop is designed to use cost-effective instance types and auto-scaling to minimize costs during the learning experience.
 {{% /notice %}}
 
 ### Ready to Begin?
