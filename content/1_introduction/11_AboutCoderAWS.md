@@ -14,9 +14,9 @@ Coder delivers self-hosted cloud development environments (CDEs) that are provis
 
 ## Core Value Propositions
 
-Coder CDEs deliver three fundamental benefits: enhanced developer productivity, enterprise-grade security, and intelligent cost optimization.
+Coder CDEs deliver benefits in three areas: developer productivity, enterprise-grade security, and cost optimization.
 
-- **Zero Setup Time**: Developers access fully-configured, AI-ready environments in under 2 minutes, eliminating "works on my machine" issues with standardized workspaces
+- **No Local Setup**: Developers access fully-configured, AI-ready environments in minutes, eliminating "works on my machine" issues with standardized workspaces
 - **Code Protection**: Source code never leaves your AWS infrastructure with built-in compliance, audit trails, and network isolation within your secure VPC
 - **Auto-Scaling**: Environments automatically start/stop and right-size resources based on usage, reducing costs by up to 70% through efficient shared infrastructure
 
