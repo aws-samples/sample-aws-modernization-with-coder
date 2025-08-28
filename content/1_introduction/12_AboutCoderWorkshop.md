@@ -8,7 +8,7 @@ weight: 05
 
 ## What are Cloud Development Environments?
 
-Cloud Development Environments are fully-configured, cloud-hosted development workspaces that developers can access from anywhere. Unlike traditional local development setups, CDEs provide:
+Cloud Development Environment is a fully-managed, cloud-hosted development workspace that developers can code or train machine learning models. It's where all the tools, libraries, and infrastructure you need come together, making it easy to provision new development environments and work from anywhere. Unlike traditional local development setups, CDEs provide:
 
 - **Instant Environment Provisioning**: Spin up fully configured development environments in minutes, not hours or days
 - **Consistent Development Experience**: Every developer works in identical, reproducible environments
