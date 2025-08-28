@@ -10,7 +10,7 @@ weight: 04
 
 ## Why Coder on AWS?
 
-Coder transforms how development teams work by delivering self-hosted Cloud Development Environments (CDEs) that leverage AWS's enterprise-grade infrastructure. By moving development workloads from local machines to AWS, organizations achieve unprecedented scalability, security, and cost efficiency.
+Coder delivers self-hosted cloud development environments (CDEs) that are provisioned as code and pre-deployed for both developer and agent activity from day one. Coder runs in your own AWS environment—or even in air-gapped setups when necessary—giving developers access to powerful infrastructure without compromising governance. With Coder, developers spend less time troubleshooting and more time coding, while infrastructure teams can standardize environments and eliminate the security and governance risks of local setups.
 
 ## Core Value Propositions
 
