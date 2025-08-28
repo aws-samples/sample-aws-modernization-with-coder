@@ -254,6 +254,16 @@ Resources:
                   if [ "$BUILD_SUCCESS" = "true" ]; then 
                     echo "EKS cluster creation successful"
                     
+                    # Configure kubectl
+                    aws eks update-kubeconfig --region ${AWSRegion} --name ${EKSClusterName}
+                    
+                    # Get the participant role ARN from the account
+                    ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+                    PARTICIPANT_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/WSParticipantRole"
+                    
+                    # Create aws-auth ConfigMap to allow participant role access
+                    kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"${PARTICIPANT_ROLE_ARN}\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
+                    
                     # Store EKS cluster info in SSM Parameter Store
                     SSM_PREFIX="/eks/${EKSClusterName}"
                     aws ssm put-parameter --name "$SSM_PREFIX/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
