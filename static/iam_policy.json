@@ -168,6 +168,16 @@
             "Resource": "arn:aws:eks:*:*:addon/coder-aws-cluster/*"
         },
         {
+            "Sid": "EKSClusterAccess",
+            "Effect": "Allow",
+            "Action": [
+                "eks:AccessKubernetesApi",
+                "eks:DescribeCluster",
+                "eks:ListClusters"
+            ],
+            "Resource": "*"
+        },
+        {
             "Sid": "MarketplacePermissions",
             "Effect": "Allow",
             "Action": [
