@@ -34,6 +34,7 @@ Here's what has been automatically deployed and what we'll configure:
 - PostgreSQL database for Coder persistence
 - Coder control plane services and web interface
 - Network Load Balancer for external access
+- CloudFront distribution for secure content delivery
 - Kubernetes Service accounts and additional IAM roles for workspace provisioning
 
 ## Key Benefits of This Architecture
