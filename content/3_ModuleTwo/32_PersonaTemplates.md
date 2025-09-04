@@ -83,7 +83,21 @@ CODER_SESSION_TOKEN=$(coder tokens create --lifetime 24h)
 echo "Session token created successfully "+$CODER_SESSION_TOKEN
 ```
 
-### Step 5: Deploy Workshop Templates
+### Step 5: Authenticate with AWS Account/Workshop Studio Env 
+
+Authenticate the Coder Workspace with your workshop AWS Account:
+1. **Go to Workshop Instructions** AWS Account Access
+2. **Select Get AWS CLI credentials** and Linux or macOS (bash)
+![AWS CLI Credentials](/images/aws-cli-credentials.png)
+3. **Copy content** and paste into Workspace terminal
+4. **Validate AWS Configuration** using the CLI
+
+```bash
+# Verify AWS Credentials
+aws sts get-caller-identity
+```
+
+### Step 6: Deploy Workshop Templates
 
 Use the provided GitOps script to deploy all workshop templates:
 
@@ -99,7 +113,7 @@ chmod +x templates_gitops.sh
 The deployment script will create all 4 workshop templates in your Coder instance. When prompted by Terraform, respond "yes" to create the defined resources. This process typically takes 2-3 minutes.
 {{% /notice %}}
 
-### Step 6: Verify Template Deployment
+### Step 7: Verify Template Deployment
 
 Confirm that all templates were deployed successfully:
 
@@ -110,7 +124,7 @@ coder templates list
 
 You should see all 4 workshop templates listed and available for workspace creation.
 
-### Step 7: Test Template Functionality
+### Step 8: Test Template Functionality
 
 Create a test workspace to verify template functionality:
 
