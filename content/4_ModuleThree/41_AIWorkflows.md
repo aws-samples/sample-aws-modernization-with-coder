@@ -115,7 +115,9 @@ Smoke test the web app deployment to the current AWS account using the created d
 Notice how Amazon Q will find and debug issues as it works with the existing scripts and workspace environment, installing required dependencies as needed.  Additionally, you will most likely see Amazon Q iterate across Lambda Functions, Back-End Schema, and other component issues as it tests the CDK stacks being deployed.
 {{% /notice %}}
 
-When completed, at least your Database and Backend stacks should be successfully deployed and smoke-tested.  You can continue to prompt Amazon Q to complete the full application deployment, if desired.  It is suggested you commit and push changes to your workshop Git repo at this point, as this Git repo will be used in the next AI-Driven Workflow example.
+When completed, at least your Database and Backend stacks should be successfully deployed and smoke-tested.  You can continue to prompt Amazon Q to complete the full application deployment, if desired.  
+
+It is suggested you commit and push changes to your workshop Git repo at this point, as this Git repo will be used in the next AI-Driven Workflow example.
 
 Step 4: Cleanup AI-Generated AWS Deployment
 ```bash
