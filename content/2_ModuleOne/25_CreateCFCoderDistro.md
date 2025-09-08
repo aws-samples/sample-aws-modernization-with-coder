@@ -223,4 +223,4 @@ With CloudFront successfully configured, your Coder deployment now has:
 - Automatic HTTPS/TLS termination
 - Enhanced security through AWS's edge locations
 
-You're ready to configure development templates and user workspaces.
+You're ready to configure development templates and user workspaces. Remember to bookmark your **Coder CloudFront URL** for easy reference for the remainder of the workshop.

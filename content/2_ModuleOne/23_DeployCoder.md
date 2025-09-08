@@ -137,4 +137,4 @@ Enable your browser to accept insecure (http) connections when prompted or relax
 {{% /expand %}}
 
 ### Next Steps
-With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  Remember to bookmark your **Coder Access URL** for easy reference for the remainder of the workshop.
+With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  

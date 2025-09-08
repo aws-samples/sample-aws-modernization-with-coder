@@ -47,7 +47,7 @@ Our AI-driven development platform integrates multiple AWS AI services with Code
 
 ## Real-World AI Development Scenarios
 
-### Scenario: New Feature Development
+### New Feature Development
 *Traditional Time*: Weeks  
 *AI-Driven Time*: Days
 
@@ -61,7 +61,6 @@ Our AI-driven development platform integrates multiple AWS AI services with Code
 
 By the end of this module, you will be able to:
 
-*AI-Powered Development Skills:*
 - Leverage Amazon Q Developer for intelligent code completion and generation
 - Use AWS Bedrock/Anthropic Claude Code for advanced code review and architectural guidance
 - Implement AI-driven refactoring and optimization workflows
