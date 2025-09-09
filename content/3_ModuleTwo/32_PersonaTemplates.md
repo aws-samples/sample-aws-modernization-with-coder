@@ -18,11 +18,29 @@ In this section, you'll create a Kubernetes devcontainer workspace and use it to
 
 ### Step 1: Create a Kubernetes Devcontainer Template
 
-First, create a Kubernetes devcontainer template:
+First, import a Kubernetes devcontainer template from the Coder Registry:
 
-1. **Access your Coder dashboard, Templates** and click "New template"
-2. **Select Kubernetes from the FILTER** and click "Use template" for the Kubernetes (Devcontainer) template
-3. **Review Template configuration** and click "Save"
+1. **Access your Coder dashboard, Workspaces** and select Kubernetes Workspace previously created
+2. **Select code-server** to create a Code Server browser-based IDE session
+3. **Select Terminal/New Terminal** within Code Server, and create a Terminal session
+4. **Clone the Coder Registry** into your Workspace
+```bash
+git clone https://github.com/coder/registry.git
+
+# Switch to the devcontainer template directory
+cd registry/registry/coder/templates/kubernetes-devcontainer
+```
+5. **Import the Template** into your Coder Instance
+```bash
+# Login to your Coder instance 
+coder login $CODER_AGENT_URL
+
+# Verify authentication
+coder whoami
+
+# Push the contents of the template to your deployment
+coder template push kubernetes-devcontainer -d .
+```
 
 ### Step 2: Create a Kubernetes Devcontainer Workspace
 
