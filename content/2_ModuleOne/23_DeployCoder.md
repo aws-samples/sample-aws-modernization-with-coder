@@ -93,22 +93,7 @@ helm upgrade coder coder-v2/coder \
     --version 2.24.3
 ```
 
-#### Step 6: Verify Coder Accessibility
-
-Test that Coder is accessible via the load balancer:
-
-```bash
-# Test HTTP connectivity
-curl -I $CODER_ACCESS_URL
-
-# If successful, you should see HTTP 200 response
-```
-
-{{% notice info %}}
-If you see **HTTP/1.1 200 OK**, Coder is successfully deployed and accessible!
-{{% /notice %}}
-
-#### Step 7: Access Coder Web Interface
+#### Step 6: Access Coder Web Interface and Create Coder Admin Account
 
 You can now access Coder in your browser:
 ```bash
@@ -152,4 +137,4 @@ Enable your browser to accept insecure (http) connections when prompted or relax
 {{% /expand %}}
 
 ### Next Steps
-With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  Remember to bookmark your **Coder Access URL** for easy reference for the remainder of the workshop.
+With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  

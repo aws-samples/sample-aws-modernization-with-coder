@@ -63,7 +63,7 @@ Let's walk through developing a new feature using AI assistance from start to fi
 Step 1: Requirements Analysis with AI, start by describing your feature in natural language:
 ```bash
 # Use Amazon Q Developer to analyze requirements with the following prompt:
-analyze the following requirements: "Create a simple task management web app that tracks task id, description, priority, and completion date.  Provide two ways to interact with the data, one that summarizes open tasks by priority and another lists completed tasks by date"
+analyze the following requirements: "Create a simple task management web app that tracks task id, description, priority, and completion date.  Provide two ways to interact with the data, one that summarizes open tasks by priority and another lists completed tasks by date".  Create a technical requirements breakdown, provide architecture suggestions, implementation approaches, potential challenges and solutions for review.
 ```
 Amazon Q will provide:
 - Technical requirements breakdown
@@ -76,6 +76,8 @@ Step 2: AI-Generated Project Structure
 # Next, have Amazon Q generate the supporting project structure with the following prompt:
 generate a supporting project structure for an AWS CDK application that uses typscript for the front end components and python for back-end API components
 ```
+Even with prescriptive prompting like what was provided, Amazon Q Developer (like any Agent) may need more guidance.  If you feel like the Agent isn't moving in the right direction, don't be afraid to stop it and re-direct it's activity with additional prompting.
+
 {{% notice info %}}
 Notice how Amazon Q always prompts you to "trust" it when creating or updating content in your Coder workspace.
 {{% /notice %}}
@@ -113,7 +115,9 @@ Smoke test the web app deployment to the current AWS account using the created d
 Notice how Amazon Q will find and debug issues as it works with the existing scripts and workspace environment, installing required dependencies as needed.  Additionally, you will most likely see Amazon Q iterate across Lambda Functions, Back-End Schema, and other component issues as it tests the CDK stacks being deployed.
 {{% /notice %}}
 
-When completed, at least your Database and Backend stacks should be successfully deployed and smoke-tested.  You can continue to prompt Amazon Q to complete the full application deployment, if desired.  It is suggested you commit and push changes to your workshop Git repo at this point, as this Git repo will be used in the next AI-Driven Workflow example.
+When completed, at least your Database and Backend stacks should be successfully deployed and smoke-tested.  You can continue to prompt Amazon Q to complete the full application deployment, if desired.  
+
+It is suggested you commit and push changes to your workshop Git repo at this point, as this Git repo will be used in the next AI-Driven Workflow example.
 
 Step 4: Cleanup AI-Generated AWS Deployment
 ```bash

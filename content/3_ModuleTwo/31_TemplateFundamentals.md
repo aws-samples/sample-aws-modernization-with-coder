@@ -44,12 +44,12 @@ Let's start by creating a simple but functional template that demonstrates core 
 ### Step 1: Access Your Coder Instance
 
 First, let's login to your Coder instance:
-![Coder Login](https://raw.githubusercontent.com/coder/coder/main/docs/images/screenshots/coder-login.png)
+![Coder Login](/images/coder-login.png)
 
 ### Step 2: Initialize a New Template using an existing Starter Template
 
 Select Templates then the New Template button:
-![Coder Templates](https://raw.githubusercontent.com/coder/coder/main/docs/images/screenshots/templates-listing.png)
+![Coder Templates](/images/templates-listing.png)
 
 From the Kubernetes starter templates, select the Kubernetes (Deployment) template:
 ![Coder K8S Starter Template](/images/kubernetes-deployment.png)
