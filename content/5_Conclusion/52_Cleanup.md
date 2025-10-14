@@ -5,9 +5,7 @@ weight: 62
 ---
 # AWS Coder Workshop - Resource Cleanup Instructions
 
-{{% notice warning %}}
-**Important**: Follow these cleanup steps if you ran this workshop in your own AWS account to avoid ongoing charges. If you used an AWS-provided sandbox environment, resources will be automatically cleaned up.
-{{% /notice %}}
+::alert[**Important**: Follow these cleanup steps if you ran this workshop in your own AWS account to avoid ongoing charges. If you used an AWS-provided sandbox environment, resources will be automatically cleaned up.]{type="warning"}
 
 ## Overview
 

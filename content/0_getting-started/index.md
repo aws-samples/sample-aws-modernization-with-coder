@@ -7,7 +7,7 @@ weight: 20
 
 The following architecture diagram illustrates the comprehensive AWS and Coder integration we'll be deploying: 
 
-![architecture diagram](/images/AWSCoderSingleRegionv1-1.png)
+![architecture diagram](/static/images/AWSCoderSingleRegionv1-1.png)
 
 This architecture demonstrates a production-ready, scalable development platform that combines:
 
@@ -45,13 +45,9 @@ During the workshop participants will provision:
 🔧 **AI Integration** with Amazon Q Developer and Claude  
 🔧 **CloudFront Distribution** for global access  
 
-{{% notice info %}}
-**Estimated Deployment Time**: The CloudFormation stack takes approximately 15-20 minutes to deploy all infrastructure components. You can monitor progress in the AWS CloudFormation console.
-{{% /notice %}}
+::alert[**Estimated Deployment Time**: The CloudFormation stack takes approximately 15-20 minutes to deploy all infrastructure components. You can monitor progress in the AWS CloudFormation console.]{type="info"}
 
-{{% notice warning %}}
-**Cost Management**: If you are running this workshop on your own AWS account, remember to delete all resources by following the [Clean Up Resources](/5_conclusion/52_cleanup.html) section to avoid unnecessary charges. The workshop is designed to use cost-effective instance types and auto-scaling to minimize costs during the learning experience.
-{{% /notice %}}
+::alert[**Cost Management**: If you are running this workshop on your own AWS account, remember to delete all resources by following the [Clean Up Resources](/5_conclusion/52_cleanup.html) section to avoid unnecessary charges. The workshop is designed to use cost-effective instance types and auto-scaling to minimize costs during the learning experience.]{type="warning"}
 
 ### Ready to Begin?
 Select your setup path above to start deploying your AI-powered development platform!

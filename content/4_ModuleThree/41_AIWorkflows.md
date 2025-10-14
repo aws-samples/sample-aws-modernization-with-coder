@@ -27,9 +27,7 @@ Create a workspace using the AWS Workshop - EC2 (Linux) Q Developer template:
 
 4. **Click "Create Workspace"** and wait for it to start
 
-{{% notice info %}}
-The selected Coder workspace template will automatically provision the AWS CLI, CDK, Amazon Q Developer CLI and other tools needed for AI-Driven AWS Development.
-{{% /notice %}}
+::alert[The selected Coder workspace template will automatically provision the AWS CLI, CDK, Amazon Q Developer CLI and other tools needed for AI-Driven AWS Development.]{type="info"}
 
 #### Step 2: Access Your Linux Q Developer Workspace
 
@@ -78,9 +76,7 @@ generate a supporting project structure for an AWS CDK application that uses typ
 ```
 Even with prescriptive prompting like what was provided, Amazon Q Developer (like any Agent) may need more guidance.  If you feel like the Agent isn't moving in the right direction, don't be afraid to stop it and re-direct it's activity with additional prompting.
 
-{{% notice info %}}
-Notice how Amazon Q always prompts you to "trust" it when creating or updating content in your Coder workspace.
-{{% /notice %}}
+::alert[Notice how Amazon Q always prompts you to "trust" it when creating or updating content in your Coder workspace.]{type="info"}
 This should create something similar to this:
 ```bash
 task-management-app/
@@ -111,9 +107,7 @@ Step 3: AI-Generated AWS Deployment
 # Smoke-test deployment to AWS by having Amazon Q deploy the generated web app to the current AWS account with the following prompt:
 Smoke test the web app deployment to the current AWS account using the created deployment scripts
 ```
-{{% notice info %}}
-Notice how Amazon Q will find and debug issues as it works with the existing scripts and workspace environment, installing required dependencies as needed.  Additionally, you will most likely see Amazon Q iterate across Lambda Functions, Back-End Schema, and other component issues as it tests the CDK stacks being deployed.
-{{% /notice %}}
+::alert[Notice how Amazon Q will find and debug issues as it works with the existing scripts and workspace environment, installing required dependencies as needed.  Additionally, you will most likely see Amazon Q iterate across Lambda Functions, Back-End Schema, and other component issues as it tests the CDK stacks being deployed.]{type="info"}
 
 When completed, at least your Database and Backend stacks should be successfully deployed and smoke-tested.  You can continue to prompt Amazon Q to complete the full application deployment, if desired.  
 
@@ -129,9 +123,7 @@ This should remove any deployed components and ensure Amazon Q double-checks and
 /quit
 ```
 
-{{% notice tip %}}
-🚀 *Workflow Optimization*: These AI development workflows can reduce development time by 60-80% while improving code quality. Start with one workflow and gradually add more as your team becomes comfortable.
-{{% /notice %}}
+::alert[🚀 *Workflow Optimization*: These AI development workflows can reduce development time by 60-80% while improving code quality. Start with one workflow and gradually add more as your team becomes comfortable.]{type="info"}
 
 ## Next Steps
 

@@ -10,9 +10,7 @@ weight: 35
 
 CloudFront provides global content delivery, TLS termination, and improved performance for your Coder deployment. This module will create a CloudFront distribution that sits in front of your AWS Load Balancer and updates the Coder configuration to use HTTPS.
 
-{{% notice info %}}
-CloudFront distributions can take 10-15 minutes to deploy globally. The process involves creating the distribution, waiting for deployment, and then updating the Coder configuration.
-{{% /notice %}}
+::alert[CloudFront distributions can take 10-15 minutes to deploy globally. The process involves creating the distribution, waiting for deployment, and then updating the Coder configuration.]{type="info"}
 
 #### Step 1: Retrieve Current Load Balancer Information
 
@@ -110,9 +108,7 @@ while true; do
 done
 ```
 
-{{% notice tip %}}
-CloudFront deployment typically takes 10-15 minutes. You can continue with other tasks and return to check the status periodically.
-{{% /notice %}}
+::alert[CloudFront deployment typically takes 10-15 minutes. You can continue with other tasks and return to check the status periodically.]{type="info"}
 
 #### Step 4: Test CloudFront Distribution
 
@@ -126,9 +122,9 @@ curl -I https://$CLOUDFRONT_DOMAIN
 curl -I http://$CLOUDFRONT_DOMAIN
 ```
 
-{{% notice success %}}
+
 You should see HTTP 301/302 redirects for HTTP requests and successful responses for HTTPS requests.
-{{% /notice %}}
+
 
 #### Step 5: Update Coder Configuration with CloudFront URLs
 
@@ -165,13 +161,13 @@ curl -I $CODER_CLOUDFRONT_URL
 echo "Access Coder securely at: $CODER_CLOUDFRONT_URL"
 ```
 
-{{% notice success %}}
+
 If you see **HTTP/2 200** or **HTTP/1.1 200 OK**, Coder is successfully accessible via HTTPS through CloudFront!
-{{% /notice %}}
+
 
 ## Troubleshooting
 
-{{% expand "CloudFront distribution creation fails" %}}
+
 Check your AWS permissions and region:
 ```bash
 # Verify CloudFront permissions
@@ -185,9 +181,9 @@ Ensure your IAM role has CloudFront permissions:
 - `cloudfront:CreateDistribution`
 - `cloudfront:GetDistribution`
 - `cloudfront:UpdateDistribution`
-{{% /expand %}}
 
-{{% expand "CloudFront returns 502/504 errors" %}}
+
+
 Verify the origin configuration:
 ```bash
 # Check if the load balancer is responding
@@ -201,9 +197,9 @@ Common issues:
 - Origin protocol policy mismatch
 - Load balancer security group blocking CloudFront IPs
 - Origin domain name incorrect
-{{% /expand %}}
 
-{{% expand "Coder interface not loading after CloudFront update" %}}
+
+
 Check the Coder pod logs and configuration:
 ```bash
 # Check Coder pod status
@@ -215,7 +211,7 @@ helm get values coder -n coder
 ```
 
 Ensure the access URL in the Helm values matches the CloudFront domain.
-{{% /expand %}}
+
 
 ### Next Steps
 With CloudFront successfully configured, your Coder deployment now has:

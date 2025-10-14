@@ -43,7 +43,7 @@ AI-driven development isn't just about code completion—it's a fundamental shif
 
 Our AI-driven development platform integrates multiple AWS AI services with Coder:
 
-![Codeer AI Architecture diagram](/images/AWSCoderAgenticAI.png)
+![Codeer AI Architecture diagram](/static/images/AWSCoderAgenticAI.png)
 
 ## Real-World AI Development Scenarios
 
@@ -66,13 +66,9 @@ By the end of this module, you will be able to:
 - Implement AI-driven refactoring and optimization workflows
 - Create context-aware development assistants
 
-{{% notice tip %}}
-🤖 *AI Development Mindset*: Think of AI as your intelligent pair programming partner. The goal is human-AI collaboration that amplifies creativity and productivity.
-{{% /notice %}}
+::alert[🤖 *AI Development Mindset*: Think of AI as your intelligent pair programming partner. The goal is human-AI collaboration that amplifies creativity and productivity.]{type="info"}
 
-{{% notice warning %}}
-The examples and sample code provided in this workshop are intended to be consumed as instructional content. These examples are not intended for use in production environments.
-{{% /notice %}}
+::alert[The examples and sample code provided in this workshop are intended to be consumed as instructional content. These examples are not intended for use in production environments.]{type="warning"}
 
 ### Ready to Experience the Future?
 Let's dive into AI-powered development workflows and transform how you build software. The future of development is intelligent, automated, and incredibly productive!

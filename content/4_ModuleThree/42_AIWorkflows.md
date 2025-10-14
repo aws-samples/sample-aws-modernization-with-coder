@@ -27,17 +27,13 @@ Create a Task using the AWS Workshop - Kubernetes with Claude Code template:
 
 4. **Click "Run task"** and wait for it to start
 
-{{% notice info %}}
-The Coder Task UI will automatically provision a task-based workspace and Claude Caude will begin analyzing the provided Task prompt.
-{{% /notice %}}
+::alert[The Coder Task UI will automatically provision a task-based workspace and Claude Caude will begin analyzing the provided Task prompt.]{type="info"}
 
 The Claude Cod Web UI in the left pane will be begin by creating and updating a "To Do List" of activities to be peformed.  As it progresses, you can monitor the Agents actions.  It will most likely prompt for your approval and direction on how to move ahead to create new workspaces to resolve the identified issues. Depending on how you respond, the Agent will spawn up to two additional Tasks to remediate the findings.
 
-{{% notice tip %}}
-You may see some API Errors from Claude Code, due to AWS Bedrock rate limiting.  Don't worry, one of the benefits of running asynchronsous Tasks using Autonomous Agents is that Claude Code will continue on until it completes the task or you stop it.  
-{{% /notice %}}
+::alert[You may see some API Errors from Claude Code, due to AWS Bedrock rate limiting.  Don't worry, one of the benefits of running asynchronsous Tasks using Autonomous Agents is that Claude Code will continue on until it completes the task or you stop it.]{type="info"}
 
-![Codeer AI Driven Review](/images/ai-driven-app-review.png)
+![Codeer AI Driven Review](/static/images/ai-driven-app-review.png)
 
 #### Step 2: Monitor and review Async Task-Automation Workspaces
 
@@ -47,13 +43,11 @@ Once your initial Task completes:
 2. **Review the new Tasks** created by your initial Task-Automation worflow
 3. **Open the new tasks** and monitor the changes made, and optionally submit PR's to your git repo
 
-![Codeer AI Driven Tasks](/images/ai-driven-task-automation.png)
+![Codeer AI Driven Tasks](/static/images/ai-driven-task-automation.png)
 
 Take some time on your own and explore each of the created Tasks and evaluate the results of the remediation activities performed by Claude Code.  Experiment by instructing Claude Code to unit test the changes and/or smoke-test a deployment to your AWS account.  
 
 The prompts provided should work for the most part, but don't be surprised if Claude Code doesn't always act as directed.  You may need to stop the Agent(s) activities and re-direct with additional prompts or prompt the agent to continue or re-analyze it's activities if it get stuck or paused due to Bedrock rate limits on the Workshop accounts.
 
-{{% notice tip %}}
-🚀 *Workflow Automation*: These AI automation workflows can reduce time spent on routine activities, while dramaticaly boosting developer productivity. Start by automating one workflow and experimenting until you get consistent results. Gradually add more AI automation workflows as your team becomes comfortable with specific Agent capabilities and required prompts to get the desired results.
-{{% /notice %}}
+::alert[🚀 *Workflow Automation*: These AI automation workflows can reduce time spent on routine activities, while dramaticaly boosting developer productivity. Start by automating one workflow and experimenting until you get consistent results. Gradually add more AI automation workflows as your team becomes comfortable with specific Agent capabilities and required prompts to get the desired results.]{type="info"}
 

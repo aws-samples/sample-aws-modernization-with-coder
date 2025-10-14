@@ -102,17 +102,11 @@ Coder templates leverage several key AWS services and patterns:
 - **Scalability**: Templates scale from individual developers to enterprise teams
 - **Cost Optimization**: Right-sized resources with automatic scaling up and down
 
-{{% notice tip %}} 
-💡 **Pro Tip**: Templates are living infrastructure. Start simple and iterate based on team feedback. The best templates evolve with your development practices.
-{{% /notice %}}
+::alert[💡 **Pro Tip**: Templates are living infrastructure. Start simple and iterate based on team feedback. The best templates evolve with your development practices.]{type="info"}
 
-{{% notice info %}}
-📋 **Template Best Practices**: We'll follow Infrastructure as Code principles throughout this module, ensuring all templates are version-controlled, tested, and documented.
-{{% /notice %}}
+::alert[📋 **Template Best Practices**: We'll follow Infrastructure as Code principles throughout this module, ensuring all templates are version-controlled, tested, and documented.]{type="info"}
 
-{{% notice warning %}}
-The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
-{{% /notice %}}
+::alert[The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.]{type="warning"}
 
 ### Ready to Engineer the Future?
 Let's start by understanding the fundamentals of Coder template architecture and building your first intelligent development environment.

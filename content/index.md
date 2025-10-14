@@ -6,7 +6,7 @@ weight: 10
 
 # AWS and Coder AI-Powered Development Workshop
 
-![Partner Logo](/images/coder-logo-black.png)
+![Partner Logo](/static/images/coder-logo-black.png)
 
 ## Welcome to the Future of Development
 
@@ -32,9 +32,7 @@ If you are running the workshop **in your own environment**, use the Region us-e
 
 The future of software development is cloud-native, AI-enabled, and incredibly productive. Let's build it together.
 
-{{% notice warning %}}
-The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
-{{% /notice %}}
+::alert[The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.]{type="warning"}
 
 ### Let's Begin Your Journey
 Start by by introducing you to the power of Coder Cloud Development Environments (CDEs) on AWS.

@@ -71,7 +71,5 @@ By the end of this workshop, you'll understand how Coder CDEs transform the deve
 
 Let's begin by setting up your Coder platform on AWS and experiencing firsthand how Cloud Development Environments can transform your development workflows.
 
-{{% notice tip %}}
-💡 **Pro Tip**: This workshop showcases patterns used by leading technology companies to scale their development teams efficiently while maintaining security and compliance standards.
-{{% /notice %}}
+::alert[💡 **Pro Tip**: This workshop showcases patterns used by leading technology companies to scale their development teams efficiently while maintaining security and compliance standards.]{type="info"}
 

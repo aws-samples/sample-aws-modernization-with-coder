@@ -26,9 +26,7 @@ infrastructure:
     - templateLocation: static/infrastructure/eks-cluster.yaml
       label: EKS Cluster for Coder Workshop
     
-
       #parameters:
-      
       #- templateParameter: AssetZipS3Path
         #defaultValue: '{{.AssetsBucketName}}/{{.AssetsBucketPrefix}}workshop.zip'
 

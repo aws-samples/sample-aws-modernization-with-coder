@@ -56,9 +56,7 @@ Next, create a workspace using the Kubernetes Devcontainer template for Coder ad
 
 4. **Click "Create Workspace"** and wait for it to start
 
-{{% notice info %}}
-The devcontainer specification in the repository will automatically provision terraform, helm, kubectl, and other tools needed for template administration.
-{{% /notice %}}
+::alert[The devcontainer specification in the repository will automatically provision terraform, helm, kubectl, and other tools needed for template administration.]{type="info"}
 
 ### Step 3: Access Your Template Administration Workspace
 
@@ -106,7 +104,7 @@ echo "Session token created successfully "+$CODER_SESSION_TOKEN
 Authenticate the Coder Workspace with your workshop AWS Account:
 1. **Go to Workshop Instructions** AWS Account Access
 2. **Select Get AWS CLI credentials** and Linux or macOS (bash)
-![AWS CLI Credentials](/images/aws-cli-credentials.png)
+![AWS CLI Credentials](/static/images/aws-cli-credentials.png)
 3. **Copy content** and paste into Workspace terminal
 4. **Validate AWS Configuration** using the CLI
 
@@ -127,9 +125,7 @@ chmod +x templates_gitops.sh
 ./templates_gitops.sh $CODER_SESSION_TOKEN
 ```
 
-{{% notice tip %}}
-The deployment script will create all 4 workshop templates in your Coder instance. When prompted by Terraform, respond "yes" to create the defined resources. This process typically takes 2-3 minutes.
-{{% /notice %}}
+::alert[The deployment script will create all 4 workshop templates in your Coder instance. When prompted by Terraform, respond "yes" to create the defined resources. This process typically takes 2-3 minutes.]{type="info"}
 
 ### Step 7: Verify Template Deployment
 
@@ -157,9 +153,9 @@ coder list
 coder delete test-linux-q
 ```
 
-{{% notice success %}}
+
 Congratulations! You've successfully deployed all workshop templates using a GitOps workflow. Your Coder instance now has 4 persona-based templates ready for use.
-{{% /notice %}}
+
 
 ## Next Steps
 

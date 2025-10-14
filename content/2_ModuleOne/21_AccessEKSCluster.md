@@ -7,7 +7,7 @@ weight: 31
 # Access Provisioned EKS Cluster
 
 ## Connect to the Coder Control Plane Infrastructure
-![AWS RefArch](https://raw.githubusercontent.com/coder/coder/main/docs/images/architecture-diagram.png)
+![AWS RefArch](/statichttps://raw.githubusercontent.com/coder/coder/main/docs/images/architecture-diagram.png)
 
 The core Coder Control Plane infrastructure has been automatically deployed using AWS EKS as depicted in the reference architecture above. The CloudFormation template has created all necessary foundational AWS services including VPC, subnets, compute resources, and storage, along with an EKS cluster named `coder-aws-cluster`.
 
@@ -16,9 +16,7 @@ Now we need to configure your local environment to connect to this pre-deployed 
 #### Step 1: Open AWS CloudShell
 Open AWS CloudShell by navigating to: [https://console.aws.amazon.com/cloudshell](https://console.aws.amazon.com/cloudshell)
 
-{{% notice info %}}
-AWS CloudShell provides a browser-based shell with pre-installed AWS CLI, kubectl, and other tools needed for this workshop.
-{{% /notice %}}
+::alert[AWS CloudShell provides a browser-based shell with pre-installed AWS CLI, kubectl, and other tools needed for this workshop.]{type="info"}
 
 #### Step 2: Configure kubectl to Access Your EKS Cluster
 Once AWS CloudShell is ready, run the following command to configure kubectl to connect to your EKS cluster:

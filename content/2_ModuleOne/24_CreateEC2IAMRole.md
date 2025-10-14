@@ -66,9 +66,7 @@ aws iam add-role-to-instance-profile \
 --role-name coder-workshop-ec2-workspace-role
 ```
 
-{{% notice info %}}
-The updated IAM Role association may not take affect until the Coder Control Plane is restarted.  Delete the coder-(instance) pods in the coder namespace that are currently running, and validate that new ones are automatically started and running. 
-{{% /notice %}}
+::alert[The updated IAM Role association may not take affect until the Coder Control Plane is restarted.  Delete the coder-(instance) pods in the coder namespace that are currently running, and validate that new ones are automatically started and running.]{type="info"}
 
 ### Next Steps <!-- MODIFY THIS HEADING -->
 With the required IAM Role successfully created and associated with the Coder EKS Service Account, you're ready to create a CloudFront distribution for the Coder Control Plane.

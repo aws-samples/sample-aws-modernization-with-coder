@@ -6,7 +6,7 @@ weight: 04
 
 # Coder: Cloud Development Environments on AWS
 
-![Partner Logo](/images/coder-logo-black.png)
+![Partner Logo](/static/images/coder-logo-black.png)
 
 ## Why Coder on AWS?
 
@@ -37,9 +37,7 @@ Organizations using Coder on AWS report:
 - **Zero security incidents** related to local development environments
 - **50% increase** in developer satisfaction scores
 
-{{% notice info %}}
-**Why Cloud Development Environments Matter**: Leading technology companies like Anthropic, Netflix, Goldman Sachs, and Government/Intelligence Agencices have adopted CDEs to scale their development teams efficiently while maintaining security and consistency. This workshop shows you how to implement the same patterns in your organization.
-{{% /notice %}}
+::alert[**Why Cloud Development Environments Matter**: Leading technology companies like Anthropic, Netflix, Goldman Sachs, and Government/Intelligence Agencices have adopted CDEs to scale their development teams efficiently while maintaining security and consistency. This workshop shows you how to implement the same patterns in your organization.]{type="info"}
 
 Ready to transform your development experience? Let's get started.
 

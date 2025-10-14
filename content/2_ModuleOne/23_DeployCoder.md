@@ -10,9 +10,7 @@ weight: 33
 
 The Coder control plane will be deployed to your EKS cluster using Helm, with an AWS Network Load Balancer providing external access. This setup ensures high availability and proper integration with AWS services.
 
-{{% notice info %}}
-The deployment process involves two phases: initial deployment and configuration update once the load balancer is provisioned.
-{{% /notice %}}
+::alert[The deployment process involves two phases: initial deployment and configuration update once the load balancer is provisioned.]{type="info"}
 
 #### Step 1: Download Coder Helm Values Configuration
 
@@ -40,9 +38,7 @@ helm install coder coder-v2/coder \
     --version 2.24.3
 ```
 
-{{% notice tip %}}
-You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.3 was known to work well with this workshop at the time of it's creation.
-{{% /notice %}}
+::alert[You can check the latest Coder version at the [Coder Releases Page](https://github.com/coder/coder/releases). Version 2.24.3 was known to work well with this workshop at the time of it's creation.]{type="info"}
 
 #### Step 3: Monitor Deployment Progress
 
@@ -105,7 +101,7 @@ Depending on your browser, when you access Coder you may get some security warni
 
 ## Troubleshooting
 
-{{% expand "Coder pod not starting" %}}
+
 Check the pod logs and events:
 ```bash
 kubectl describe pod -n coder -l app.kubernetes.io/name=coder
@@ -116,25 +112,25 @@ Common issues:
 - Database connection problems (check PostgreSQL pod status)
 - Insufficient resources (check node capacity)
 - Configuration errors (validate the values file)
-{{% /expand %}}
 
-{{% expand "Load balancer not getting external IP" %}}
+
+
 Check service events:
 ```bash
 kubectl describe service coder -n coder
 ```
 
 The EKS cluster should have the AWS Load Balancer Controller installed automatically with Auto Mode.
-{{% /expand %}}
 
-{{% expand "Cannot access Coder web interface" %}}
+
+
 Verify the service and endpoints:
 ```bash
 kubectl get service coder -n coder
 kubectl get endpoints coder -n coder
 ```
 Enable your browser to accept insecure (http) connections when prompted or relax browser security settings as needed.
-{{% /expand %}}
+
 
 ### Next Steps
 With Coder successfully deployed and accessible, you're ready to configure IAM roles for workspace provisioning.  

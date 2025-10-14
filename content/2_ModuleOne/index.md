@@ -44,13 +44,9 @@ Here's what has been automatically deployed and what we'll configure:
 - **Security**: Encrypted storage, private networking, and least-privilege IAM
 - **Cost Optimization**: Pay-per-use scaling and efficient resource utilization
 
-{{% notice tip %}}
-💡 **Pro Tip**: The EKS cluster uses Auto Mode, which automatically provisions and manages compute capacity, networking, and storage based on your workload requirements. This reduces operational overhead while optimizing costs.
-{{% /notice %}}
+::alert[💡 **Pro Tip**: The EKS cluster uses Auto Mode, which automatically provisions and manages compute capacity, networking, and storage based on your workload requirements. This reduces operational overhead while optimizing costs.]{type="info"}
 
-{{% notice warning %}}
-The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
-{{% /notice %}}
+::alert[The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.]{type="warning"}
 
 ### Ready to Get Started?
 Let's begin by connecting to your EKS cluster and validating the infrastructure deployment.

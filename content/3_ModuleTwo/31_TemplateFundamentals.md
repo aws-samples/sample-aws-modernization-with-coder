@@ -44,43 +44,41 @@ Let's start by creating a simple but functional template that demonstrates core 
 ### Step 1: Access Your Coder Instance
 
 First, let's login to your Coder instance:
-![Coder Login](/images/coder-login.png)
+![Coder Login](/static/images/coder-login.png)
 
 ### Step 2: Initialize a New Template using an existing Starter Template
 
 Select Templates then the New Template button:
-![Coder Templates](/images/templates-listing.png)
+![Coder Templates](/static/images/templates-listing.png)
 
 From the Kubernetes starter templates, select the Kubernetes (Deployment) template:
-![Coder K8S Starter Template](/images/kubernetes-deployment.png)
+![Coder K8S Starter Template](/static/images/kubernetes-deployment.png)
 
 Finalize the template configuration and Save:
-![Coder K8S Template Save](/images/k8s-template-save.png)
+![Coder K8S Template Save](/static/images/k8s-template-save.png)
 
 Update template variables, if prompted, and Retry:
-![Coder K8S Template Variables](/images/k8s-template-variables.png)
+![Coder K8S Template Variables](/static/images/k8s-template-variables.png)
 
 Review the template main.tf (select Edit), then Create Workspace to provision your first Coder Workspace:
-![Coder K8S Template Provision](/images/k8s-template-create.png)
+![Coder K8S Template Provision](/static/images/k8s-template-create.png)
 
 Create your own unique Workspace name or use a suggestion, and then select Create Workspace
-![Coder K8S Workspace Create](/images/K8s-workspace-create.png)
+![Coder K8S Workspace Create](/static/images/K8s-workspace-create.png)
 
 Your first Workspace is now successfully provisioned into your EKS Cluster as a Kubernetes Deployment (pod):
-![Coder K8S Workspace Provisioned](/images/K8s-workspace-provisioned.png)
+![Coder K8S Workspace Provisioned](/static/images/K8s-workspace-provisioned.png)
 
 ### Step 3: Validate Workspace connectivity via Terminal and code-server
 Select Terminal to create an SSH connection to the Workspace, and enter a linux command to validate Workspace operation:
-![Coder K8S Workspace Terminal](/images/k8s-workspace-terminal.png)
+![Coder K8S Workspace Terminal](/static/images/k8s-workspace-terminal.png)
 
 Select code-server to create a Code Server browser session, and explore the features of a browser-based VS Code compatible IDE:
-![Coder K8S Workspace code-server](/images/k8s-workspace-codeserver.png)
+![Coder K8S Workspace code-server](/static/images/k8s-workspace-codeserver.png)
 
 **Optional**: Select VS Code Desktop if you have VS Code installed locally, and validate your Workspace connection.
 
-{{% notice tip %}}
-💡 **Pro Tip**: Start with a simple template and iterate. Add complexity gradually based on user feedback and requirements.
-{{% /notice %}}
+::alert[💡 **Pro Tip**: Start with a simple template and iterate. Add complexity gradually based on user feedback and requirements.]{type="info"}
 
 ### Next Steps
 Now that you understand template fundamentals, let's create persona-specific templates that cater to different developer roles and workflows.
