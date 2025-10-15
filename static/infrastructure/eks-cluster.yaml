@@ -387,9 +387,8 @@ Resources:
 ################## EKS Bootstrap #####################
 
   BuildProject:
-    DependsOn: [WorkshopInstanceProfile]
+    DependsOn: [WorkshopInstanceProfile, CoderAuroraInstance]
     Type: AWS::CodeBuild::Project
-    DependsOn: CoderAuroraInstance
     Properties:
       Name: !Sub CodeBuild-${AWS::StackName}
       ServiceRole: !GetAtt WorkshopAdminRole.Arn
@@ -534,7 +533,7 @@ Resources:
                     PARTICIPANT_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/WSParticipantRole"
                     
                     # Deploy a K8S StorageClass for dynamic EBS volume provisioning
-                    kubectl apply -f - << EOF
+                    kubectl apply -f - << 'EOF'
                     apiVersion: storage.k8s.io/v1
                     kind: StorageClass
                     metadata:
@@ -547,7 +546,7 @@ Resources:
                       type: gp3
                       encrypted: "true"
                     allowVolumeExpansion: true
-                    EOF
+                    'EOF'
 
                     # Create aws-auth ConfigMap to allow participant role access
                     kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"${PARTICIPANT_ROLE_ARN}\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
