@@ -354,8 +354,6 @@ Resources:
       DBSubnetGroupName: coderaurorasubnetgroup
       DBSubnetGroupDescription: "Subnet group for Coder' Aurora PostgreSQL - same as EKS cluster"
       SubnetIds: 
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
         - !Ref PrivateSubnet1
         - !Ref PrivateSubnet2
 

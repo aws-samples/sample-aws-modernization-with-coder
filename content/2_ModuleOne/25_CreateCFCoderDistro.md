@@ -142,6 +142,10 @@ echo "New Coder Wildcard URL: $CODER_CLOUDFRONT_WILDCARD"
 sed -i "s|http://$CODER_LB_HOSTNAME|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
 sed -i "s|\*\.$CODER_LB_HOSTNAME|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
 
+sed -i "s|https://coder.example.com|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
+sed -i "s|\*.coder.example.com|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
+
+
 # Apply the updated configuration
 helm upgrade coder coder-v2/coder \
     --namespace coder \
