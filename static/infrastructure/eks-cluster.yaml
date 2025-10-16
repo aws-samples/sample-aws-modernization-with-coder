@@ -533,20 +533,18 @@ Resources:
                     PARTICIPANT_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/WSParticipantRole"
                     
                     # Deploy a K8S StorageClass for dynamic EBS volume provisioning
-                    cat > storageclass.yaml << 'STORAGE_EOF'
-                    apiVersion: storage.k8s.io/v1
-                    kind: StorageClass
-                    metadata:
-                      name: gp3-csi
-                      annotations:
-                        storageclass.kubernetes.io/is-default-class: "true"
-                    provisioner: ebs.csi.eks.amazonaws.com
-                    volumeBindingMode: WaitForFirstConsumer
-                    parameters:
-                      type: gp3
-                      encrypted: "true"
-                    allowVolumeExpansion: true
-                    STORAGE_EOF
+                    echo 'apiVersion: storage.k8s.io/v1' > storageclass.yaml
+                    echo 'kind: StorageClass' >> storageclass.yaml
+                    echo 'metadata:' >> storageclass.yaml
+                    echo '  name: gp3-csi' >> storageclass.yaml
+                    echo '  annotations:' >> storageclass.yaml
+                    echo '    storageclass.kubernetes.io/is-default-class: "true"' >> storageclass.yaml
+                    echo 'provisioner: ebs.csi.eks.amazonaws.com' >> storageclass.yaml
+                    echo 'volumeBindingMode: WaitForFirstConsumer' >> storageclass.yaml
+                    echo 'parameters:' >> storageclass.yaml
+                    echo '  type: gp3' >> storageclass.yaml
+                    echo '  encrypted: "true"' >> storageclass.yaml
+                    echo 'allowVolumeExpansion: true' >> storageclass.yaml
                     kubectl apply -f storageclass.yaml
 
                     # Create aws-auth ConfigMap to allow participant role access
