@@ -502,6 +502,9 @@ Resources:
                 - curl --silent --fail --retry 5 --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
                 - mv -v /tmp/eksctl /usr/local/bin
                 - eksctl version
+                - curl --silent --fail --retry 5 --location "https://get.helm.sh/helm-v3.16.4-linux-amd64.tar.gz" | tar xz -C /tmp
+                - mv -v /tmp/linux-amd64/helm /usr/local/bin
+                - helm version
                 - export PATH=$PWD/:$PATH
             build:
               commands:
