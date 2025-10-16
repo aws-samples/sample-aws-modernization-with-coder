@@ -579,7 +579,8 @@ Resources:
                         --version 2.24.3
 
                     # Get the load balancer hostname and wait until provisioned
-                    CODER_LB_HOSTNAME=$(kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+                    kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' > lb_hostname.txt
+                    CODER_LB_HOSTNAME=$(cat lb_hostname.txt)
                     echo "Coder Load Balancer: $CODER_LB_HOSTNAME"
 
                     # Wait for AWS Load Balancer 
