@@ -561,20 +561,7 @@ Resources:
                     ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
                     PARTICIPANT_ROLE_ARN="arn:aws:iam::$ACCOUNT_ID:role/WSParticipantRole"
                     
-                    cat > storageclass.yaml << 'SC_EOF'
-                  apiVersion: storage.k8s.io/v1
-                  kind: StorageClass
-                  metadata:
-                    name: gp3-csi
-                    annotations:
-                      storageclass.kubernetes.io/is-default-class: "true"
-                  provisioner: ebs.csi.eks.amazonaws.com
-                  volumeBindingMode: WaitForFirstConsumer
-                  parameters:
-                    type: gp3
-                    encrypted: "true"
-                  allowVolumeExpansion: true
-                  SC_EOF
+                    curl -o storageclass.yaml https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/storageclass.yaml
                     kubectl apply -f storageclass.yaml
                     
                     kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"$PARTICIPANT_ROLE_ARN\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
@@ -601,52 +588,9 @@ Resources:
                     done
                     
                     if [ -n "$CODER_LB_HOSTNAME" ]; then
-                      cat > cloudfront-config.json << 'CF_EOF'
-                      {
-                        "CallerReference": "coder-workshop-$(date +%s)",
-                        "Comment": "Coder Workshop CloudFront Distribution",
-                        "DefaultCacheBehavior": {
-                          "TargetOriginId": "coder-alb-origin",
-                          "ViewerProtocolPolicy": "redirect-to-https",
-                          "AllowedMethods": {
-                            "Quantity": 7,
-                            "Items": ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"],
-                            "CachedMethods": {
-                              "Quantity": 2,
-                              "Items": ["GET", "HEAD"]
-                            }
-                          },
-                          "ForwardedValues": {
-                            "QueryString": true,
-                            "Cookies": {"Forward": "all"},
-                            "Headers": {
-                              "Quantity": 1,
-                              "Items": ["*"]
-                            }
-                          },
-                          "MinTTL": 0,
-                          "DefaultTTL": 0,
-                          "MaxTTL": 0
-                        },
-                        "Origins": {
-                          "Quantity": 1,
-                          "Items": [
-                            {
-                              "Id": "coder-alb-origin",
-                              "DomainName": "$CODER_LB_HOSTNAME",
-                              "CustomOriginConfig": {
-                                "HTTPPort": 80,
-                                "HTTPSPort": 443,
-                                "OriginProtocolPolicy": "http-only"
-                              }
-                            }
-                          ]
-                        },
-                        "Enabled": true,
-                        "PriceClass": "PriceClass_100"
-                      }
-                      CF_EOF
-
+                      curl -o cloudfront-config.json https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/cloudfront-config.json
+                      sed -i "s|CODER_LB_HOSTNAME_PLACEHOLDER|$CODER_LB_HOSTNAME|g" cloudfront-config.json
+ 
                       # Create the CloudFront distribution
                       CLOUDFRONT_RESULT=$(aws cloudfront create-distribution --distribution-config file://cloudfront-config.json)
                       echo "$CLOUDFRONT_RESULT" > cloudfront-result.json
