@@ -6,6 +6,11 @@ Parameters:
     Type: String
     Default: "1.32"
 
+  CoderVersion:
+    Description: Coder version
+    Type: String
+    Default: "2.24.3"
+
   EKSClusterName:
     Description: Name of EKS Cluster
     Type: String
@@ -434,6 +439,8 @@ Resources:
             Value: !Ref AWS::StackName
           - Name: KubernetesVersion
             Value: !Ref KubernetesVersion
+          - Name: CoderVersion
+            Value: !Ref CoderVersion
           - Name: WorkerNodeInstanceType
             Value: !Ref WorkerNodeInstanceType
           - Name: VpcId
@@ -580,7 +587,7 @@ Resources:
                     
                     helm repo add coder-v2 https://helm.coder.com/v2
                     helm repo update
-                    helm install coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version 2.24.3
+                    helm install coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
                     
                     for i in {1..30}; do
                       kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' > lb_hostname.txt 2>/dev/null || echo "" > lb_hostname.txt
@@ -594,9 +601,86 @@ Resources:
                     done
                     
                     if [ -n "$CODER_LB_HOSTNAME" ]; then
-                      sed -i "s|https://coder.example.com|http://$CODER_LB_HOSTNAME|g" coder-core-values-v2.yaml
-                      sed -i "s|\*.coder.example.com|*.$CODER_LB_HOSTNAME|g" coder-core-values-v2.yaml
-                      helm upgrade coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version 2.24.3
+                      cat > cloudfront-config.json << 'CF_EOF'
+                      {
+                        "CallerReference": "coder-workshop-$(date +%s)",
+                        "Comment": "Coder Workshop CloudFront Distribution",
+                        "DefaultCacheBehavior": {
+                          "TargetOriginId": "coder-alb-origin",
+                          "ViewerProtocolPolicy": "redirect-to-https",
+                          "AllowedMethods": {
+                            "Quantity": 7,
+                            "Items": ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"],
+                            "CachedMethods": {
+                              "Quantity": 2,
+                              "Items": ["GET", "HEAD"]
+                            }
+                          },
+                          "ForwardedValues": {
+                            "QueryString": true,
+                            "Cookies": {"Forward": "all"},
+                            "Headers": {
+                              "Quantity": 1,
+                              "Items": ["*"]
+                            }
+                          },
+                          "MinTTL": 0,
+                          "DefaultTTL": 0,
+                          "MaxTTL": 0
+                        },
+                        "Origins": {
+                          "Quantity": 1,
+                          "Items": [
+                            {
+                              "Id": "coder-alb-origin",
+                              "DomainName": "$CODER_LB_HOSTNAME",
+                              "CustomOriginConfig": {
+                                "HTTPPort": 80,
+                                "HTTPSPort": 443,
+                                "OriginProtocolPolicy": "http-only"
+                              }
+                            }
+                          ]
+                        },
+                        "Enabled": true,
+                        "PriceClass": "PriceClass_100"
+                      }
+                      CF_EOF
+
+                      # Create the CloudFront distribution
+                      CLOUDFRONT_RESULT=$(aws cloudfront create-distribution --distribution-config file://cloudfront-config.json)
+                      echo "$CLOUDFRONT_RESULT" > cloudfront-result.json
+
+                      # Extract distribution information
+                      DISTRIBUTION_ID=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.Id')
+                      CLOUDFRONT_DOMAIN=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.DomainName')
+
+                      echo "CloudFront Distribution ID: $DISTRIBUTION_ID"
+                      echo "CloudFront Domain: $CLOUDFRONT_DOMAIN"
+
+                      # Check deployment status
+                      echo "Waiting for CloudFront distribution to deploy..."
+                      while true; do
+                        STATUS=$(aws cloudfront get-distribution --id $DISTRIBUTION_ID --query 'Distribution.Status' --output text)
+                        echo "Distribution Status: $STATUS"
+                        if [ "$STATUS" = "Deployed" ]; then
+                          echo "CloudFront distribution is ready!"
+                          break
+                        fi
+                        echo "Waiting 60 seconds before checking again..."
+                        sleep 60
+                      done
+
+                      # Construct the new URLs
+                      CODER_CLOUDFRONT_URL="https://$CLOUDFRONT_DOMAIN"
+                      CODER_CLOUDFRONT_WILDCARD="*.$CLOUDFRONT_DOMAIN"
+
+                      echo "New Coder Access URL: $CODER_CLOUDFRONT_URL"
+                      echo "New Coder Wildcard URL: $CODER_CLOUDFRONT_WILDCARD"
+
+                      sed -i "s|https://coder.example.com|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
+                      sed -i "s|\*.coder.example.com|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
+                      helm upgrade coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
                     fi
                     
                     aws ssm put-parameter --name "/eks/${EKSClusterName}/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
