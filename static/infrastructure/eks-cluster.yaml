@@ -348,6 +348,21 @@ Resources:
 
 ################## Aurora PostgreSQL #####################
 
+  AuroraSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for Aurora PostgreSQL cluster
+      VpcId: !Ref CoderVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 192.168.0.0/16
+          Description: Allow PostgreSQL access from VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${EKSClusterName}-aurora-sg'
+
   CoderAuroraSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
@@ -367,6 +382,8 @@ Resources:
       MasterUsername: !Ref Username
       MasterUserPassword: !Ref Password
       DBSubnetGroupName: !Ref CoderAuroraSubnetGroup
+      VpcSecurityGroupIds:
+        - !Ref AuroraSecurityGroup
       BackupRetentionPeriod: 3
       StorageEncrypted: true
       ServerlessV2ScalingConfiguration:
