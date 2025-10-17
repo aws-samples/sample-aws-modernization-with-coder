@@ -381,6 +381,8 @@ Resources:
       EngineVersion: '16.6'
       MasterUsername: !Ref Username
       MasterUserPassword: !Ref Password
+      DatabaseName: !Ref DatabaseName
+      Port: 5432
       DBSubnetGroupName: !Ref CoderAuroraSubnetGroup
       VpcSecurityGroupIds:
         - !Ref AuroraSecurityGroup
