@@ -21,7 +21,7 @@ In this module, you will:
 
 ## Platform Deployment Overview
 
-Here's what has been automatically deployed and what we'll configure:
+Here's what has been automatically deployed and what we'll review:
 
 **Pre-Deployed Infrastructure (via CloudFormation):**
 - Amazon EKS cluster (`coder-aws-cluster`) with Auto Mode
@@ -29,8 +29,6 @@ Here's what has been automatically deployed and what we'll configure:
 - EKS node groups with optimized instance types
 - AWS Load Balancer Controller and EBS CSI driver
 - IAM roles and policies for secure AWS service integration
-
-**Components We'll Deploy:**
 - PostgreSQL database for Coder persistence
 - Coder control plane services and web interface
 - Network Load Balancer for external access
@@ -49,5 +47,5 @@ Here's what has been automatically deployed and what we'll configure:
 ::alert[The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.]{type="warning"}
 
 ### Ready to Get Started?
-Let's begin by connecting to your EKS cluster and validating the infrastructure deployment.
+If you're accessing the workshop from an AWS Event, jump ahead to [Module Two](/3_ModuleTwo/index.html) to implement your first Coder Wordspace Templates.  Otherwise, begin a self-guided workshop by connecting to your EKS cluster and validating the infrastructure deployment.
 
