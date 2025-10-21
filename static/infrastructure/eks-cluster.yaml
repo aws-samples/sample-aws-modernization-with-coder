@@ -55,6 +55,7 @@ Resources:
                 - pods.eks.amazonaws.com
             Action:
               - sts:AssumeRole
+              - sts:TagSession
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
       Path: "/"
