@@ -52,6 +52,7 @@ Resources:
               Service:
                 - ec2.amazonaws.com
                 - codebuild.amazonaws.com
+                - pods.eks.amazonaws.com
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
@@ -164,7 +165,7 @@ Resources:
     DependsOn: WorkshopAdminRole
     Properties:
       Path: "/"
-      InstanceProfileName: !Sub "coder-and-aws-workshop-admin-${AWS::StackName}"
+      InstanceProfileName: !Sub "coder-workshop-ec2-workspace-profile"
       Roles:
         - !Ref WorkshopAdminRole
 
@@ -586,6 +587,12 @@ Resources:
                       echo "Waiting for load balancer... ($i/30)"
                       sleep 30
                     done
+
+                    aws eks create-pod-identity-association \
+                    --cluster-name coder-aws-cluster \
+                    --namespace coder \
+                    --service-account coder \
+                    --role-arn arn:aws:iam::$ACCOUNT_ID:role/coder-and-aws-workshop-admin
                     
                     if [ -n "$CODER_LB_HOSTNAME" ]; then
                       curl -o cloudfront-config.json https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/cloudfront-config.json
