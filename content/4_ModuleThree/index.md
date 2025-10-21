@@ -63,6 +63,7 @@ By the end of this module, you will be able to:
 
 - Leverage Amazon Q Developer for intelligent code completion and generation
 - Use AWS Bedrock/Anthropic Claude Code for advanced code review and architectural guidance
+- Prototype GenAI Applications using AWS Bedrock/Anthropic Claude Code with PostgreSQL Knowledgebase
 - Implement AI-driven refactoring and optimization workflows
 - Create context-aware development assistants
 
