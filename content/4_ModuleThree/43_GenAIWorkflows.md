@@ -73,7 +73,7 @@ Use Claude Code to enhance your RAG application:
 
 ```bash
 # Prompt for adding a Web Crawler for Data Ingestion
-"Analyze the current RAG implementation and add support for crawling web pages to ingest additioal data into the PostgreSQL Vector Knowledgebase.  Limit the number of web pages that could be ingested to 100, and maximum link depth of 4."
+"Analyze the current RAG implementation and add support for crawling web pages to ingest additional data into the PostgreSQL Vector Knowledgebase.  Limit the number of web pages that could be ingested to 100, and maximum link depth of 4.  Process the data in chunks and ensure appropriate error handling and basic import progress tracking is available in the UI."
 ```
 1. **Monitor Claude Agent** and provide any guidance needed to implement Web Crawler
 2. **Test Vector Search & RAG Response Implementation** by crawling some web content and validating chat interface against new content
