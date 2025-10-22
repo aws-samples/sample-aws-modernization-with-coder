@@ -6,6 +6,11 @@ Parameters:
     Type: String
     Default: "1.32"
 
+  CoderVersion:
+    Description: Coder version
+    Type: String
+    Default: "2.24.3"
+
   EKSClusterName:
     Description: Name of EKS Cluster
     Type: String
@@ -47,8 +52,10 @@ Resources:
               Service:
                 - ec2.amazonaws.com
                 - codebuild.amazonaws.com
+                - pods.eks.amazonaws.com
             Action:
               - sts:AssumeRole
+              - sts:TagSession
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
       Path: "/"
@@ -159,7 +166,7 @@ Resources:
     DependsOn: WorkshopAdminRole
     Properties:
       Path: "/"
-      InstanceProfileName: !Sub "coder-and-aws-workshop-admin-${AWS::StackName}"
+      InstanceProfileName: !Sub "coder-workshop-ec2-workspace-profile"
       Roles:
         - !Ref WorkshopAdminRole
 
@@ -348,14 +355,27 @@ Resources:
 
 ################## Aurora PostgreSQL #####################
 
+  AuroraSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for Aurora PostgreSQL cluster
+      VpcId: !Ref CoderVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 192.168.0.0/16
+          Description: Allow PostgreSQL access from VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${EKSClusterName}-aurora-sg'
+
   CoderAuroraSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
       DBSubnetGroupName: coderaurorasubnetgroup
       DBSubnetGroupDescription: "Subnet group for Coder' Aurora PostgreSQL - same as EKS cluster"
       SubnetIds: 
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
         - !Ref PrivateSubnet1
         - !Ref PrivateSubnet2
 
@@ -368,7 +388,11 @@ Resources:
       EngineVersion: '16.6'
       MasterUsername: !Ref Username
       MasterUserPassword: !Ref Password
+      DatabaseName: !Ref DatabaseName
+      Port: 5432
       DBSubnetGroupName: !Ref CoderAuroraSubnetGroup
+      VpcSecurityGroupIds:
+        - !Ref AuroraSecurityGroup
       BackupRetentionPeriod: 3
       StorageEncrypted: true
       ServerlessV2ScalingConfiguration:
@@ -387,9 +411,8 @@ Resources:
 ################## EKS Bootstrap #####################
 
   BuildProject:
-    DependsOn: [WorkshopInstanceProfile]
+    DependsOn: [WorkshopInstanceProfile, CoderAuroraInstance]
     Type: AWS::CodeBuild::Project
-    DependsOn: CoderAuroraInstance
     Properties:
       Name: !Sub CodeBuild-${AWS::StackName}
       ServiceRole: !GetAtt WorkshopAdminRole.Arn
@@ -418,6 +441,8 @@ Resources:
             Value: !Ref AWS::StackName
           - Name: KubernetesVersion
             Value: !Ref KubernetesVersion
+          - Name: CoderVersion
+            Value: !Ref CoderVersion
           - Name: WorkerNodeInstanceType
             Value: !Ref WorkerNodeInstanceType
           - Name: VpcId
@@ -503,6 +528,9 @@ Resources:
                 - curl --silent --fail --retry 5 --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
                 - mv -v /tmp/eksctl /usr/local/bin
                 - eksctl version
+                - curl --silent --fail --retry 5 --location "https://get.helm.sh/helm-v3.16.4-linux-amd64.tar.gz" | tar xz -C /tmp
+                - mv -v /tmp/linux-amd64/helm /usr/local/bin
+                - helm version
                 - export PATH=$PWD/:$PATH
             build:
               commands:
@@ -521,130 +549,104 @@ Resources:
                   fi
             post_build:
               commands:
-                - echo ">>> Post-build phase"
+                - echo ">>> Creating post-build script"
                 - |
-                  if [ "$BUILD_SUCCESS" = "true" ]; then 
+                  cat > post_build.sh << 'POST_EOF'
+                  #!/bin/bash
+                  set -e
+                  
+                  if [ "$BUILD_SUCCESS" = "true" ]; then
                     echo "EKS cluster creation successful"
                     
-                    # Configure kubectl
                     aws eks update-kubeconfig --region ${AWSRegion} --name ${EKSClusterName}
                     
-                    # Get the participant role ARN from the account
                     ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-                    PARTICIPANT_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/WSParticipantRole"
+                    PARTICIPANT_ROLE_ARN="arn:aws:iam::$ACCOUNT_ID:role/WSParticipantRole"
                     
-                    # Deploy a K8S StorageClass for dynamic EBS volume provisioning
-                    kubectl apply -f - << EOF
-                    apiVersion: storage.k8s.io/v1
-                    kind: StorageClass
-                    metadata:
-                      name: gp3-csi
-                      annotations:
-                        storageclass.kubernetes.io/is-default-class: "true"
-                    provisioner: ebs.csi.eks.amazonaws.com
-                    volumeBindingMode: WaitForFirstConsumer
-                    parameters:
-                      type: gp3
-                      encrypted: "true"
-                    allowVolumeExpansion: true
-                    EOF
-
-                    # Create aws-auth ConfigMap to allow participant role access
-                    kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"${PARTICIPANT_ROLE_ARN}\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
-
-                    # Create Coder namespace
+                    curl -o storageclass.yaml https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/storageclass.yaml
+                    kubectl apply -f storageclass.yaml
+                    
+                    kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"$PARTICIPANT_ROLE_ARN\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
                     kubectl create namespace coder
-
-                    # Store Coder PostgreSQL DB Configuration as Secret
-                    PostgreSQLConnectionURL="postgresql://${Username}:${Password}@${PostgreSQLClusterAddress}:${PostgreSQLPort}/${DatabaseName}'
-                    echo "Store Coder PostgreSQL DB Configuration as Secret: ${PostgreSQLConnectionURL}"
-                    kubectl create secret generic coder-db-url -n coder --from-literal=url=${PostgreSQLConnectionURL}"
-
-                    # Download the Coder configuration file
-                    # TODO: how to use local file from git?
+                    
+                    PostgreSQLConnectionURL="postgresql://${Username}:${Password}@${PostgreSQLClusterAddress}:${PostgreSQLPort}/${DatabaseName}"
+                    kubectl create secret generic coder-db-url -n coder --from-literal=url="$PostgreSQLConnectionURL"
+                    
                     curl -o coder-core-values-v2.yaml https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/coder-core-values-v2.yaml
-
-                    # Verify the file was downloaded
-                    ls -la coder-core-values-v2.yaml
-
-                    # Add Coder Helm repository
+                    
                     helm repo add coder-v2 https://helm.coder.com/v2
                     helm repo update
-
-                    # Install Coder using the configuration file
-                    helm install coder coder-v2/coder \
-                        --namespace coder \
-                        --values coder-core-values-v2.yaml \
-                        --version 2.24.3
-
-                    # Get the load balancer hostname and wait until provisioned
-                    CODER_LB_HOSTNAME=$(kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-                    echo "Coder Load Balancer: $CODER_LB_HOSTNAME"
-
-                    # Wait for AWS Load Balancer 
-                    aws elbv2 wait $CODER_LB_HOSTNAME
-                  
-                    # Construct the access URLs
-                    CODER_ACCESS_URL="http://$CODER_LB_HOSTNAME"
-                    CODER_WILDCARD_URL="*.$CODER_LB_HOSTNAME"
-
-                    echo "Coder Access URL: $CODER_ACCESS_URL"
-                    echo "Coder Wildcard URL: $CODER_WILDCARD_URL"
-
-                    # Update the values file with the real URLs
-                    sed -i "s|https://coder.example.com|$CODER_ACCESS_URL|g" coder-core-values-v2.yaml
-                    sed -i "s|\*.coder.example.com|$CODER_WILDCARD_URL|g" coder-core-values-v2.yaml
-
-                    # Apply the updated configuration
-                    helm upgrade coder coder-v2/coder \
-                        --namespace coder \
-                        --values coder-core-values-v2.yaml \
-                        --version 2.24.3
-                                        
-                    # Store EKS cluster info in SSM Parameter Store
-                    SSM_PREFIX="/eks/${EKSClusterName}"
-                    aws ssm put-parameter --name "$SSM_PREFIX/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
-                    aws ssm put-parameter --name "$SSM_PREFIX/region" --value "${AWSRegion}" --type "String" --overwrite                  
-                  fi
-                
-                # Signal CloudFormation with success/failure status
-                - |
-                  echo "Signaling CloudFormation"
-                  echo "WAIT_HANDLE_URL: $WAIT_HANDLE_URL"
-                  
-                  if [ -n "$WAIT_HANDLE_URL" ]; then
-                    if [ "$BUILD_SUCCESS" = "true" ]; then
-                      # Try to send SUCCESS signal, with retry logic
-                      MAX_RETRIES=3
-                      RETRY_COUNT=0
-                      SIGNAL_SENT=false
-                      
-                      while [ $RETRY_COUNT -lt $MAX_RETRIES ] && [ "$SIGNAL_SENT" != "true" ]; do
-                        if curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"SUCCESS","Reason":"EKS Cluster Created","UniqueId":"EKSCluster","Data":"Deployment Complete"}' "$WAIT_HANDLE_URL"; then
-                          echo "Successfully sent SUCCESS signal to CloudFormation"
-                          SIGNAL_SENT=true
-                        else
-                          RETRY_COUNT=$((RETRY_COUNT+1))
-                          echo "Failed to send SUCCESS signal to CloudFormation (attempt $RETRY_COUNT/$MAX_RETRIES)"
-                          if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
-                            echo "Retrying in 5 seconds..."
-                            sleep 5
-                          fi
-                        fi
-                      done
-                      
-                      if [ "$SIGNAL_SENT" != "true" ]; then
-                        echo "All attempts to send SUCCESS signal failed. Sending FAILURE signal instead."
-                        curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"Failed to send SUCCESS signal","UniqueId":"EKSCluster","Data":"Signal Transmission Failed"}' "$WAIT_HANDLE_URL" || echo "Also failed to send FAILURE signal."
-                        exit 1
+                    helm install coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
+                    
+                    for i in {1..30}; do
+                      kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' > lb_hostname.txt 2>/dev/null || echo "" > lb_hostname.txt
+                      CODER_LB_HOSTNAME=$(cat lb_hostname.txt | tr -d '\n')
+                      if [ -n "$CODER_LB_HOSTNAME" ]; then
+                        echo "Load balancer ready: $CODER_LB_HOSTNAME"
+                        break
                       fi
-                    else
-                      echo "Build was not successful. Sending FAILURE signal."
-                      curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"Post-build verification of failure"}' "$WAIT_HANDLE_URL" || echo "Failed to send FAILURE signal"
+                      echo "Waiting for load balancer... ($i/30)"
+                      sleep 30
+                    done
+
+                    aws eks create-pod-identity-association \
+                    --cluster-name coder-aws-cluster \
+                    --namespace coder \
+                    --service-account coder \
+                    --role-arn arn:aws:iam::$ACCOUNT_ID:role/coder-and-aws-workshop-admin
+                    
+                    if [ -n "$CODER_LB_HOSTNAME" ]; then
+                      curl -o cloudfront-config.json https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/cloudfront-config.json
+                      sed -i "s|CODER_LB_HOSTNAME_PLACEHOLDER|$CODER_LB_HOSTNAME|g" cloudfront-config.json
+ 
+                      # Create the CloudFront distribution
+                      CLOUDFRONT_RESULT=$(aws cloudfront create-distribution --distribution-config file://cloudfront-config.json)
+                      echo "$CLOUDFRONT_RESULT" > cloudfront-result.json
+
+                      # Extract distribution information
+                      DISTRIBUTION_ID=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.Id')
+                      CLOUDFRONT_DOMAIN=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.DomainName')
+
+                      echo "CloudFront Distribution ID: $DISTRIBUTION_ID"
+                      echo "CloudFront Domain: $CLOUDFRONT_DOMAIN"
+
+                      # Check deployment status
+                      echo "Waiting for CloudFront distribution to deploy..."
+                      while true; do
+                        STATUS=$(aws cloudfront get-distribution --id $DISTRIBUTION_ID --query 'Distribution.Status' --output text)
+                        echo "Distribution Status: $STATUS"
+                        if [ "$STATUS" = "Deployed" ]; then
+                          echo "CloudFront distribution is ready!"
+                          break
+                        fi
+                        echo "Waiting 60 seconds before checking again..."
+                        sleep 60
+                      done
+
+                      # Construct the new URLs
+                      CODER_CLOUDFRONT_URL="https://$CLOUDFRONT_DOMAIN"
+                      CODER_CLOUDFRONT_WILDCARD="*.$CLOUDFRONT_DOMAIN"
+
+                      echo "New Coder Access URL: $CODER_CLOUDFRONT_URL"
+                      echo "New Coder Wildcard URL: $CODER_CLOUDFRONT_WILDCARD"
+
+                      sed -i "s|https://coder.example.com|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
+                      sed -i "s|\*.coder.example.com|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
+                      helm upgrade coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
                     fi
+                    
+                    aws ssm put-parameter --name "/eks/${EKSClusterName}/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
+                    aws ssm put-parameter --name "/eks/${EKSClusterName}/region" --value "${AWSRegion}" --type "String" --overwrite
+                  fi
+                  POST_EOF
+                - chmod +x post_build.sh
+                - ./post_build.sh
+                - echo ">>> Signaling CloudFormation"
+                - |
+                  if [ "$BUILD_SUCCESS" = "true" ]; then
+                    curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"SUCCESS","Reason":"EKS Cluster Created","UniqueId":"EKSCluster","Data":"Deployment Complete"}' "$WAIT_HANDLE_URL"
                   else
-                    echo "ERROR: WAIT_HANDLE_URL is not set."
-                    exit 1
+                    curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"Deployment Failed"}' "$WAIT_HANDLE_URL"
                   fi
 
   TriggerBuildLambdaIamRole:

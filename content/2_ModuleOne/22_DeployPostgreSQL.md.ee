@@ -24,6 +24,7 @@ kubectl create namespace coder
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install coder-db bitnami/postgresql \
     --namespace coder \
+    --set image.repository=bitnamilegacy/postgresql \
     --set auth.username=coder \
     --set auth.password=coder \
     --set auth.database=coder \
