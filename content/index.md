@@ -4,14 +4,11 @@ chapter: true
 weight: 10
 ---
 
-# AWS and Coder AI-Powered Development Workshop
-
 ![Partner Logo](/static/images/coder-logo-black.png)
 
 ## Welcome to the Future of Development
 
 Welcome to the AWS and Coder AI-Powered Development Workshop – Explore how enterprise teams can boost developer productivity with AI-enabled, cloud-native environments. In this hands-on session, you'll learn how to reduce friction in development workflows and accelerate delivery — all while maintaining the visibility, security, and control your organization demands.
-
 
 ## Rethinking Developer Experience
 

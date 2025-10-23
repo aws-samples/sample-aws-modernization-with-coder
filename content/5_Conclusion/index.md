@@ -4,8 +4,6 @@ chapter: true
 weight: 60
 ---
 
-# Workshop Conclusion
-
 ## Congratulations on Your AI-Powered Development Journey!
 
 You've successfully completed the AWS and Coder AI-Powered Development Workshop! Over the past 90 minutes, you've transformed from traditional development practices to cutting-edge, AI-enhanced cloud development environments. Let's recap your achievements and explore what's next.

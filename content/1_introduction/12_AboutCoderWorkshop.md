@@ -4,8 +4,6 @@ chapter: false
 weight: 05
 ---
 
-# About this Coder Workshop
-
 ## What are Cloud Development Environments?
 
 Cloud Development Environment (CDE) is a fully-managed, cloud-hosted development workspace that developers can code or train machine learning models. It's where all the tools, libraries, and infrastructure you need come together, making it easy to provision new development environments and work from anywhere. Unlike traditional local development setups, CDEs provide:

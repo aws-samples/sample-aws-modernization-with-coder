@@ -125,6 +125,8 @@ Resources:
             - ssm:SendCommand
             - ssm:GetCommandInvocation
             - ssm:ListCommandInvocations
+            - ssm:PutParameter
+            - ssm:GetParameter
             Resource: "*"
 
   KMSSecretsKey:
@@ -630,6 +632,9 @@ Resources:
                       echo "New Coder Access URL: $CODER_CLOUDFRONT_URL"
                       echo "New Coder Wildcard URL: $CODER_CLOUDFRONT_WILDCARD"
 
+                       # Store hostname in SSM for CloudFormation retrieval
+                      aws ssm put-parameter --name "/eks/${EKSClusterName}/coder-cloudfront-url" --value "$CODER_CLOUDFRONT_URL" --type "String" --overwrite
+
                       sed -i "s|https://coder.example.com|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
                       sed -i "s|\*.coder.example.com|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
                       helm upgrade coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
@@ -648,6 +653,106 @@ Resources:
                   else
                     curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"Deployment Failed"}' "$WAIT_HANDLE_URL"
                   fi
+
+  GetCoderCloudFrontURLLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: SSMReadAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ssm:GetParameter
+                Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/eks/${EKSClusterName}/coder-cloudfront-url"
+
+  GetCoderCloudFrontURLLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.12
+      Handler: index.handler
+      Role: !GetAtt GetCoderCloudFrontURLLambdaRole.Arn
+      Timeout: 60
+      Code:
+        ZipFile: |
+          import boto3
+          import json
+          import urllib.request
+          import logging
+
+          logger = logging.getLogger()
+          logger.setLevel(logging.INFO)
+
+          def handler(event, context):
+              logger.info(f'Event: {json.dumps(event)}')
+              
+              response_data = {}
+              
+              try:
+                  if event['RequestType'] == 'Delete':
+                      response_data['Status'] = 'SUCCESS'
+                  else:
+                      ssm = boto3.client('ssm')
+                      cluster_name = event['ResourceProperties']['ClusterName']
+                      
+                      try:
+                          response = ssm.get_parameter(
+                              Name=f'/eks/{cluster_name}/coder-cloudfront-url'
+                          )
+                          cfurl = response['Parameter']['Value']
+                          response_data['CoderCloudFrontURL'] = cfurl
+                          logger.info(f'Retrieved Cloud Front URL: {cfurl}')
+                      except ssm.exceptions.ParameterNotFound:
+                          logger.warning('Parameter not found, returning empty Cloud Front URL')
+                          response_data['CoderCloudFrontURL'] = ''
+                      
+                      response_data['Status'] = 'SUCCESS'
+                      
+              except Exception as e:
+                  logger.error(f'Error: {str(e)}')
+                  response_data['Status'] = 'FAILED'
+                  response_data['Reason'] = str(e)
+              
+              send_response(event, context, response_data)
+              return response_data
+
+          def send_response(event, context, response_data):
+              response_body = json.dumps({
+                  'Status': response_data['Status'],
+                  'Reason': response_data.get('Reason', 'See CloudWatch logs'),
+                  'PhysicalResourceId': context.log_stream_name,
+                  'StackId': event['StackId'],
+                  'RequestId': event['RequestId'],
+                  'LogicalResourceId': event['LogicalResourceId'],
+                  'Data': response_data
+              })
+              
+              req = urllib.request.Request(
+                  url=event['ResponseURL'],
+                  data=response_body.encode('utf-8'),
+                  headers={'content-type': '', 'content-length': str(len(response_body))},
+                  method='PUT'
+              )
+              
+              with urllib.request.urlopen(req) as response:
+                  logger.info(f'Response sent: {response.getcode()}')
+
+  CoderCloudFrontURLRetriever:
+    Type: Custom::CoderCloudFrontURL
+    DependsOn: EKSClusterWaitCondition
+    Properties:
+      ServiceToken: !GetAtt GetCoderCloudFrontURLLambda.Arn
+      ClusterName: !Ref EKSClusterName
 
   TriggerBuildLambdaIamRole:
     Type: AWS::IAM::Role
@@ -787,6 +892,10 @@ Outputs:
   EKSClusterName:
     Description: EKS Cluster Name
     Value: !Ref EKSClusterName
+  
+  CoderURL:
+    Description: Coder Cloud Front URL
+    Value: !GetAtt CoderCloudFrontURLRetriever.CoderCloudFrontURL
   
   PostgreSQLConnectionURLWithoutPassword:
     Description: PostgreSQL Connection URL (without password)

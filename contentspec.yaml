@@ -16,8 +16,8 @@ params:
 additionalLinks:
   - title: "Coder Marketplace Listing"
     link: "https://aws.amazon.com/marketplace/pp/prodview-zaoq7tiogkxhc?sr=0-2&ref_=beagle&applicationId=AWSMPContessa"
-  
-  
+  - title: "Coder Documentation"
+    link: "https://coder.com/docs"
 
 # START Infrastructure
 infrastructure:
@@ -25,6 +25,10 @@ infrastructure:
      
     - templateLocation: static/infrastructure/eks-cluster.yaml
       label: EKS Cluster for Coder Workshop
+      participantVisibleStackOutputs:
+        - CoderURL
+        - EKSClusterName
+        - PostgreSQLConnectionURLWithoutPassword
     
       #parameters:
       #- templateParameter: AssetZipS3Path

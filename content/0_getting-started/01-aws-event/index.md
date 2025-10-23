@@ -28,9 +28,3 @@ Follow the steps below to gain access to your Workshop Studio AWS account:
 You will be taken to the workshop instructions. You can access the console of your AWS account for the event by clicking the link in the sidebar.
 
 ![Console access](/static/images/console_access.png)
-
-::alert[We will not be using CLI credentials in today's workshop as this workshop uses AWS CloudShell.]{type="info"}
-
-## Proceed to the workshop
-
-You are now ready for the workshop. Execute the AWS CloudShell workshop setup as specified [here](/0_getting-started/02-own-account.html)

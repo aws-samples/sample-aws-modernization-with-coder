@@ -20,7 +20,7 @@ This architecture demonstrates a production-ready, scalable development platform
 
 ## Preparing for the Workshop
 
-The workshop infrastructure will be can automatically deployed using AWS CloudFormation or manually via the AWS CLI. This includes the EKS cluster, networking, security components, and all foundational services needed for the Coder platform.
+The workshop infrastructure will be automatically deployed using AWS CloudFormation at AWS Event or can be manually provisioned via the AWS CLI. This includes the EKS cluster, networking, security components, and all foundational services needed for the Coder platform.
 
 **Choose your setup path:**
 

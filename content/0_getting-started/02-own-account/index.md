@@ -3,36 +3,37 @@ title: Using Your Own AWS Account
 weight: 22
 ---
 
-::alert[If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/5_conclusion/52_cleanup.html) to avoid unnecessary charges.]{type="warning"}
+::alert[Note, you might occur charges for provisioned resources below. The amount depends how long you will be experimenting with Coder and how many workspaces you will provision.]{type="warning"}
 
 ## Workshop resources
 
 The following resources will be deployed to run the workshop:
+- Amazon EKS cluster (`coder-aws-cluster`) with Auto Mode, which allows to automatically provision and manage compute capacity, networking, and storage based on your workload requirements. This reduces operational overhead while optimizing costs.
+- VPC with public/private subnets across multiple Availability Zones
+- EKS node groups with optimized instance types
+- AWS Load Balancer Controller and EBS CSI driver
+- IAM roles and policies for secure AWS service integration
+- PostgreSQL database for Coder persistence
+- Coder control plane services and web interface
+- Network Load Balancer for external access
+- CloudFront distribution for secure content delivery
+- Kubernetes Service accounts and additional IAM roles for workspace provisioning
 
-- AWS CloudShell environment.
-- AWS EKS Cluster with supporting VPC, Subnets, Elastic Load-Balancer, EC2 Node Group with EBS Storage and supporting IAM Roles.
+## Key Benefits of This Architecture
+
+- **High Availability**: Multi-AZ deployment ensures resilience
+- **Auto Scaling**: EKS Auto Mode automatically manages capacity
+- **Security**: Encrypted storage, private networking, and least-privilege IAM
+- **Cost Optimization**: Pay-per-use scaling and efficient resource utilization
 
 ::alert[The role used to bootstrap the account will require sufficient permissions to provision the resources above.]{type="info"}
 
-## Download and execute the helm installation script
+## Download and execute the CFN installation script
 
-We will be using the Kubernetes Helm utility from the AWS Clooudshell. If Helm is not already available in your Cloushell, we will then downlad the script to provision the utility.
+Download Cloud Formation Template :link[**here**.]{href=":assetUrl{path="../static/infrastructure/eks-cluster.yaml"}" action=download} to automatically provision AWS instrustructure needed and to deploy Coder. Use AWS CLI or *AWS Management Console -> Cloud Formation -> Create Stack* and select the option *Upload a template file*. 
 
-1. Sign in to the AWS Management Console and open the AWS CloudShell console at https://console.aws.amazon.com/cloudshell/.
+You will need to provider a stack name. You can leave the rest parameters as is.
 
-2. In the menu bar, for **Select a Region**, choose the region in which you will be running the workshop.
-
-3. Run the following commands in CloudShell terminal.
-```bash
-# Install Helm using the official script
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get-helm-3.sh
-chmod +x get-helm-3.sh && ./get-helm-3.sh
-```
-```bash
-# Verify the installation
-helm version --short
-```
-
-::alert[You may need to re-install **helm** if your AWS cloudshell session timesout and restarts.  Simply re-use the created `get-helm-3.sh` bash script.]{type="info"}
+::alert[Note the deployment takes 20-30 minutes. Time for a little break and coffee! Feel free to explore the content and Coder termonilogy and continue with hands-on when deployment completed!]{type="warning"}
 
 ::alert[If you are running this workshop on your own AWS account, remember to delete all resources by following the [Cleanup instructions](/5_conclusion/52_cleanup.html) to avoid unnecessary charges.]{type="warning"}

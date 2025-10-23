@@ -2,11 +2,7 @@
 title: "About Coder"
 chapter: false
 weight: 04
----
-
-# Coder: Cloud Development Environments on AWS
-
-![Partner Logo](/static/images/coder-logo-black.png)
+--- 
 
 ## Why Coder on AWS?
 

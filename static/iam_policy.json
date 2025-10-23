@@ -34,7 +34,6 @@
                 "iam:GetInstanceProfile",
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:AddRoleToInstanceProfile",
-                "iam:PassRole",
                 "iam:TagRole",
                 "iam:TagOpenIDConnectProvider",
                 "iam:AttachRolePolicy",
