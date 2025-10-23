@@ -31,7 +31,6 @@ Parameters:
     Description: Master password for the database
     NoEcho: true
     MinLength: 8
-    Default: coderworkshop
   
   DatabaseName:
     Type: String
