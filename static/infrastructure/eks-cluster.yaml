@@ -367,6 +367,10 @@ Resources:
           ToPort: 5432
           CidrIp: 192.168.0.0/16
           Description: Allow PostgreSQL access from VPC
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic
       Tags:
         - Key: Name
           Value: !Sub '${EKSClusterName}-aurora-sg'
@@ -408,6 +412,7 @@ Resources:
       DBInstanceClass: db.serverless
       Engine: aurora-postgresql
       DBClusterIdentifier: !Ref CoderAuroraCluster
+      PubliclyAccessible: false
 
 ################## EKS Bootstrap #####################
 
