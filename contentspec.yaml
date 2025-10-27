@@ -60,12 +60,10 @@ awsAccountConfig:
       recommended:
         - us-west-2
         - us-east-1
-        - us-east-2
     deployableRegions:
       recommended:
         - us-west-2
         - us-east-1
-        - us-east-2
 
         
       

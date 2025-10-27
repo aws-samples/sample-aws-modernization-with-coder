@@ -26,7 +26,7 @@ Traditional developer onboarding can take days or weeks as new team members stru
 ### 2. **AI-Enhanced Development Workflows**
 Coder CDEs provide the perfect foundation for AI-powered development by offering:
 
-- **Integrated AI Tools**: Seamless integration with Amazon Q Developer and AWS Bedrock services
+- **Integrated AI Tools**: Seamless integration with Amazon Q Developer and Amazon Bedrock services
 - **Consistent AI Context**: AI assistants have access to standardized project structures and configurations
 - **Scalable AI Workloads**: Cloud resources can handle AI model inference and code generation at scale
 - **Secure AI Integration**: AI tools operate within your secure cloud environment, not on individual machines

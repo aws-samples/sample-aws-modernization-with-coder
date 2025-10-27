@@ -36,7 +36,7 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 
 **AI-Powered Development Workflows: (30 min)**
 - Integrate Amazon Q Developer for intelligent code assistance and generation
-- Leverage AWS Bedrock with Anthropic Claude Code for advanced code review and documentation
+- Leverage Amazon Bedrock with Anthropic Claude Code for advanced code review and documentation
 - Create agentic development workflows that automate repetitive tasks
 
 **Real-World Use Cases:**

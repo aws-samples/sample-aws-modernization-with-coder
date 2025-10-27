@@ -42,7 +42,7 @@ You set out to master three key areas of modern development infrastructure, and 
 ### ✅ AI-Powered Development Workflows
 **What You Experienced:**
 - Integrated Amazon Q Developer for intelligent code assistance
-- Leveraged AWS Bedrock with Anthropic Claude Code for advanced code review
+- Leveraged Amazon Bedrock with Anthropic Claude Code for advanced code review
 - Created agentic development workflows for task automation
 - Experienced the transformation from traditional to AI-driven development
 

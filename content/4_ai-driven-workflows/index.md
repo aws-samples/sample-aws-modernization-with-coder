@@ -12,7 +12,7 @@ Welcome to the AI-Driven Development Workflows module! Now that you have deploye
 
 In this module, you will:
 
-1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Q Developer and AWS Bedrock
+1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Q Developer and Amazon Bedrock
 2. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
 3. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
 ## The AI-First Development Philosophy
@@ -60,8 +60,8 @@ Our AI-driven development platform integrates multiple AWS AI services with Code
 By the end of this module, you will be able to:
 
 - Leverage Amazon Q Developer for intelligent code completion and generation
-- Use AWS Bedrock/Anthropic Claude Code for advanced code review and architectural guidance
-- Prototype GenAI Applications using AWS Bedrock/Anthropic Claude Code with PostgreSQL Knowledgebase
+- Use Amazon Bedrock/Anthropic Claude Code for advanced code review and architectural guidance
+- Prototype GenAI Applications using Amazon Bedrock/Anthropic Claude Code with PostgreSQL Knowledgebase
 - Implement AI-driven refactoring and optimization workflows
 - Create context-aware development assistants
 

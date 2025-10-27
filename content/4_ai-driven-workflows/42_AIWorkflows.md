@@ -29,7 +29,7 @@ Create a Task using the AWS Workshop - Kubernetes with Claude Code template:
 
 The Claude Cod Web UI in the left pane will be begin by creating and updating a "To Do List" of activities to be peformed.  As it progresses, you can monitor the Agents actions.  It will most likely prompt for your approval and direction on how to move ahead to create new workspaces to resolve the identified issues. Depending on how you respond, the Agent will spawn up to two additional Tasks to remediate the findings.
 
-::alert[You may see some API Errors from Claude Code, due to AWS Bedrock rate limiting.  Don't worry, one of the benefits of running asynchronsous Tasks using Autonomous Agents is that Claude Code will continue on until it completes the task or you stop it.]{type="info"}
+::alert[You may see some API Errors from Claude Code, due to Amazon Bedrock rate limiting.  Don't worry, one of the benefits of running asynchronsous Tasks using Autonomous Agents is that Claude Code will continue on until it completes the task or you stop it.]{type="info"}
 
 ![Codeer AI Driven Review](/static/images/ai-driven-app-review.png)
 

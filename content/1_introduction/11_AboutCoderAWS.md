@@ -20,7 +20,7 @@ Coder CDEs deliver benefits in three key areas: developer productivity, enterpri
 
 Coder enables four key AI-enhanced workflows: intelligent code generation, automated quality assurance, accelerated learning, and collaborative AI experiences.
 
-- **Context-Aware AI**: Amazon Q Developer and AWS Bedrock models leverage full project context in standardized environments for scalable, relevant code suggestions
+- **Context-Aware AI**: Amazon Q Developer and Amazon Bedrock models leverage full project context in standardized environments for scalable, relevant code suggestions
 - **Automated Reviews**: AI agents provide automated code reviews, documentation generation, and security scanning integrated into development workflows
 - **Personalized Guidance**: AI assistants deliver contextual help and pattern recognition to accelerate new developer learning and knowledge transfer
 - **Shared AI Context**: Teams benefit from collective AI interactions with consistent behavior and secure processing within AWS infrastructure

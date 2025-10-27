@@ -13,7 +13,7 @@ The workshop repository contains several specialized templates designed for diff
 **Purpose**: General-purpose Linux development environment with Amazon Q Developer CLI integration
 
 **Key Features**:
-- AWS EC2 Linux instances with persistent storage
+- Amazon EC2 Linux instances with persistent storage
 - Pre-installed Amazon Q Developer CLI for AI-powered coding assistance
 - Code Server with development extensions
 - Git, AWS CLI/CDK, and common development tools
@@ -30,11 +30,11 @@ The workshop repository contains several specialized templates designed for diff
 **Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
 
 **Key Features**:
-- AWS EC2 ARM64/Graviton Linux instances optimized for serverless development
-- AWS SAM CLI pre-installed and configured
+- Amazon EC2 ARM64/Graviton Linux instances optimized for serverless development
+- AWS Serverless Application Model (SAM) CLI pre-installed and configured
 - AWS CLI with proper IAM integration
 - Amazon Q IDE Extension pre-installed
-- Lambda development tools and runtime environments
+- AWS Lambda development tools and runtime environments
 
 **Use Cases**:
 - AWS Lambda function development
@@ -49,7 +49,7 @@ The workshop repository contains several specialized templates designed for diff
 **Key Features**:
 - Kubernetes pod-based workspaces with AI assistance
 - Claude Code AI assistant for automated development tasks
-- Integration with AWS Bedrock for Claude models
+- Integration with Amazon Bedrock for Claude models
 - VS Code Web and Kiro AI-powered editor
 - Configurable CPU, memory, and storage resources
 - Coder Tasks integration, Run Async Agentic AI Tasks in Coder Workspaces
@@ -65,7 +65,7 @@ The workshop repository contains several specialized templates designed for diff
 **Purpose**: Windows-based development environment with NICE DCV remote desktop
 
 **Key Features**:
-- Windows Server 2022 EC2 instances
+- Windows Server 2022 Amazon EC2 instances
 - NICE DCV for high-performance remote desktop access
 - VS Code on Windows with full GUI support
 - PowerShell and Windows development tools

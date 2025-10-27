@@ -11,12 +11,12 @@ The following architecture diagram illustrates the comprehensive AWS and Coder i
 
 This architecture demonstrates a production-ready, scalable development platform that combines:
 
-- **Amazon EKS** with Auto Mode for intelligent container orchestration
+- **Amazon Elastic Kubernetes Service (EKS)** with Auto Mode for intelligent container orchestration
 - **AWS Network Load Balancer** content delivery and Coder Workspace connectivity
-- **PostgreSQL** for reliable data persistence
-- **AWS IAM** for enterprise-grade security
+- **Amazon Aurora PostgreSQL** for reliable data persistence
+- **AWS Identity and Access Management (IAM)** for enterprise-grade security
 - **Coder Control Plane** for cloud development environment management
-- **AI Integration** with Amazon Q Developer and Anthropic Claude Code + AWS Bedrock
+- **AI Integration** with Amazon Q Developer and Anthropic Claude Code + Amazon Bedrock
 
 ## Preparing for the Workshop
 
@@ -29,21 +29,20 @@ The workshop infrastructure will be automatically deployed using AWS CloudFormat
 
 ## What Gets Deployed during the Workshop
 
-During the workshop participants will provision:
-
 ✅ **Amazon EKS Cluster** with Auto Mode enabled  
-✅ **VPC and Networking** with public/private subnets across multiple AZs  
+✅ **Amazon VPC and Networking** with public/private subnets across multiple AZs  
 ✅ **Security Groups and IAM Roles** with least-privilege access  
-✅ **EBS CSI Driver** for persistent storage  
+✅ **Amazon EBS CSI Driver** for persistent storage  
 ✅ **AWS Load Balancer Controller** for ingress management  
+✅ **Amazon Aurora PostgreSQL Database** for Coder persistence  
+✅ **Amazon CloudFront Distribution** for global access  
+✅ **Coder Control Plane** services and web interface  
 
-## What You'll Configure During the Workshop
+You will configure:
 
-🔧 **PostgreSQL Database** for Coder persistence  
-🔧 **Coder Control Plane** services and web interface  
 🔧 **Development Templates** for different personas  
 🔧 **AI Integration** with Amazon Q Developer and Claude  
-🔧 **CloudFront Distribution** for global access  
+
 
 ::alert[**Estimated Deployment Time**: The CloudFormation stack takes approximately 15-20 minutes to deploy all infrastructure components. You can monitor progress in the AWS CloudFormation console.]{type="info"}
 

@@ -23,7 +23,7 @@ This is how the most effective teams are building today.
 
 ## Cost of Workshop
 If you are running this as part of an AWS hosted event and, in the sandbox provided to you, then there is no cost for you.
-If you are running the workshop **in your own environment**, use the Region us-east-1, you will incur costs for the resources you launch, and API calls you make. Examples include EKS Cluster, EC2 Instances, and ELB. Costs may vary based on resources deployed/utilized. We recommend that you check the official pricing pages and monitor costs. You can use [AWS Pricing Calculator](https://calculator.aws/#/) for estimation.
+If you are running the workshop **in your own environment**, use the Region us-east-1 or us-west-2, you will incur costs for the resources you launch, and API calls you make. Examples include Amazon EKS Cluster, Amazon EC2 Instances, and Amazon Elastic Loab Balancer (ELB). Costs may vary based on resources deployed/utilized. We recommend that you check the official pricing pages and monitor costs. You can use [AWS Pricing Calculator](https://calculator.aws/#/) for estimation.
 
 ## Ready to Transform Development?
 
