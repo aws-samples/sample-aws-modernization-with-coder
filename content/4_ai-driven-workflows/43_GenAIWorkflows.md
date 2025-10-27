@@ -36,12 +36,16 @@ Once your workspace is running:
 1. **Open the workspace** from your Coder dashboard
 2. **View task** to access Task UI and monitor Claude Code
 
+![Coder GenAI Workspace](/static/images/genai-workspace.png)
+
 #### Step 3: Validate RAG Application Environment
 
 The Claude Code agent will automatically begin setting up your RAG development environment based on the AI prompt. Monitor its progress:
 
 1. **Observe Claude Code activities** in the integrated Task UI
 2. **Review the RAG application structure** in the coder-server tab:
+
+![Coder GenAI Task](/static/images/genai-task.png)
 
 ```bash
 # Typical RAG application structure
@@ -64,6 +68,8 @@ Validate the current RAG functionality and PostgreSQL VectorDB integration using
 1. **Document Ingestion:** by Browsing local PDF's and selecting, then Processing 
 2. **Vector Search & RAG Response Implementation:** by using Chat interace to post a query about Documents ingested
 3. **Multi-Model Selection:** by selecting a different model from the dropdown and re-running previous or new query
+
+![Coder GenAI Preview](/static/images/genai-preview.png)
 
 #### Step 5: Protype new funcationality with AI Guidance
 
