@@ -74,7 +74,6 @@ cd /workspaces/aws-coder-workshop-gitops/templates
 
 # Verify required tools are available
 terraform version
-kubectl version --client
 coder version
 
 # Initialize Terraform

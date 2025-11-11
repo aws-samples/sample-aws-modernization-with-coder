@@ -77,6 +77,24 @@ The workshop repository contains several specialized templates designed for diff
 - Legacy application modernization
 - Cross-platform development testing
 
+### 5. AWS RAG with Claude Code (`awshp-k8s-rag-claude-code`)
+
+**Purpose**: Kubernetes-based development environment for building Retrieval-Augmented Generation (RAG) applications with Claude Code integration
+
+**Key Features**:
+- Kubernetes pod-based workspaces optimized for AI/ML development
+- Claude Code AI assistant with RAG-specific capabilities
+- Amazon Bedrock integration for Claude models and embeddings
+- Pre-configured vector databases and search engines
+- VS Code Web with AI/ML development extensions
+
+**Use Cases**:
+- AI/ML application development with RAG patterns
+- Document processing and intelligent search systems
+- Knowledge base and chatbot development
+- Semantic search and content recommendation engines
+- Enterprise AI application prototyping with Amazon Bedrock
+
 ## Template Architecture Patterns
 
 ### Infrastructure as Code Approach
