@@ -92,6 +92,16 @@ Coder templates leverage several key AWS services and patterns:
 - Legacy application modernization
 - Cross-platform development testing
 
+### 5. AWS RAG with Claude Code
+**Purpose**: Kubernetes-based development environment for building Retrieval-Augmented Generation (RAG) applications with Claude Code integration
+
+**Use Cases**:
+- AI/ML application development with RAG patterns
+- Document processing and intelligent search systems
+- Knowledge base and chatbot development
+- Semantic search and content recommendation engines
+- Enterprise AI application prototyping with Amazon Bedrock
+
 ## Key Benefits of This Approach
 
 - **Consistency**: Every developer gets the same, optimized environment 

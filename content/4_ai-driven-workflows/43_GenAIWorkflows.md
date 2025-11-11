@@ -21,7 +21,7 @@ Create a workspace using the AWS Workshop - Kubernetes with Claude Code RAG temp
 3. **Configure the workspace parameters**:
    - **Name**: `rag-dev-workspace`
    - **CPU**: 4 Cores (recommended for RAG workloads)
-   - **Memory**: 6 GB (recommended for vector processing)
+   - **Memory**: 8 GB (recommended for vector processing)
    - **Home disk size**: 30 GB
    - **AI Prompt**: `Look for an AWS RAG Prototyping repo in the Coder Workspace. If found, create a new Python3 virtual environment, pip install the requirements.txt and then start the app via streamlit.`
 
