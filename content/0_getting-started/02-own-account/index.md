@@ -30,9 +30,19 @@ The following resources will be deployed to run the workshop:
 
 ## Download and execute the CFN installation script
 
-Download Cloud Formation Template :link[**here**.]{href=":assetUrl{path="../static/infrastructure/eks-cluster.yaml"}" action=download} to automatically provision AWS instrustructure needed and to deploy Coder. Use AWS CLI or *AWS Management Console -> Cloud Formation -> Create Stack* and select the option *Upload a template file*. 
+Download Cloud Formation Template :link[**here**.]{href=":assetUrl{path="../static/infrastructure/eks-cluster.yaml"}" action=download} to automatically provision AWS infrastructure needed and to deploy Coder. Use AWS CLI or *AWS Management Console -> Cloud Formation -> Create Stack* and select the option *Upload a template file*. 
 
-You will need to provider a stack name. You can leave the rest parameters as is.
+You will need to provide a stack name. The template includes several parameters you can customize:
+
+### Key Parameters
+
+- **CoderAdminEmail**: Email for the pre-created administrator account (default: `admin@example.com`)
+- **CoderAdminUser**: Username for the administrator (default: `admin`)
+- **CoderAdminPassword**: Password for the administrator (default: `admin@coder`, minimum 8 characters)
+- **CoderAdminName**: Full name for the administrator (default: `Admin User`)
+- **CoderPremiumTrial**: Enable 30-day Coder Premium trial (default: `false`)
+
+You can leave other parameters at their default values or customize them based on your requirements.
 
 ::alert[Note the deployment takes 20-30 minutes. Time for a little break and coffee! Feel free to explore the content and Coder termonilogy and continue with hands-on when deployment completed!]{type="warning"}
 

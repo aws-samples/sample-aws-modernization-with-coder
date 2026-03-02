@@ -13,11 +13,11 @@ You've successfully completed the AWS and Coder AI-Powered Development Workshop!
 You set out to master three key areas of modern development infrastructure, and you've accomplished all of them:
 
 ### ✅ Infrastructure & Platform Management
-**What You Built:**
-- Deployed a production-ready Coder platform on Amazon EKS with Auto Mode
-- Configured PostgreSQL database for persistent workspace metadata
-- Set up Network Load Balancer for Coder Control Plane network connectivity
-- Implemented secure IAM roles and service accounts for AWS integration
+**What You Reviewed:**
+- Production-ready Coder platform on Amazon EKS with Auto Mode
+- PostgreSQL database for persistent workspace metadata
+- Network Load Balancer for Coder Control Plane network connectivity
+- Secure IAM roles and service accounts for AWS integration
 
 **Skills Gained:**
 - Understanding of scalable cloud development environment architecture
@@ -25,11 +25,11 @@ You set out to master three key areas of modern development infrastructure, and 
 - Knowledge of security best practices for cloud development platforms
 
 ### ✅ Template Creation & Management 
-**What You Built:**
-- Created four persona-based Coder templates:
-  - AWS Linux Base with Amazon Q Developer integration
+**What was Deployed:**
+- Four persona-based Coder templates:
   - AWS SAM Development for serverless applications
   - Kubernetes Development with Claude Code integration
+  - Kubernetes Development with Kiro CLI and IDE integration
   - Windows Development with NICE DCV remote desktop
 - Configured templates with pre-installed tools and dependencies
 - Implemented Infrastructure as Code patterns for consistent provisioning
@@ -41,7 +41,7 @@ You set out to master three key areas of modern development infrastructure, and 
 
 ### ✅ AI-Powered Development Workflows
 **What You Experienced:**
-- Integrated Amazon Q Developer for intelligent code assistance
+- Integrated Amazon Kiro for intelligent code assistance
 - Leveraged Amazon Bedrock with Anthropic Claude Code for advanced code review
 - Created agentic development workflows for task automation
 - Experienced the transformation from traditional to AI-driven development

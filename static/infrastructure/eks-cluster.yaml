@@ -1,16 +1,25 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Cloudformation template for Coder and AWS Modernization Workshop
 Parameters:
+  WksModelS3BucketName:
+    Description: Assets bucket name
+    Type: String
+    Default: "ws-assets-prod-iad-r-gru-527b8c19222c1182"
+    
+  WksModelS3Prefix:
+    Description: Assets bucket prefix
+    Type: String
+    Default: "0e51c8ed-274c-4bf1-97b1-7758d17d5e1b/"
+
   KubernetesVersion:
     Description: Kubernetes version
     Type: String
-    Default: "1.34"
+    Default: "1.35"
 
   CoderVersion:
     Description: Coder version
     Type: String
-    Default: "2.29.1"
-
+    Default: "2.30.2"
 
   EKSClusterName:
     Description: Name of EKS Cluster
@@ -72,14 +81,89 @@ Parameters:
   CoderGitOpsTemplateRepoURL:
     Type: String
     Description: Coder GitOps Template Repository URL
-    Default: "https://github.com/coder/aws-coder-ai-builder-gitops.git"
+    Default: "https://github.com/coder/aws-coder-workshop-gitops.git"
+    
+  RetryFlag:
+    Type: String
+    Description: Rerun Coder Build With Existent EKS Deployment (coder is deployed successfully, including CloudFront)
+    Default: False
 
 Resources:
+################## LOGGING BUCKETS #################
+  CloudFrontLoggingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${AWS::StackName}-cf-logs-${AWS::AccountId}'
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteOldLogs
+            Status: Enabled
+            ExpirationInDays: 90
+
+  LoggingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${AWS::StackName}-logs-${AWS::AccountId}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteOldLogs
+            Status: Enabled
+            ExpirationInDays: 90
+
+  LoggingBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref LoggingBucket
+      PolicyDocument:
+        Statement:
+          - Sid: AWSLogDeliveryWrite
+            Effect: Allow
+            Principal:
+              Service: delivery.logs.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub '${LoggingBucket.Arn}/*'
+            Condition:
+              StringEquals:
+                s3:x-amz-acl: bucket-owner-full-control
+          - Sid: AWSLogDeliveryAclCheck
+            Effect: Allow
+            Principal:
+              Service: delivery.logs.amazonaws.com
+            Action: s3:GetBucketAcl
+            Resource: !GetAtt LoggingBucket.Arn
+          - Sid: ELBAccessLogs
+            Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::797873946194:root
+            Action: s3:PutObject
+            Resource: !Sub '${LoggingBucket.Arn}/nlb-logs/*'
+
 ################## PERMISSIONS AND ROLES #################
-  WorkshopAdminRole:
+  WorkshopCoderRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: coder-and-aws-workshop-admin
+      RoleName: coder-and-aws-workshop-user
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -92,9 +176,90 @@ Resources:
             Action:
               - sts:AssumeRole
               - sts:TagSession
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AdministratorAccess
       Path: "/"
+      Policies:
+        - PolicyName: WorkshopCoderPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  # Coder permissions:
+                  ## Deployed to RDS + EKS -> EC2, VPC, EKS, CloudFront
+                  ## EKS cluster creation triggers provisioning roles an OpenIDCConnectorProvider management
+
+                  # User is working with: 
+                  ## Bedrock, AgentCore, secrets (create\update) for API keys, 
+                  ## Lambdas and OpenSearch for knowledge bases and logic of retrieval
+                  ## SageMaker for deployment of agents in notebooks
+                  ## CFN for knowledge bases creation
+                  ## for Lyzr\Arize user need to create correct Cross Account role - its precreated but in a case smth incorrect
+                  - bedrock:*
+                  ## access to models
+                  - aws-marketplace:ViewSubscriptions
+                  - aws-marketplace:Subscribe
+                  - s3:*
+                  - secretsmanager:*
+                  - ssm:*
+                  - lambda:*
+                  - iam:GetRole
+                  - iam:GetRolePolicy
+                  - iam:ListRolePolicies
+                  - iam:ListAttachedRolePolicies
+                  - iam:ListRoles
+                  - iam:ListRoleTags
+                  - iam:CreateRole
+                  - iam:PutRolePolicy
+                  - iam:AttachRolePolicy
+                  - iam:PassRole
+                  - iam:TagRole
+                  - iam:UntagRole
+                  - iam:CreateInstanceProfile
+                  - iam:GetInstanceProfile
+                  - iam:ListInstanceProfiles
+                  - iam:DeleteInstanceProfile
+                  - iam:AddRoleToInstanceProfile
+                  - iam:RemoveRoleFromInstanceProfile
+                  - iam:CreateServiceLinkedRole
+                  - iam:CreateOpenIDConnectProvider
+                  - iam:GetOpenIDConnectProvider
+                  - iam:ListOpenIDConnectProviders
+                  - iam:ListOpenIDConnectProviderTags
+                  - iam:TagOpenIDConnectProvider
+                  - iam:UntagOpenIDConnectProvider
+                  - iam:AddClientIDToOpenIDConnectProvider
+                  - iam:UpdateOpenIDConnectProviderThumbprint
+                Resource: "*"
+              # Deny modification of AWS managed and workshop roles
+              - Effect: Deny
+                Action:
+                  - iam:UpdateRole
+                  - iam:DeleteRole
+                  - iam:UpdateAssumeRolePolicy
+                  - iam:AttachRolePolicy
+                  - iam:DetachRolePolicy
+                  - iam:PutRolePolicy
+                  - iam:DeleteRolePolicy
+                  - iam:DeleteOpenIDConnectProvider
+                  - iam:RemoveClientIDFromOpenIDConnectProvider
+                Resource:
+                  - !Sub "arn:aws:iam::${AWS::AccountId}:role/WS*"
+              - Effect: Allow
+                Action:
+                  - eks:*
+                  - cloudfront:*
+                  - ec2:*
+                  - aoss:*
+                  - dynamodb:*
+                  - rds:*
+                  - sagemaker:*
+                  - logs:*
+                  - kms:*
+                  - cloudformation:*
+                  - events:Describe*
+                  - events:List*
+                  - sts:AssumeRole
+                Resource: "*"
 
   coderLambdaExecutionRole:
     Type: AWS::IAM::Role
@@ -154,7 +319,7 @@ Resources:
           - Effect: Allow
             Action:
             - iam:PassRole
-            Resource: !GetAtt WorkshopAdminRole.Arn
+            Resource: !GetAtt WorkshopCoderRole.Arn
           - Effect: Allow
             Action:
             - ssm:DescribeInstanceInformation
@@ -164,6 +329,11 @@ Resources:
             - ssm:PutParameter
             - ssm:GetParameter
             Resource: "*"
+          - Effect: Allow
+            Action:
+            - secretsmanager:PutSecretValue
+            - secretsmanager:UpdateSecret
+            Resource: !Ref CoderSessionTokenSecret
 
   KMSSecretsKey:
     Type: AWS::KMS::Key
@@ -201,12 +371,12 @@ Resources:
 
   WorkshopInstanceProfile:
     Type: AWS::IAM::InstanceProfile
-    DependsOn: WorkshopAdminRole
+    DependsOn: WorkshopCoderRole
     Properties:
       Path: "/"
       InstanceProfileName: !Sub "coder-workshop-ec2-workspace-profile"
       Roles:
-        - !Ref WorkshopAdminRole
+        - !Ref WorkshopCoderRole
 
 ################## VPC Setup #####################
 
@@ -391,6 +561,21 @@ Resources:
       RouteTableId: !Ref PrivateRouteTable2
       SubnetId: !Ref PrivateSubnet2
 
+################## Secrets Manager #####################
+
+  CoderAdminPasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub '${EKSClusterName}-coder-admin-password'
+      Description: Coder Administrator Password
+      SecretString: !Ref CoderAdminPassword
+
+  CoderSessionTokenSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub 'partner-coder-session-token'
+      Description: Coder Session Token for API access
+
 ################## Aurora PostgreSQL #####################
 
   AuroraSecurityGroup:
@@ -405,9 +590,16 @@ Resources:
           CidrIp: 192.168.0.0/16
           Description: Allow PostgreSQL access from VPC
       SecurityGroupEgress:
-        - IpProtocol: -1
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
           CidrIp: 0.0.0.0/0
-          Description: Allow all outbound traffic
+          Description: Allow HTTPS for AWS API calls
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 192.168.0.0/16
+          Description: Allow PostgreSQL within VPC
       Tags:
         - Key: Name
           Value: !Sub '${EKSClusterName}-aurora-sg'
@@ -458,7 +650,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Sub CodeBuild-${AWS::StackName}
-      ServiceRole: !GetAtt WorkshopAdminRole.Arn
+      ServiceRole: !GetAtt WorkshopCoderRole.Arn
       Artifacts:
         Type: NO_ARTIFACTS
       LogsConfig:
@@ -517,9 +709,19 @@ Resources:
           - Name: CoderAdminUser
             Value: !Ref CoderAdminUser
           - Name: CoderPremiumTrial
-            Value: !Ref CoderPremiumTrial          
+            Value: !Ref CoderPremiumTrial      
+          - Name: RetryFlag
+            Value: !Ref RetryFlag    
           - Name: CoderGitOpsTemplateRepoURL
             Value: !Ref CoderGitOpsTemplateRepoURL  
+          - Name: CoderSessionTokenSecretArn
+            Value: !Ref CoderSessionTokenSecret  
+          - Name: WksModelS3BucketName
+            Value: !Ref WksModelS3BucketName  
+          - Name: WksModelS3Prefix
+            Value: !Ref WksModelS3Prefix  
+          - Name: CODER_CF_S3_BUCKET
+            Value: !Ref CloudFrontLoggingBucket
           
       Source:
         Type: NO_SOURCE
@@ -599,16 +801,20 @@ Resources:
               commands:
                 - echo ">>> creating EKS cluster in region $AWSRegion with Auto Mode"
                 - |
-                  if eksctl create cluster -f cluster-config.yaml; then
-                    export BUILD_SUCCESS=true
-                    echo "EKS cluster creation successful"
-                  else
-                    echo "EKS cluster creation failed"
-                    if [ -n "$WAIT_HANDLE_URL" ]; then
-                      curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"EKS Cluster Creation Failed"}' "$WAIT_HANDLE_URL"
-                      echo "Sent FAILURE signal to CloudFormation"
+                  if [ "$RetryFlag" != "True" ]; then
+                    if eksctl create cluster -f cluster-config.yaml; then
+                      export BUILD_SUCCESS=true
+                      echo "EKS cluster creation successful"
+                    else
+                      echo "EKS cluster creation failed"
+                      if [ -n "$WAIT_HANDLE_URL" ]; then
+                        curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"EKS Cluster Creation Failed"}' "$WAIT_HANDLE_URL"
+                        echo "Sent FAILURE signal to CloudFormation"
+                      fi
+                      exit 1
                     fi
-                    exit 1
+                  else
+                    export BUILD_SUCCESS=true
                   fi
             post_build:
               commands:
@@ -627,20 +833,22 @@ Resources:
                     PARTICIPANT_ROLE_ARN="arn:aws:iam::$ACCOUNT_ID:role/WSParticipantRole"
                     
                     curl -o storageclass.yaml https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/storageclass.yaml
-                    kubectl apply -f storageclass.yaml
-                    
-                    kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"$PARTICIPANT_ROLE_ARN\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
-                    kubectl create namespace coder
-                    
-                    PostgreSQLConnectionURL="postgresql://${Username}:${Password}@${PostgreSQLClusterAddress}:${PostgreSQLPort}/${DatabaseName}"
-                    kubectl create secret generic coder-db-url -n coder --from-literal=url="$PostgreSQLConnectionURL"
-                    
                     curl -o coder-core-values-v2.yaml https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/coder-core-values-v2.yaml
-                    
                     helm repo add coder-v2 https://helm.coder.com/v2
                     helm repo update
-                    helm install coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
-                    
+
+                    if [ "$RetryFlag" != "True" ]; then
+                      kubectl apply -f storageclass.yaml
+                      
+                      kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"$PARTICIPANT_ROLE_ARN\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
+                      kubectl create namespace coder
+                      
+                      PostgreSQLConnectionURL="postgresql://${Username}:${Password}@${PostgreSQLClusterAddress}:${PostgreSQLPort}/${DatabaseName}"
+                      kubectl create secret generic coder-db-url -n coder --from-literal=url="$PostgreSQLConnectionURL"
+                 
+                      helm install coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
+                    fi
+
                     for i in {1..30}; do
                       kubectl get service coder -n coder -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' > lb_hostname.txt 2>/dev/null || echo "" > lb_hostname.txt
                       CODER_LB_HOSTNAME=$(cat lb_hostname.txt | tr -d '\n')
@@ -652,23 +860,40 @@ Resources:
                       sleep 30
                     done
 
-                    aws eks create-pod-identity-association \
-                    --cluster-name coder-aws-cluster \
-                    --namespace coder \
-                    --service-account coder \
-                    --role-arn arn:aws:iam::$ACCOUNT_ID:role/coder-and-aws-workshop-admin
-                    
-                    if [ -n "$CODER_LB_HOSTNAME" ]; then
-                      curl -o cloudfront-config.json https://raw.githubusercontent.com/coder/aws-workshop-samples/refs/heads/main/coder-admin/cloudfront-config.json
-                      sed -i "s|CODER_LB_HOSTNAME_PLACEHOLDER|$CODER_LB_HOSTNAME|g" cloudfront-config.json
- 
-                      # Create the CloudFront distribution
-                      CLOUDFRONT_RESULT=$(aws cloudfront create-distribution --distribution-config file://cloudfront-config.json)
-                      echo "$CLOUDFRONT_RESULT" > cloudfront-result.json
+                    if [ "$RetryFlag" != "True" ]; then
+                      aws eks create-pod-identity-association \
+                      --cluster-name coder-aws-cluster \
+                      --namespace coder \
+                      --service-account coder \
+                      --role-arn arn:aws:iam::$ACCOUNT_ID:role/coder-and-aws-workshop-user
+                    fi
 
-                      # Extract distribution information
-                      DISTRIBUTION_ID=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.Id')
-                      CLOUDFRONT_DOMAIN=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.DomainName')
+                    if [ -n "$CODER_LB_HOSTNAME" ]; then
+                      aws s3 cp s3://${WksModelS3BucketName}/${WksModelS3Prefix}coder-cloudfront-config.json cloudfront-config.json
+                      sed -i "s|CODER_LB_HOSTNAME_PLACEHOLDER|$CODER_LB_HOSTNAME|g" cloudfront-config.json
+                      sed -i "s|LOGGING_BUCKET_PLACEHOLDER|$CODER_CF_S3_BUCKET|g" cloudfront-config.json
+
+                      if [ "$RetryFlag" != "True" ]; then
+                        # Create the CloudFront distribution
+                        CLOUDFRONT_RESULT=$(aws cloudfront create-distribution --distribution-config file://cloudfront-config.json)
+                        echo "$CLOUDFRONT_RESULT" > cloudfront-result.json
+
+                        # Extract distribution information
+                        DISTRIBUTION_ID=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.Id')
+                        CLOUDFRONT_DOMAIN=$(echo "$CLOUDFRONT_RESULT" | jq -r '.Distribution.DomainName')
+                      else
+                        # Get existing CloudFront distribution
+                        DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?contains(Origins.Items[0].DomainName, '$CODER_LB_HOSTNAME')].Id" --output text)
+                        
+                        if [ -n "$DISTRIBUTION_ID" ]; then
+                          echo "Found existing CloudFront Distribution ID: $DISTRIBUTION_ID"
+                          CLOUDFRONT_DOMAIN=$(aws cloudfront get-distribution --id $DISTRIBUTION_ID --query 'Distribution.DomainName' --output text)
+                          echo "CloudFront Domain: $CLOUDFRONT_DOMAIN"
+                        else
+                          echo "No CloudFront distribution found for this load balancer"
+                          exit 1
+                        fi
+                      fi
 
                       echo "CloudFront Distribution ID: $DISTRIBUTION_ID"
                       echo "CloudFront Domain: $CLOUDFRONT_DOMAIN"
@@ -693,12 +918,50 @@ Resources:
                       echo "New Coder Access URL: $CODER_CLOUDFRONT_URL"
                       echo "New Coder Wildcard URL: $CODER_CLOUDFRONT_WILDCARD"
 
-                       # Store hostname in SSM for CloudFormation retrieval
-                      aws ssm put-parameter --name "/eks/${EKSClusterName}/coder-cloudfront-url" --value "$CODER_CLOUDFRONT_URL" --type "String" --overwrite
+                      # Store hostname in SSM for CloudFormation retrieval
+                      aws ssm put-parameter --name "coder-cloudfront-url" --value "$CODER_CLOUDFRONT_URL" --type "String" --overwrite
 
                       sed -i "s|https://coder.example.com|$CODER_CLOUDFRONT_URL|g" coder-core-values-v2.yaml
                       sed -i "s|\*.coder.example.com|$CODER_CLOUDFRONT_WILDCARD|g" coder-core-values-v2.yaml
                       helm upgrade coder coder-v2/coder --namespace coder --values coder-core-values-v2.yaml --version "${CoderVersion}"
+
+                      # Health Check Step 2: Check Coder Pod Status
+                      echo "=== Health Check: Verifying Coder Pod Status ==="
+                      kubectl get pods -n coder -o wide
+                      POD_STATUS=$(kubectl get pods -n coder -o jsonpath='{.items[0].status.phase}')
+                      POD_READY=$(kubectl get pods -n coder -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}')
+                      echo "Pod Status: $POD_STATUS, Ready: $POD_READY"
+                      
+                      if [ "$POD_STATUS" != "Running" ] || [ "$POD_READY" != "True" ]; then
+                        echo "WARNING: Coder pod is not ready. Status: $POD_STATUS, Ready: $POD_READY"
+                        kubectl describe pod -n coder $(kubectl get pods -n coder -o jsonpath='{.items[0].metadata.name}')
+                      fi
+
+                      # Health Check Step 3: Test Direct ALB Access
+                      echo "=== Health Check: Testing Direct ALB Connectivity ==="
+                      ALB_HEALTH_CHECK=$(curl -s -o /dev/null -w "%{http_code}" -m 10 http://$CODER_LB_HOSTNAME/api/v2/buildinfo)
+                      echo "ALB Health Check Response: $ALB_HEALTH_CHECK"
+                      
+                      if [ "$ALB_HEALTH_CHECK" != "200" ]; then
+                        echo "WARNING: ALB health check failed with status $ALB_HEALTH_CHECK"
+                      else
+                        echo "SUCCESS: ALB is responding correctly"
+                      fi
+
+                      # Health Check Step 4: Test CloudFront Access
+                      echo "=== Health Check: Testing CloudFront Connectivity ==="
+                      CF_HEALTH_CHECK=$(curl -s -o /dev/null -w "%{http_code}" -m 10 $CODER_CLOUDFRONT_URL/api/v2/buildinfo)
+                      echo "CloudFront Health Check Response: $CF_HEALTH_CHECK"
+                      
+                      if [ "$CF_HEALTH_CHECK" != "200" ]; then
+                        echo "WARNING: CloudFront health check failed with status $CF_HEALTH_CHECK"
+                        echo "Waiting additional 60 seconds for CloudFront propagation..."
+                        sleep 60
+                        CF_HEALTH_CHECK=$(curl -s -o /dev/null -w "%{http_code}" -m 10 $CODER_CLOUDFRONT_URL/api/v2/buildinfo)
+                        echo "CloudFront Health Check Response (retry): $CF_HEALTH_CHECK"
+                      else
+                        echo "SUCCESS: CloudFront is responding correctly"
+                      fi
 
                       echo "Deploying Coder GitOps Template Repository: $CoderGitOpsTemplateRepoURL"
                       git clone $CoderGitOpsTemplateRepoURL
@@ -706,28 +969,47 @@ Resources:
                       CODER_AGENT_URL="$CODER_CLOUDFRONT_URL"; export CODER_AGENT_URL
                       cd $CODER_GITOPS_DIR/templates 
 
-                      #Perform initial Coder Login and create initial admin user
-                      echo "Creating initial Coder Administrator User"
-                      LOGIN_SUCCESS=false
-                      for attempt in {1..5}; do
-                        echo "Login attempt $attempt/5"
-                        if coder login $CODER_CLOUDFRONT_URL \
-                          --first-user-email $CoderAdminEmail \
-                          --first-user-username $CoderAdminUser \
-                          --first-user-password "$CoderAdminPassword" \
-                          --first-user-full-name "$CoderAdminName" \
-                          --first-user-trial=$CoderPremiumTrial; then
+                      if [ "$RetryFlag" != "True" ]; then
+                        #Perform initial Coder Login and create initial admin user
+                        echo "Creating initial Coder Administrator User"
+                        LOGIN_SUCCESS=false
+                        for attempt in {1..10}; do
+                          echo "Login attempt $attempt/10"
+                          if coder login $CODER_CLOUDFRONT_URL \
+                            --first-user-email $CoderAdminEmail \
+                            --first-user-username $CoderAdminUser \
+                            --first-user-password "$CoderAdminPassword" \
+                            --first-user-full-name "$CoderAdminName" \
+                            --first-user-trial=$CoderPremiumTrial; then
+                            LOGIN_SUCCESS=true
+                            echo "Coder login successful"
+                            break
+                          fi
+                          echo "Login failed, waiting $((attempt * 15)) seconds before retry..."
+                          sleep $((attempt * 15))
+                        done
+
+                        # Create a session token for template deployment
+                        CODER_SESSION_TOKEN=$(coder tokens create --lifetime 120)
+                        echo "Session token created successfully"
+
+                        # Store token in Secrets Manager
+                        aws secretsmanager put-secret-value \
+                          --secret-id "$CoderSessionTokenSecretArn" \
+                          --secret-string "$CODER_SESSION_TOKEN"
+                        echo "Session token stored in Secrets Manager" 
+                      else
+                        # Create a session token for template deployment
+                        CODER_SESSION_TOKEN=$(aws secretsmanager get-secret-value --secret-id partner-coder-session-token --query SecretString --output text)
+                        echo "Session token received successfully"
+                        
+                        echo "Logging in to Coder"
+                        LOGIN_SUCCESS=false
+                        if coder login $CODER_CLOUDFRONT_URL --use-token-as-session true; then
                           LOGIN_SUCCESS=true
                           echo "Coder login successful"
-                          break
                         fi
-                        echo "Login failed, waiting $((attempt * 10)) seconds before retry..."
-                        sleep $((attempt * 10))
-                      done
-
-                      # Create a session token for template deployment
-                      CODER_SESSION_TOKEN=$(coder tokens create --lifetime 24h)
-                      echo "Session token created successfully "+$CODER_SESSION_TOKEN 
+                      fi
 
                       echo "Deploying GitOps templates via Terraform: $CODER_AGENT_URL"
                       # Ensure AWS credentials are available to Terraform
@@ -753,16 +1035,7 @@ Resources:
                       terraform init
 
                       # Additional wait for Coder API to be fully responsive
-                      echo "Waiting for Coder API to be responsive..."
-                      for i in {1..30}; do
-                        if curl -f -s -o /dev/null "$CODER_CLOUDFRONT_URL/api/v2/buildinfo"; then
-                          echo "Coder API is responsive"
-                          sleep 10  # Extra grace period
-                          break
-                        fi
-                        echo "Waiting for Coder API... ($i/30)"
-                        sleep 10
-                      done
+                      sleep 120
 
                       ./templates_gitops.sh $CODER_SESSION_TOKEN
                     fi
@@ -801,7 +1074,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - ssm:GetParameter
-                Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/eks/${EKSClusterName}/coder-cloudfront-url"
+                Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/coder-cloudfront-url"
 
   GetCoderCloudFrontURLLambda:
     Type: AWS::Lambda::Function
@@ -834,7 +1107,7 @@ Resources:
                       
                       try:
                           response = ssm.get_parameter(
-                              Name=f'/eks/{cluster_name}/coder-cloudfront-url'
+                              Name=f'coder-cloudfront-url'
                           )
                           cfurl = response['Parameter']['Value']
                           response_data['CoderCloudFrontURL'] = cfurl
@@ -1016,13 +1289,25 @@ Resources:
     Type: AWS::CloudFormation::WaitConditionHandle
 
 Outputs:
-  EKSClusterName:
-    Description: EKS Cluster Name
-    Value: !Ref EKSClusterName
-  
   CoderURL:
     Description: Coder Cloud Front URL
     Value: !GetAtt CoderCloudFrontURLRetriever.CoderCloudFrontURL
+  
+  CoderAdminEmail:
+    Description: Coder Admin Email
+    Value: !Ref CoderAdminEmail
+
+  CoderAdminPassword:
+    Description: Coder Admin Password
+    Value: !Ref CoderAdminPassword
+
+  CoderAdminPasswordSecretArn:
+    Description: ARN of the Coder Admin Password Secret
+    Value: !Ref CoderAdminPasswordSecret
+
+  CoderSessionTokenSecretArn:
+    Description: ARN of the Coder Session Token Secret
+    Value: !Ref CoderSessionTokenSecret
   
   PostgreSQLConnectionURLWithoutPassword:
     Description: PostgreSQL Connection URL (without password)

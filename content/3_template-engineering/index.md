@@ -47,60 +47,61 @@ Coder templates leverage several key AWS services and patterns:
 │  │   Amazon EKS    │  │   Amazon EC2    │  │  Amazon EBS │ │
 │  │   Workspaces    │  │   Workspaces    │  │   Storage   │ │
 │  └─────────────────┘  └─────────────────┘  └─────────────┘ │
-│  ┌─────────────────┐  ┌─────────────────┐                  │
-│  │   Amazon Q      │  │   Amazon Bedrock   │                  │
-│  │   Developer     │  │   Claude Code   │                  │
-│  └─────────────────┘  └─────────────────┘                  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
+│  │   Kiro CLI      │  │   Claude Code   │  │   Aurora    │ │
+│  │   + MCP         │  │   + Bedrock     │  │   pgvector  │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────┘ │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Template Types We'll Build
+## Template Types Pre-Deployed
 
-### 1. AWS Linux Base with Amazon Q 
-**Purpose**: General-purpose Linux development environment with Amazon Q Developer CLI integration
+The workshop environment includes five pre-configured templates ready for use:
+
+### 1. Kubernetes with Kiro CLI
+**Purpose**: AI-powered development with Kiro CLI and MCP server support
 
 **Use Cases**:
-- General software development
-- Cloud application development
-- Learning and experimentation with Amazon Q
-- Multi-language development projects
+- AI-assisted development with configurable MCP servers
+- Infrastructure as Code with AWS CDK
+- General-purpose AWS development on Kubernetes
+- Fast workspace startup with persistent tools
 
-### 2. AWS SAM Development 
-**Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
+### 2. Kubernetes with Claude Code
+**Purpose**: Container-based development with Claude Code 4.7.1 AI assistant and task automation
+
+**Use Cases**:
+- AI-driven development with task-based workflows
+- Rapid prototyping with AI code generation
+- Microservices and container orchestration
+- Automated testing and deployment
+
+### 3. Kubernetes RAG with Claude Code
+**Purpose**: RAG application prototyping with Aurora PostgreSQL pgvector and Claude Code
+
+**Use Cases**:
+- AI/ML application development with RAG patterns
+- Vector database integration for embeddings
+- Document processing and intelligent search
+- Streamlit-based data applications
+
+### 4. AWS SAM Development
+**Purpose**: Serverless application development with AWS SAM CLI on ARM64
 
 **Use Cases**:
 - AWS Lambda function development
 - Serverless application architecture
-- Event-driven application development
-- AWS service integration projects
+- Cost-effective ARM64 development
+- Local serverless testing
 
-### 3. Kubernetes Development with Claude Code 
-**Purpose**: Container-based development environment running on Kubernetes with Claude Code Agentic Task integration
-
-**Use Cases**:
-- AI-assisted software development
-- Rapid prototyping with AI code generation
-- Learning and experimentation with AI coding tools
-- Container-based development with intelligent assistance
-
-### 4. Windows Development with DCV 
-**Purpose**: Windows-based development environment with NICE DCV remote desktop
+### 5. Windows Development with DCV
+**Purpose**: Windows-based development with NICE DCV remote desktop
 
 **Use Cases**:
 - .NET application development
 - Windows-specific software development
-- Legacy application modernization
+- GUI application development
 - Cross-platform development testing
-
-### 5. AWS RAG with Claude Code
-**Purpose**: Kubernetes-based development environment for building Retrieval-Augmented Generation (RAG) applications with Claude Code integration
-
-**Use Cases**:
-- AI/ML application development with RAG patterns
-- Document processing and intelligent search systems
-- Knowledge base and chatbot development
-- Semantic search and content recommendation engines
-- Enterprise AI application prototyping with Amazon Bedrock
 
 ## Key Benefits of This Approach
 
@@ -116,5 +117,5 @@ Coder templates leverage several key AWS services and patterns:
 
 ::alert[The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.]{type="warning"}
 
-### Ready to Engineer the Future?
-Let's start by understanding the fundamentals of Coder template architecture and building your first intelligent development environment.
+### Ready to Explore the Templates?
+The templates are pre-deployed and ready to use. Let's explore how to leverage these intelligent development environments for your AWS projects.

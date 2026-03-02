@@ -6,94 +6,95 @@ weight: 43
 
 ## Available Workshop Templates
 
-The workshop repository contains several specialized templates designed for different development personas and use cases.  Spend some time on a self-guided tour of their capabiities by creating workspaces for each of the workshop templates provisioned:
+The workshop environment includes five pre-deployed templates designed for different development personas and use cases. Explore their capabilities by creating workspaces from each template:
 
-### 1. AWS Linux Base with Amazon Q (`awshp-linux-q-base`)
+### 1. Kubernetes with Kiro CLI (`awshp-k8s-with-kiro-cli`)
 
-**Purpose**: General-purpose Linux development environment with Amazon Q Developer CLI integration
+**Purpose**: AI-powered development with Kiro CLI and MCP server support
 
 **Key Features**:
-- Amazon EC2 Linux instances with persistent storage
-- Pre-installed Amazon Q Developer CLI for AI-powered coding assistance
-- Code Server with development extensions
-- Git, AWS CLI/CDK, and common development tools
-- Optimized for cloud-native development workflows
+- Kubernetes pod-based workspaces with persistent storage
+- Kiro CLI with Model Context Protocol (MCP) server support
+- Pre-installed AWS CLI v2, AWS CDK, and Node.js 20 LTS
+- uv/uvx for Python-based MCP servers
+- Workspace trust pre-configured for seamless IDE integration
+- Fast startup times (~30-60 seconds)
 
 **Use Cases**:
-- General software development
-- Cloud application development
-- Learning and experimentation with Amazon Q
-- Multi-language development projects
+- AI-assisted development with configurable MCP servers
+- Infrastructure as Code with AWS CDK
+- General-purpose AWS development on Kubernetes
+- MCP server integration (Pulumi, LaunchDarkly, Arize, etc.)
 
-### 2. AWS SAM Development (`awshp-linux-sam`)
+### 2. Kubernetes with Claude Code (`awshp-k8s-with-claude-code`)
 
-**Purpose**: Serverless application development with AWS SAM (Serverless Application Model)
+**Purpose**: Container-based development with Claude Code 4.7.1 AI assistant and task automation
 
 **Key Features**:
-- Amazon EC2 ARM64/Graviton Linux instances optimized for serverless development
-- AWS Serverless Application Model (SAM) CLI pre-installed and configured
-- AWS CLI with proper IAM integration
-- Amazon Q IDE Extension pre-installed
-- AWS Lambda development tools and runtime environments
+- Kubernetes pod-based workspaces with AI assistance
+- Claude Code 4.7.1 with AWS Bedrock (Claude Opus 4.5)
+- Task-based workflows using `coder task create`
+- Pre-installed AWS CLI, AWS CDK, Node.js 20.x
+- Preview server on port 3000 with health checks
+- Automated testing with Playwright integration
+
+**Use Cases**:
+- AI-driven development with task-based workflows
+- Rapid prototyping with AI code generation
+- Microservices and container orchestration
+- Automated testing and deployment
+
+### 3. Kubernetes RAG with Claude Code (`awshp-k8s-rag-with-claude-code`)
+
+**Purpose**: RAG application prototyping with Aurora PostgreSQL pgvector and Claude Code
+
+**Key Features**:
+- Kubernetes pod-based workspaces optimized for RAG development
+- Aurora PostgreSQL 16.8 Serverless v2 with pgvector extension
+- Claude Code 4.7.1 with AWS Bedrock (Claude Sonnet 4.5)
+- Streamlit preview on port 8501
+- Auto-configured database with environment variables
+- Git repository auto-cloning for RAG prototyping
+
+**Use Cases**:
+- AI/ML application development with RAG patterns
+- Vector database integration for embeddings
+- Document processing and intelligent search systems
+- Streamlit-based data applications
+
+### 4. AWS SAM Development (`awshp-linux-sam`)
+
+**Purpose**: Serverless application development with AWS SAM CLI on ARM64
+
+**Key Features**:
+- Amazon EC2 ARM64/Graviton instances for cost-effective development
+- AWS Serverless Application Model (SAM) CLI pre-installed
+- AWS CLI v2 with ARM64 optimization
+- Python 3 runtime environment
+- Local Lambda and API Gateway testing
 
 **Use Cases**:
 - AWS Lambda function development
 - Serverless application architecture
-- Event-driven application development
-- AWS service integration projects
+- Cost-effective ARM64 development
+- Local serverless testing
 
-### 3. Kubernetes Development with Claude Code (`awshp-k8s-with-claude-code`)
+### 5. Windows Development with DCV (`awshp-windows-dcv`)
 
-**Purpose**: Container-based development environment running on Kubernetes with Claude Code Agentic Task integration
-
-**Key Features**:
-- Kubernetes pod-based workspaces with AI assistance
-- Claude Code AI assistant for automated development tasks
-- Integration with Amazon Bedrock for Claude models
-- VS Code Web and Kiro AI-powered editor
-- Configurable CPU, memory, and storage resources
-- Coder Tasks integration, Run Async Agentic AI Tasks in Coder Workspaces
-
-**Use Cases**:
-- AI-assisted software development
-- Rapid prototyping with AI code generation
-- Learning and experimentation with AI coding tools
-- Container-based development with intelligent assistance
-
-### 4. Windows Development with DCV (`awshp-windows-dcv`)
-
-**Purpose**: Windows-based development environment with NICE DCV remote desktop
+**Purpose**: Windows-based development with NICE DCV remote desktop
 
 **Key Features**:
 - Windows Server 2022 Amazon EC2 instances
 - NICE DCV for high-performance remote desktop access
 - VS Code on Windows with full GUI support
 - PowerShell and Windows development tools
-- Configurable instance types and storage
+- Multi-region support (15 AWS regions)
 
 **Use Cases**:
 - .NET application development
 - Windows-specific software development
-- Legacy application modernization
+- GUI application development
 - Cross-platform development testing
-
-### 5. AWS RAG with Claude Code (`awshp-k8s-rag-claude-code`)
-
-**Purpose**: Kubernetes-based development environment for building Retrieval-Augmented Generation (RAG) applications with Claude Code integration
-
-**Key Features**:
-- Kubernetes pod-based workspaces optimized for AI/ML development
-- Claude Code AI assistant with RAG-specific capabilities
-- Amazon Bedrock integration for Claude models and embeddings
-- Pre-configured vector databases and search engines
-- VS Code Web with AI/ML development extensions
-
-**Use Cases**:
-- AI/ML application development with RAG patterns
-- Document processing and intelligent search systems
-- Knowledge base and chatbot development
-- Semantic search and content recommendation engines
-- Enterprise AI application prototyping with Amazon Bedrock
 
 ## Template Architecture Patterns
 
@@ -146,7 +147,7 @@ The templates implement several security best practices:
 
 ## Template Management and Updates
 
-Now that you've deployed the workshop templates, you can manage and update them using the same GitOps workflow:
+The templates are pre-deployed in your workshop environment. You can manage and update them using the GitOps workflow:
 
 ### Updating Templates
 
@@ -183,11 +184,11 @@ cd ..
 
 ## Next Steps
 
-With persona-based templates deployed, you can:
+With pre-deployed templates available, you can:
 
 1. **Create Workspaces**: Users can create workspaces from available templates
 2. **Monitor Usage**: Track template usage and performance metrics
 3. **Iterate Templates**: Update templates based on user feedback
 4. **Scale Deployment**: Add more specialized templates as needed
 
-The templates from the workshop repository provide a solid foundation for building a comprehensive development platform that serves multiple developer personas while maintaining consistency and security standards.
+The pre-deployed templates provide a solid foundation for building a comprehensive development platform that serves multiple developer personas while maintaining consistency and security standards.

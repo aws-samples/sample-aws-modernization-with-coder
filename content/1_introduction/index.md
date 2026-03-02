@@ -24,18 +24,18 @@ Cloud Development Environments are fully-configured, cloud-hosted development wo
 
 By the end of this workshop, you will be able to demonstrate new skills in the following areas:
 
-**Infrastructure & Platform Management: (30 min)**
-- Deploy and configure a production-ready Coder platform on Amazon EKS
+**Infrastructure & Platform Management: (15 min)**
+- Explore a production-ready Coder platform deployed on Amazon EKS
 - Understand the architecture patterns for scalable cloud development environments
 - Implement secure, multi-tenant development infrastructure using AWS best practices
 
-**Template Creation & Management: (30 min)**
-- Create persona-based Coder templates for different development environments (General/Linux, Serverless, AI-Assisted, Windows)
-- Configure templates with pre-installed tools and dependencies
-- Implement Infrastructure as Code (IaC) patterns for consistent workspace provisioning
+**Template Creation & Management: (15 min)**
+- Explore persona-based Coder templates for different development environments (General/Linux, Serverless, AI-Assisted, Windows)
+- Review deployed templates with pre-installed tools and dependencies
+- Understand Infrastructure as Code (IaC) patterns used for consistent workspace provisioning
 
-**AI-Powered Development Workflows: (30 min)**
-- Integrate Amazon Q Developer for intelligent code assistance and generation
+**AI-Powered Development Workflows: (60 min)**
+- Integrate Amazon Kiro for intelligent code assistance and generation
 - Leverage Amazon Bedrock with Anthropic Claude Code for advanced code review and documentation
 - Create agentic development workflows that automate repetitive tasks
 
