@@ -6,15 +6,15 @@ weight: 50
 
 ## Speed Up Development with Intelligent Automation
 
-Welcome to the AI-Driven Development Workflows module! Now that you have deployed Coder and created intelligent templates, it's time to experience the future of software development. This module demonstrates how AI transforms every aspect of the development lifecycle—from initial code generation to deployment and monitoring.
+Welcome to the AI-Driven Development Workflows module! Now that you have accessed Coder and the deployed intelligent templates, it's time to experience the future of software development. This module demonstrates how AI transforms every aspect of the development lifecycle—from initial code generation to deployment and monitoring.
 
 ### What We'll Accomplish
 
 In this module, you will:
 
-1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Q Developer and Amazon Bedrock
+1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Kiro and Amazon Bedrock
 2. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
-3. *Build Agentic Development Workflows* - Create autonomous development agents that handle routine tasks and complex problem-solving
+3. *Build Agentic Development Workflows* - Create autonomous development workflows that handle routine tasks and complex problem-solving
 ## The AI-First Development Philosophy
 
 AI-driven development isn't just about code completion—it's a fundamental shift in how we approach software engineering:
@@ -28,7 +28,6 @@ AI-driven development isn't just about code completion—it's a fundamental shif
 | Manual testing | Intelligent test generation and execution |
 | Static documentation | Dynamic, context-aware documentation |
 | Manual code reviews | AI-enhanced reviews with security scanning |
-| Reactive monitoring | Predictive analytics and automated remediation |
 
 ### Key Principles
 
@@ -41,7 +40,7 @@ AI-driven development isn't just about code completion—it's a fundamental shif
 
 Our AI-driven development platform integrates multiple AWS AI services with Coder:
 
-![Codeer AI Architecture diagram](/static/images/AWSCoderAgenticAI.png)
+![Codeer AI Architecture diagram](/static/images/AWSCoderAgenticAIv2-0.png)
 
 ## Real-World AI Development Scenarios
 
@@ -59,11 +58,11 @@ Our AI-driven development platform integrates multiple AWS AI services with Code
 
 By the end of this module, you will be able to:
 
-- Leverage Amazon Q Developer for intelligent code completion and generation
+- Leverage Amazon Kiro for intelligent code completion and generation
 - Use Amazon Bedrock/Anthropic Claude Code for advanced code review and architectural guidance
 - Prototype GenAI Applications using Amazon Bedrock/Anthropic Claude Code with PostgreSQL Knowledgebase
 - Implement AI-driven refactoring and optimization workflows
-- Create context-aware development assistants
+- Create context-aware development workflows
 
 ::alert[🤖 *AI Development Mindset*: Think of AI as your intelligent pair programming partner. The goal is human-AI collaboration that amplifies creativity and productivity.]{type="info"}
 

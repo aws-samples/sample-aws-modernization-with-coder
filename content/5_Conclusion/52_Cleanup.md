@@ -33,6 +33,7 @@ This document provides step-by-step instructions to completely remove all AWS re
 1. **Access your AWS Management Console, CloudFormation** and click "Stacks"
 2. **Filter and select your Stack** and click the "Delete" button
 3. **Follow Stack deletion instructions** and monitor until successfully complete
+4. **Manual deletion of S3 Buckets** used for logging may be required
 
 ### Step 3: Delete individual IAM Role(s) created as part of workshop
 
@@ -41,3 +42,12 @@ This document provides step-by-step instructions to completely remove all AWS re
 1. **Access your AWS Management Console, IAM** and click "Roles"
 2. **Search for "coder-workshop" roles** and select, then click the "Delete" button
 3. **Follow IAM Role deletion instructions** and monitor until successfully complete
+
+### Step 4: Delete CloudFront Distribution created as part of workshop
+
+**Why**: Clean up extraneous CloudFront Distribution no longer needed.
+
+1. **Access your AWS Management Console, CloudFront** and click "Distributions"
+2. **Search for "Coder Workshop CloudFront Distribution"** and select, then click the "Disable" button
+3. **Wait for the Distribution to propogate** and status to change to "Disabled"
+4. **Follow Distribution deletion instructions** and monitor until successfully complete

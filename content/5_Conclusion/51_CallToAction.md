@@ -25,7 +25,7 @@ weight: 61
 **Documentation & Guides:**
 - [Coder Documentation](https://coder.com/docs) - Comprehensive platform documentation
 - [AWS EKS Best Practices](https://aws.github.io/aws-eks-best-practices/) - Production deployment guidance
-- [Amazon Q Developer Guide](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/) - AI coding assistance documentation
+- [Amazon Kiro](https://kiro.dev/enterprise/) - AI coding assistance for the Enterprise
 
 **Community & Support:**
 - [Coder Community Discord](https://discord.gg/coder) - Connect with other Coder users

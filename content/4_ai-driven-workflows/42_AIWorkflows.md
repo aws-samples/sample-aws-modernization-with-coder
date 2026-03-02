@@ -16,18 +16,18 @@ Let's create a Coder Task that will perform a Well-Architected review of the Web
 #### Step 1: Create Your Task-Automation Workspace
 
 Create a Task using the AWS Workshop - Kubernetes with Claude Code template:
-1. **Access your Coder dashboard** and click "Tasks"
-2. **Within the Task UI, Select the AWS Workshop - Kubernetes with Claude Code template from the drop-down** (created in the previous module)
+1. **Access your Coder dashboard** and click "Tasks" (may need to refresh dashboard for Task option to appear)
+2. **Within the Task UI, Select the AWS Workshop - Kubernetes with Claude Code template from the drop-down** 
 3. **Configure the Task prompt**:
-   - `Analyze the Task Management Web App found at https://github.com/your-git-id/ai-dev-workflows.git, perform a Well Architected Review of the application with a focus on the Security pillar.  Create up to two additional Coder workspaces using the AWS Workshop - Kubernetes with Claude Code task template. Use the issues identified as the Task prompt for each additional workspace, using the AI Prompt parameter. Ensure the Task prompt for the new workspaces specifies that updates should be made as PRs to the original git repo at https://github.com/your-git-id/ai-dev-workflows.git`
+   `Analyze the Task Management Web App found at https://github.com/greg-the-coder/ai-dev-workflows.git, perform a Well Architected Review of the application with a focus on the Security pillar. Create up to two additional Coder tasks using the AWS Workshop - Kubernetes with Claude Code task template. Use the issues identified as the Task prompt for each additional task, using the AI Prompt parameter. Ensure the Task prompt for the new task specifies that updates should be made as PRs in feature branches to the original git repo at https://github.com/greg-the-coder/ai-dev-workflows.git. Create a markdown summary of your Well Architected review findings in security_war.md using a style similar to a standard AWS Well Architected Review. Display security_war.md in the workspace app preview`
 
-   - **note:** If you were not able to save your work from the prior workshop step, you can reference the following repo in the above prompt `https://github.com/greg-the-coder/ai-dev-workflows.git` 
+   - **note:** If you were able to save your work from the prior workshop step, replace references of the following repo in the above prompt `https://github.com/greg-the-coder/ai-dev-workflows.git` with your own.
 
 4. **Click "Run task"** and wait for it to start
 
 ::alert[The Coder Task UI will automatically provision a task-based workspace and Claude Caude will begin analyzing the provided Task prompt.]{type="info"}
 
-The Claude Cod Web UI in the left pane will be begin by creating and updating a "To Do List" of activities to be peformed.  As it progresses, you can monitor the Agents actions.  It will most likely prompt for your approval and direction on how to move ahead to create new workspaces to resolve the identified issues. Depending on how you respond, the Agent will spawn up to two additional Tasks to remediate the findings.
+Select the Task from the displayed list to open the Task UI.  Once the Task initializes, the Claude Cod Web UI in the left pane will be begin by creating and updating a "To Do List" of activities to be peformed.  As it progresses, you can monitor the Agents actions.  It will most likely prompt for your approval and direction on how to move ahead to create new workspaces to resolve the identified issues. Depending on how you respond, the Agent will spawn up to two additional Tasks to remediate the findings.
 
 ::alert[You may see some API Errors from Claude Code, due to Amazon Bedrock rate limiting.  Don't worry, one of the benefits of running asynchronsous Tasks using Autonomous Agents is that Claude Code will continue on until it completes the task or you stop it.]{type="info"}
 
