@@ -12,9 +12,10 @@ Welcome to the AI-Driven Development Workflows module! Now that you have accesse
 
 In this module, you will:
 
-1. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Kiro and Amazon Bedrock
-2. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
-3. *Build Agentic Development Workflows* - Create autonomous development workflows that handle routine tasks and complex problem-solving
+1. *Experience Autonomous AI Game Development* - Modify a live Memory Card Game using Claude Code with agent-ready workspaces and real-time preview
+2. *Learn AI-Powered Coding Workflows* - Experience intelligent code generation, completion, and refactoring with Amazon Kiro and Amazon Bedrock
+3. *Create Intelligent Deployment Automation* - Deploy applications using AI-powered infrastructure provisioning and optimization
+4. *Build Agentic Development Workflows* - Create autonomous development workflows that handle routine tasks and complex problem-solving
 ## The AI-First Development Philosophy
 
 AI-driven development isn't just about code completion—it's a fundamental shift in how we approach software engineering:
@@ -58,6 +59,7 @@ Our AI-driven development platform integrates multiple AWS AI services with Code
 
 By the end of this module, you will be able to:
 
+- Use autonomous AI agents to modify running applications with natural language prompts
 - Leverage Amazon Kiro for intelligent code completion and generation
 - Use Amazon Bedrock/Anthropic Claude Code for advanced code review and architectural guidance
 - Prototype GenAI Applications using Amazon Bedrock/Anthropic Claude Code with PostgreSQL Knowledgebase

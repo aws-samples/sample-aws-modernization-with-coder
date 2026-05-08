@@ -35,6 +35,7 @@ By the end of this workshop, you will be able to demonstrate new skills in the f
 - Understand Infrastructure as Code (IaC) patterns used for consistent workspace provisioning
 
 **AI-Powered Development Workflows: (60 min)**
+- Experience autonomous AI game development using agent-ready workspaces with live preview
 - Integrate Amazon Kiro for intelligent code assistance and generation
 - Leverage Amazon Bedrock with Anthropic Claude Code for advanced code review and documentation
 - Create agentic development workflows that automate repetitive tasks

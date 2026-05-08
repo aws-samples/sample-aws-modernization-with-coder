@@ -56,9 +56,18 @@ Coder templates leverage several key AWS services and patterns:
 
 ## Template Types Pre-Deployed
 
-The workshop environment includes five pre-configured templates ready for use:
+The workshop environment includes six pre-configured templates ready for use:
 
-### 1. Kubernetes with Kiro CLI
+### 1. Kubernetes Memorycard with Claude Code
+**Purpose**: Memory Card Game development with Claude Code AI agent and autonomous task workflows
+
+**Use Cases**:
+- AI-driven interactive application development
+- Autonomous agent workflows with live preview
+- Rapid iteration using natural language prompts
+- Demonstrating agentic development patterns with real applications
+
+### 2. Kubernetes with Kiro CLI
 **Purpose**: AI-powered development with Kiro CLI and MCP server support
 
 **Use Cases**:
@@ -67,8 +76,8 @@ The workshop environment includes five pre-configured templates ready for use:
 - General-purpose AWS development on Kubernetes
 - Fast workspace startup with persistent tools
 
-### 2. Kubernetes with Claude Code
-**Purpose**: Container-based development with Claude Code 4.7.1 AI assistant and task automation
+### 3. Kubernetes with Claude Code
+**Purpose**: Container-based development with Claude Code AI assistant and task automation
 
 **Use Cases**:
 - AI-driven development with task-based workflows
@@ -76,7 +85,7 @@ The workshop environment includes five pre-configured templates ready for use:
 - Microservices and container orchestration
 - Automated testing and deployment
 
-### 3. Kubernetes RAG with Claude Code
+### 4. Kubernetes RAG with Claude Code
 **Purpose**: RAG application prototyping with Aurora PostgreSQL pgvector and Claude Code
 
 **Use Cases**:
@@ -85,7 +94,7 @@ The workshop environment includes five pre-configured templates ready for use:
 - Document processing and intelligent search
 - Streamlit-based data applications
 
-### 4. AWS SAM Development
+### 5. AWS SAM Development
 **Purpose**: Serverless application development with AWS SAM CLI on ARM64
 
 **Use Cases**:
@@ -94,7 +103,7 @@ The workshop environment includes five pre-configured templates ready for use:
 - Cost-effective ARM64 development
 - Local serverless testing
 
-### 5. Windows Development with DCV
+### 6. Windows Development with DCV
 **Purpose**: Windows-based development with NICE DCV remote desktop
 
 **Use Cases**:

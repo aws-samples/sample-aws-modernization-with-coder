@@ -6,9 +6,29 @@ weight: 43
 
 ## Available Workshop Templates
 
-The workshop environment includes five pre-deployed templates designed for different development personas and use cases. Explore their capabilities by creating workspaces from each template:
+The workshop environment includes six pre-deployed templates designed for different development personas and use cases. Explore their capabilities by creating workspaces from each template:
 
-### 1. Kubernetes with Kiro CLI (`awshp-k8s-with-kiro-cli`)
+### 1. Kubernetes Memorycard with Claude Code (`awshp-k8s-cc-memorycard`)
+
+**Purpose**: Memory Card Game development with Claude Code AI agent and autonomous task workflows
+
+**Key Features**:
+- Kubernetes pod-based workspaces with Claude Code in a tmux session
+- Pre-configured MCP servers (GitHub, Playwright) for agent tooling
+- Vite dev server with hot-reload on port 5173 for live preview
+- Automated home directory seeding with AI agent configuration
+- Task-based workflows with autonomous issue resolution
+- VS Code Web, File Browser, and Portable Desktop included
+- 25GB persistent volume with 2 CPU / 4GB RAM resource limits
+
+**Use Cases**:
+- AI-driven interactive application development
+- Autonomous agent workflows with real-time visual feedback
+- Rapid iteration on web applications using natural language prompts
+- Demonstrating agentic development patterns with running applications
+- Workshop scenarios for AI-powered game modifications
+
+### 2. Kubernetes with Kiro CLI (`awshp-k8s-with-kiro-cli`)
 
 **Purpose**: AI-powered development with Kiro CLI and MCP server support
 
@@ -26,13 +46,13 @@ The workshop environment includes five pre-deployed templates designed for diffe
 - General-purpose AWS development on Kubernetes
 - MCP server integration (Pulumi, LaunchDarkly, Arize, etc.)
 
-### 2. Kubernetes with Claude Code (`awshp-k8s-with-claude-code`)
+### 3. Kubernetes with Claude Code (`awshp-k8s-with-claude-code`)
 
-**Purpose**: Container-based development with Claude Code 4.7.1 AI assistant and task automation
+**Purpose**: Container-based development with Claude Code AI assistant and task automation
 
 **Key Features**:
 - Kubernetes pod-based workspaces with AI assistance
-- Claude Code 4.7.1 with AWS Bedrock (Claude Opus 4.5)
+- Claude Code with AWS Bedrock (Claude Opus 4.5)
 - Task-based workflows using `coder task create`
 - Pre-installed AWS CLI, AWS CDK, Node.js 20.x
 - Preview server on port 3000 with health checks
@@ -44,14 +64,14 @@ The workshop environment includes five pre-deployed templates designed for diffe
 - Microservices and container orchestration
 - Automated testing and deployment
 
-### 3. Kubernetes RAG with Claude Code (`awshp-k8s-rag-with-claude-code`)
+### 4. Kubernetes RAG with Claude Code (`awshp-k8s-rag-with-claude-code`)
 
 **Purpose**: RAG application prototyping with Aurora PostgreSQL pgvector and Claude Code
 
 **Key Features**:
 - Kubernetes pod-based workspaces optimized for RAG development
 - Aurora PostgreSQL 16.8 Serverless v2 with pgvector extension
-- Claude Code 4.7.1 with AWS Bedrock (Claude Sonnet 4.5)
+- Claude Code with AWS Bedrock (Claude Sonnet 4.5)
 - Streamlit preview on port 8501
 - Auto-configured database with environment variables
 - Git repository auto-cloning for RAG prototyping
@@ -62,7 +82,7 @@ The workshop environment includes five pre-deployed templates designed for diffe
 - Document processing and intelligent search systems
 - Streamlit-based data applications
 
-### 4. AWS SAM Development (`awshp-linux-sam`)
+### 5. AWS SAM Development (`awshp-linux-sam`)
 
 **Purpose**: Serverless application development with AWS SAM CLI on ARM64
 
@@ -79,7 +99,7 @@ The workshop environment includes five pre-deployed templates designed for diffe
 - Cost-effective ARM64 development
 - Local serverless testing
 
-### 5. Windows Development with DCV (`awshp-windows-dcv`)
+### 6. Windows Development with DCV (`awshp-windows-dcv`)
 
 **Purpose**: Windows-based development with NICE DCV remote desktop
 
